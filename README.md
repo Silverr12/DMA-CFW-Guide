@@ -4,7 +4,7 @@ The following guide previews detailed instructions on the creation of modified D
 Also, this guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
 
 # CONTENTS
-1. [Gathering the donor information](https://github.com/Silverr12/DMA-FW-Guide/edit/main/README.md#1-gathering-the-donor-information)
+1. [Gathering the donor information](https://github.com/Silverr12/DMA-FW-Guide/tree/main?tab=readme-ov-file#1-gathering-the-donor-information)
 
 
 ## **1. Gathering the donor information** 
