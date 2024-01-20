@@ -13,7 +13,7 @@ people to push them to buy their +$100 "highly custom undetectable" firmware.
 
 
 ### 📑 CONTENTS
-1. [Requirements]()
+1. [Requirements](https://github.com/Silverr12/DMA-FW-Guide#1-requirements)
 2. [Gathering the donor information](https://github.com/Silverr12/DMA-FW-Guide/tree/main?tab=readme-ov-file#1-gathering-the-donor-information)
 
 ## **1. Requirements**
