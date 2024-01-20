@@ -1,5 +1,5 @@
 # DMA-FW-Guide
-The following guide previews detailed instructions on the creation of modified DMA (attack) Firmware based on [pcileech](https://github.com/ufrisk/pcileech). <br />
+The following guide details instructions on the creation of modified DMA (attack) Firmware based on [pcileech](https://github.com/ufrisk/pcileech). <br />
 
 
 #### 📖Why make this guide?
