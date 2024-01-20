@@ -48,9 +48,8 @@ Also, this guide does ___not___ detail how to set up software or change computer
 #### Download all of the following
 - [Visual Studio](https://visualstudio.microsoft.com/vs/community/)
 - [Xilinx Vivado](https://www.xilinx.com/support/download.html)
-- [Pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) source code for custom firmware
-- [RWEverything](http://rweverything.com/download/)
-
+- [Pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) Source code for custom firmware
+- [Arbor]([http://rweverything.com/download/](https://www.mindshare.com/software/Arbor)) You have to make an account to download the trial
 
 
 
@@ -68,7 +67,7 @@ Go Into PCI Config and locate your network controller, scroll around in the deco
 3. Revision ID
 4. BAR0
 5. Subsystem ID
-6. DSN(listed as Serial Number Register), just combine the lower and upper DW
+6. DSN(listed as Serial Number Register), just combine the lower and upper DW <sub>**(need to verify)**</sub>
 
 We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it in here so keep it open
 
@@ -85,8 +84,12 @@ Once again due to limited knowledge, I'll be focusing on the PCIeSquirrel sectio
 1. Press your Windows key and type 'tcl shell' and open it, then use cd to point to your project folder, this is easily done by going to your project folder, clicking on the file address bar and copying the file address (before cding you *may* have to reverse the slashes in the address.)
 2. Now type in `source vivado_generate_project.tcl -notrace` and wait for it to finish.
 
-
-
+### Customising within Vivado
+1. Navigate to the newly created "pcileech_squirrel" folder made by Vivado and open the .xpr file. (the first open may take a bit longer than expected)
+2. Once inside Vivado, navigate to the "sources" box and navigate as such `pcileech_squirrel_top` > `i_pcileech_pcie_a7 : pcileech_pcie_a7` then double click on the file with the yellow square labelled `i_pcie_7x_0 : pcie_7x_0`.
+3. You should now be in a window called "Re-customize IP", in there, press on the `IDs` tab and enter all the IDs you gathered from your donor board, also note that the "SubSystem Vendor ID" Is just the same as your Vendor ID. _(If your donor board is different from a network adapter you may have to adjust some settings in the "Class Code" section below as well.)_
+4. Press OK on the bottom right then hit "Generate" on the new window that pops up and wait for it to finish.
+5. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and to allow us to manually edit some things we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.
 
 
 
