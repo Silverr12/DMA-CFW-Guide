@@ -68,7 +68,7 @@ Go Into PCI Config and locate your network controller, scroll around in the deco
 3. Revision ID
 4. BAR0
 5. Subsystem ID
-6. DSN(listed as Serial Number Register), just combine the lower and upper DW
+6. DSN(listed as Serial Number Register), just combine the lower and upper DW<br />
 We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it in here so keep it open
 
 ## **3. Initial Customisation**
