@@ -1,5 +1,5 @@
 # DMA-FW-Guide
-The following guide details instructions on the creation of modified DMA (attack) Firmware based on [pcileech](https://github.com/ufrisk/pcileech). <br />
+The following guide details instructions on the creation of modified DMA (attack) Firmware based on [pcileech-fpga](https://github.com/ufrisk/pcileech). <br />
 **Additionally this is intended to be a build off of garagedweller's [UC thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) guide in a more detailed way**<br />
 
 #### 📖Why make this guide?
