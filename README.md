@@ -58,7 +58,7 @@ Once in here, under "Summary" on the right hand side, take note of the:
 Once again due to limited knowledge I'll be focusing on the PCIeSquirrel section of ufrisk's pcileech at the moment, sorry to those using other cards.
 
 ### Using Visual Studio
-1. Open the PCIeSquirrel folder from Pcileech with Visual Studio and use Ctrl+Shift+F to search the solution for `rw[20]` to find the master abort flag/auto-clear status register, it should be listed in `pcileech_pcie_cfg_a7.sv` on line 207, now change the accompanying 0 to a 1 along with the accompanying one on `rw[21]`.
+1. Open the PCIeSquirrel folder from Pcileech with Visual Studio and use Ctrl+Shift+F to search the solution for `rw[20]` to find the master abort flag/auto-clear status register, it should be listed in `pcileech_pcie_cfg_a7.sv` on line 209, now change the accompanying 0 to a 1 along with the accompanying one on `rw[21]`.
 2. Now in the same file go to `rw[127:64]` to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`, insert your Serial Number there as such `rw[127:64]  <= 64'h0000000xxxxxxxx;    // cfg_dsn` <sub>(I don't think it has to be exact as long as its not the hard coded value that pcileech comes with, as that is what AC's would scan for, please correct me if im wrong though.)</sub>
 3. Use the search function once again to search for `bar_0` which should be located in `pcie_7x_0.xci`, change the accompanying default `>FFFFF000<` to the bar1 address you gathered in step 1, don't mind that its your 'bar1' that you're pasting into bar0, RWEverything shifted them all up by one.
 
