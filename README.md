@@ -1,7 +1,11 @@
 # DMA-FW-Guide
-Detailed Instructions on the creation of modified DMA Firmware <br />
-(Don't expect this to work for Vanguard, FaceIT, or other such sophisticated ACs as they are much more 'intrusive', <br />
+The following guide previews detailed instructions on the creation of modified DMA (attack) Firmware. <br />
+(Don't expect this to work for Vanguard, Faceit, ESEA, or other such sophisticated ACs as they are much more 'intrusive'. <br />
 Also, this guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
+
+# CONTENTS
+1. [Gathering the donor information](https://github.com/Silverr12/DMA-FW-Guide/edit/main/README.md#1-gathering-the-donor-information)
+
 
 ## **1. Gathering the donor information** 
 Due to my limited testing and knowledge, I'll be using a network adapter for all examples continuing <br />
