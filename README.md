@@ -1,15 +1,21 @@
 # DMA-FW-Guide
 The following guide previews detailed instructions on the creation of modified DMA (attack) Firmware based on [pcileech](https://github.com/ufrisk/pcileech). <br />
 
+
 #### 📖Why make this guide?
 I know how tedious reading through pages of threads and documentation can be to make some relatively minor changes such as this,
 additionally, it doesn't help that there are people intentionally being vague and keeping information secret, or even misleading 
 people to push them to buy their +$100 "highly custom undetectable" firmware.
 
 ### ⚠️ Disclaimer
-(Don't expect this to work for Vanguard, Faceit, ESEA, or other such sophisticated ACs as they are much more 'intrusive'. <br />
+- (Don't expect this to work for Vanguard, Faceit, ESEA, or other such sophisticated ACs as they are much more 'intrusive'. <br />
 Also, this guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
 
+- It is assumed that the user following the guide has a basic understanding of custom firmware ...  **Finish this list** ... 
+
+- It is not our fault if you brick your computer / DMA card. 
+
+- This guide does not go over on how to flash the custom firmware onto your DMA card
 
 
 
