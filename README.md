@@ -60,30 +60,29 @@ Also, this guide does ___not___ detail how to set up software or change computer
 Due to my limited testing and knowledge, I'll be using a network adapter for all examples continuing <br />
 <sup>(I welcome any contribution about utilising different hardware for this)</sup>
 
-### Using RWEverything
-<sup> I will eventually update the guide to utilise Arbor which provides more concise information
-Press PCI Devices in the top left and navigate the list to find your donor card
-Once in here, under "Summary" on the right-hand side, take note of the:
-1. Device & Vendor ID, under Summary it will display for example as _0x2G4H5302_, disregarding the 0x, the first 4 letters/numbers are your Device ID, and the other 4 the Vendor ID.
-2. Revision ID
-3. BAR1
-4. Subsystem ID, but only the first 4 letters/numbers once again as the other 4 is a duplicate of our Vendor ID
-5. Either take a picture of the block of bytes underneath the dropdown or save the dump as a file
-6. DSN(Device Serial Number) if you see it in there, for me it was on the box of the donor card
+### Using Arbor
+Go into Scan Options and Press Scan/Rescan, the values selected by default are good enough for us.
+Go Into PCI Config and locate your network controller, scroll around in the decode section and take note of the following things:
+1. Device ID
+2. Vendor ID
+3. Revision ID
+4. BAR0
+5. Subsystem ID
+6. DSN(listed as Serial Number Register), just combine the lower and upper DW
+We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it in here so keep it open
 
 ## **3. Initial Customisation**
 Once again due to limited knowledge, I'll be focusing on the PCIeSquirrel section of ufrisk's pcileech at the moment, sorry to those using other cards.
 
 ### Using Visual Studio
 1. Open the PCIeSquirrel folder from Pcileech with Visual Studio and use Ctrl+Shift+F to search the solution for `rw[20]` to find the master abort flag/auto-clear status register, it should be listed in `pcileech_pcie_cfg_a7.sv` on line 209, now change the accompanying 0 to a 1 along with the accompanying one on `rw[21]`.
-2. Now in the same file go to `rw[127:64]` to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`, insert your Serial Number there as such `rw[127:64]  <= 64'h0000000xxxxxxxx;    // cfg_dsn` <sub>(I don't think it has to be exact as long as its not the hard-coded value that pcileech comes with, as that is what AC's would scan for, please correct me if I'm wrong though.)</sub>
-3. Use the search function once again to search for `bar_0` which should be located in `pcie_7x_0.xci`, and change the accompanying default `>FFFFF000<` to the bar1 address you gathered in step 1, don't mind that its your 'bar1' that you're pasting into bar0, RWEverything shifted them all up by one.
+2. Now in the same file go to `rw[127:64]` to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`, insert your Serial Number there as such `rw[127:64]  <= 64'hXXXXXXXXXXXXXXXX;    // cfg_dsn` <sub>(I don't think it has to be exact as long as its not the hard coded value that pcileech comes with, as that is what AC's would scan for, please correct me if I'm wrong though.)</sub>
+3. Use the search function once again to search for `rw[203]` which will be located in `pcileech_fifo.sv`, change the `1'b1;` to `1'b0;`
+4. Go ahead and save all the changes you've made
 
 ## **4. Vivado Project Generation and Customisation**
 1. Press your Windows key and type 'tcl shell' and open it, then use cd to point to your project folder, this is easily done by going to your project folder, clicking on the file address bar and copying the file address (before cding you *may* have to reverse the slashes in the address.)
 2. Now type in `source vivado_generate_project.tcl -notrace` and wait for it to finish.
-
-
 
 
 
