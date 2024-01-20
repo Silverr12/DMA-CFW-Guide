@@ -58,5 +58,5 @@ Due to my limited testing and knowledge, I'll be using a network adapter for all
 ### Additional Credits
 garagedweller's [UC thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) <br />
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
-ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi) <br> <sub>(I recommend looking into this further if you want to look towards creating firmware to bypass sophisticated ACs)</sub>
+ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(I recommend looking into this further if you want to look towards creating firmware to bypass sophisticated ACs)</sub>
 
