@@ -7,6 +7,23 @@ I know how tedious reading through pages of threads and documentation can be to 
 additionally, it doesn't help that there are people intentionally being vague and keeping information secret, or even misleading 
 people to push them to buy their +$100 "highly custom undetectable" firmware.
 
+#### 🔎 Definitions
+UC
+: Unknown Cheats
+
+ACs
+: Anti Cheats
+
+DMA
+: Direct Memory Access
+
+TLP
+: Transaction Layer Packet
+
+
+
+
+
 ### ⚠️ Disclaimer
 - (Don't expect this to work for Vanguard, Faceit, ESEA, or other such sophisticated ACs as they are much more 'intrusive'. <br />
 Also, this guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
@@ -15,7 +32,7 @@ Also, this guide does ___not___ detail how to set up software or change computer
 
 - It is not our fault if you brick your computer / DMA card. 
 
-- This guide does not go over on how to flash the custom firmware onto your DMA card
+- This guide does not go over how to flash the custom firmware onto your DMA card
 
 
 
@@ -46,7 +63,7 @@ Due to my limited testing and knowledge, I'll be using a network adapter for all
 ### Using RWEverything
 <sup> I will eventually update the guide to utilise Arbor which provides more concise information
 Press PCI Devices in the top left and navigate the list to find your donor card
-Once in here, under "Summary" on the right hand side, take note of the:
+Once in here, under "Summary" on the right-hand side, take note of the:
 1. Device & Vendor ID, under Summary it will display for example as _0x2G4H5302_, disregarding the 0x, the first 4 letters/numbers are your Device ID, and the other 4 the Vendor ID.
 2. Revision ID
 3. BAR1
@@ -55,15 +72,15 @@ Once in here, under "Summary" on the right hand side, take note of the:
 6. DSN(Device Serial Number) if you see it in there, for me it was on the box of the donor card
 
 ## **3. Initial Customisation**
-Once again due to limited knowledge I'll be focusing on the PCIeSquirrel section of ufrisk's pcileech at the moment, sorry to those using other cards.
+Once again due to limited knowledge, I'll be focusing on the PCIeSquirrel section of ufrisk's pcileech at the moment, sorry to those using other cards.
 
 ### Using Visual Studio
 1. Open the PCIeSquirrel folder from Pcileech with Visual Studio and use Ctrl+Shift+F to search the solution for `rw[20]` to find the master abort flag/auto-clear status register, it should be listed in `pcileech_pcie_cfg_a7.sv` on line 209, now change the accompanying 0 to a 1 along with the accompanying one on `rw[21]`.
-2. Now in the same file go to `rw[127:64]` to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`, insert your Serial Number there as such `rw[127:64]  <= 64'h0000000xxxxxxxx;    // cfg_dsn` <sub>(I don't think it has to be exact as long as its not the hard coded value that pcileech comes with, as that is what AC's would scan for, please correct me if im wrong though.)</sub>
-3. Use the search function once again to search for `bar_0` which should be located in `pcie_7x_0.xci`, change the accompanying default `>FFFFF000<` to the bar1 address you gathered in step 1, don't mind that its your 'bar1' that you're pasting into bar0, RWEverything shifted them all up by one.
+2. Now in the same file go to `rw[127:64]` to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`, insert your Serial Number there as such `rw[127:64]  <= 64'h0000000xxxxxxxx;    // cfg_dsn` <sub>(I don't think it has to be exact as long as its not the hard-coded value that pcileech comes with, as that is what AC's would scan for, please correct me if I'm wrong though.)</sub>
+3. Use the search function once again to search for `bar_0` which should be located in `pcie_7x_0.xci`, and change the accompanying default `>FFFFF000<` to the bar1 address you gathered in step 1, don't mind that its your 'bar1' that you're pasting into bar0, RWEverything shifted them all up by one.
 
 ## **4. Vivado Project Generation and Customisation**
-1. Press your windows key and type 'tcl shell' and open it, then use cd to point to your project folder, this is easily done by going to your project folder, clicking on the file address bar and copying the file address (before cding you *may* have to reverse the slashes in the address.)
+1. Press your Windows key and type 'tcl shell' and open it, then use cd to point to your project folder, this is easily done by going to your project folder, clicking on the file address bar and copying the file address (before cding you *may* have to reverse the slashes in the address.)
 2. Now type in `source vivado_generate_project.tcl -notrace` and wait for it to finish.
 
 
