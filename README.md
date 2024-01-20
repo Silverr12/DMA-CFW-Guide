@@ -23,6 +23,7 @@ people to push them to buy their +$100 "highly custom undetectable" firmware.
 - [Visual Studio](https://visualstudio.microsoft.com/vs/community/)
 - [Xilinx Vivado](https://www.xilinx.com/support/download.html)
 - [Pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) source code for custom firmware
+- [RWEverything](http://rweverything.com/download/)
 
 
 
@@ -32,7 +33,7 @@ people to push them to buy their +$100 "highly custom undetectable" firmware.
 Due to my limited testing and knowledge, I'll be using a network adapter for all examples continuing <br />
 <sup>(I welcome any contribution about utilising different hardware for this)</sup>
 
-### Download [RWEverything](http://rweverything.com/download/)
+### Using RWEverything
 - Press PCI Devices in the top left and navigate the list to find your donor card
 - Once in here, under "Summary" on the right-hand side, take note of the:
 1. Device & Vendor ID, under Summary it will display for example as _0x2G4H5302_, disregarding the 0x, the first 4 letters/numbers are your Device ID, and the other 4 the Vendor ID.
@@ -53,7 +54,7 @@ Due to my limited testing and knowledge, I'll be using a network adapter for all
 
 
 
-### - Additional Credits
+### Additional Credits
 garagedweller's [UC thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) <br />
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
 ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi) <sub>(I recommend looking into this further if you want to look towards creating firmware to bypass sophisticated ACs)</sub>
