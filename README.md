@@ -20,7 +20,7 @@ Also, this guide does ___not___ detail how to set up software or change computer
 ## **1. Requirements**
 
 
-#### Download
+#### Download all of the following
 - [Visual Studio](https://visualstudio.microsoft.com/vs/community/)
 - [Xilinx Vivado](https://www.xilinx.com/support/download.html)
 - [Pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) source code for custom firmware
