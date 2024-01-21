@@ -50,7 +50,7 @@ Also, this guide does ___not___ detail how to set up software or change computer
 - [Visual Studio](https://visualstudio.microsoft.com/vs/community/)
 - [Xilinx Vivado](https://www.xilinx.com/support/download.html)
 - [Pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) Source code for custom firmware
-- [Arbor]([http://rweverything.com/download/](https://www.mindshare.com/software/Arbor)) You have to make an account to download the trial
+- [Arbor](https://www.mindshare.com/software/Arbor) You have to make an account to download the trial
 
 
 
