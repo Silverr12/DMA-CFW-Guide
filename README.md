@@ -43,8 +43,8 @@ Also, this guide does ___not___ detail how to set up software or change computer
 2. [Gathering the donor information](https://github.com/Silverr12/DMA-FW-Guide#2-gathering-the-donor-information)
 3. [Initial Customisation](https://github.com/Silverr12/DMA-FW-Guide#3-initial-customisation)
 4. [Vivado Project Generation and Customisation](https://github.com/Silverr12/DMA-FW-Guide#4-vivado-project-generation-and-customisation)
-5. [BAR Address & TLP Emulation](https://github.com/Silverr12//DMA-FW-Guide#5-BAR-address-&-tlp-emulation)
-6. [Blocks 0x40 and 0x60](https://github.com/Silverr12//DMA-FW-Guide#6-blocks-0x40-and-0x60)
+5. [Blocks 0x40 and 0x60](https://github.com/Silverr12//DMA-FW-Guide#5-BAR-address-&-tlp-emulation)
+6. [BAR Address & TLP Emulation](https://github.com/Silverr12//DMA-FW-Guide#6-blocks-0x40-and-0x60)
 
 ## **1. Requirements**
 
@@ -171,24 +171,20 @@ The console should now open at the bottom of the application.
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/5617a8f8-6d5a-44af-8f88-703bc7d1f101)
 
-
-
-
 2. You should now be in a window called "Re-customize IP", in there, press on the `IDs` tab and enter all the IDs you gathered from your donor board, also note that the "SubSystem Vendor ID" Is just the same as your Vendor ID. _(If your donor board is different from a network adapter you may have to adjust some settings in the "Class Code" section below as well.)_
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/4b0584ec-9dda-4a2a-a5e1-a6e2eb28c6d1)
-
-
-
 
 3. Also go into the "BARs" tab and set the size value you gathered in step 2, note that this is not meant to be the same as your BAR Address
 4. Press OK on the bottom right then hit "Generate" on the new window that pops up and wait for it to finish.
 5. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and to allow us to manually edit some things we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, (to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.)
 
-## **5. BAR Address & TLP Emulation**
-1. Back in Visual Studio search for `FFFFF000`, this will come up with a lot of results but we will only be changing
+## **5. Blocks 0x40 and 0x60**
+1. Back in Arbor, near the middle left press on "raw" to see the config space of your donor card, now select DWords for the cell size and press update
+2. Navigate to `ip` > `pcileech_cfgspace.coe`
 
-## **6. Blocks 0x40 and 0x60**
+## **6. BAR Address & TLP Emulation**
+** TODO: Still need to find out which exact values to change + new pcileech PIO BAR support needs research
 
 
 
@@ -198,3 +194,11 @@ The console should now open at the bottom of the application.
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
 ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(I recommend looking into this further if you want to look towards creating firmware to bypass sophisticated ACs)</sub>
 
+
+
+
+
+
+End note:<br />
+Don't be like this guy<br />
+![formerstafflmao](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/cf881e80-1139-4641-99c2-325b24bc162a)
