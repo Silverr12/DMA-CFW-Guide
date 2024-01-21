@@ -94,7 +94,7 @@ Go Into PCI Config and locate your network controller, scroll around in the deco
 
 
 
-6. DSN(listed as Serial Number Register), just combine the lower and upper DW should look like `01 00 00 00 68 4C E0 00` when combined  <sub>**(need to verify)**</sub>
+6. DSN(listed as Serial Number Register), just combine the lower and upper DW should look like `68 4C E0 00 01 00 00 00 ` when combined  <sub>**(need to verify)**</sub>
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/595ae3e2-4cd8-4b3d-bcfa-cf6a59f289d5)
 
