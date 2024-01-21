@@ -118,11 +118,11 @@ this being my DSN
 4. Go ahead and save all the changes you've made
 
 ## **4. Vivado Project Generation and Customisation**
-1. Open vivado and in the top menu, in the search query, search for tcl shell and click on it.
+1. Open Vivado and in the top menu, in the search query, search for tcl console and click on it.
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/5a3770ad-b821-49c1-bea8-a79684993abc)
 
-The shell should now open at the bottom of the application.
+The console should now open at the bottom of the application.
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/ae96df35-3e46-4f55-8ffd-39b42c8d0972)
 
@@ -131,7 +131,7 @@ The shell should now open at the bottom of the application.
 
 3. cd back a few times and then cd to the PCIeSquirrel folder in the pcileech-fpga-4.13 project folder. It should look something like this `C:\Users\user\Desktop\pcileech-fpga-4.13\PCIeSquirrel`. (Desktop is where my project folder is)
 
-4. Once you have PCIeSquirrel dir open, in the tcl shell type in `source vivado_generate_project.tcl -notrace` and wait for it to finish
+4. Once you have PCIeSquirrel dir open, in the Tcl console type in `source vivado_generate_project.tcl -notrace` and wait for it to finish
 
 ### Customising within Vivado
 1. Navigate to the newly created "pcileech_squirrel" folder made by Vivado and open the .xpr file. (the first open may take a bit longer than expected)
