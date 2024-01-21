@@ -68,11 +68,36 @@ Due to my limited testing and knowledge, I'll be using a network adapter for all
 Go into Scan Options under the Local system tab and Press Scan/Rescan, the values selected by default are good enough for us.
 Go Into PCI Config and locate your network controller, scroll around in the decode section and take note of the following things:
 1. Device ID
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/8baec3fe-c4bd-478e-9f95-d262804d6f67)
+
+
 2. Vendor ID
-3. Revision ID
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/39c7de6d-d8db-4744-b0a0-ddeca0dfd7d7)
+
+
+3. Revision ID (will show as RevID)
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/c2374ea7-ca9c-47b7-8a8d-4ceff5dffe3b)
+
+
 4. BAR0 (Also click on this value and take note of the sizing value) e.g <br>`Size: 256 bytes (bit 8 is first writable bit; sizing value: FFFF_FF01h)`
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/19239179-057a-4ed5-a79f-45cf242787a5)
+
+
+
 5. Subsystem ID
-6. DSN(listed as Serial Number Register), just combine the lower and upper DW <sub>**(need to verify)**</sub>
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/94522a95-70bd-4336-8e38-58c0839e38ad)
+
+
+
+6. DSN(listed as Serial Number Register), just combine the lower and upper DW should look like `01 00 00 00 68 4C E0 00` when combined  <sub>**(need to verify)**</sub>
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/595ae3e2-4cd8-4b3d-bcfa-cf6a59f289d5)
+
 
 We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it here so keep it open
 
