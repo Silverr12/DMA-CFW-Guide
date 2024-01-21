@@ -129,7 +129,7 @@ The shell should now open at the bottom of the application.
 
 3. cd back a few times and then cd to the PCIeSquirrel folder in the pcileech-fpga-4.13 project folder. It should look something like this `C:\Users\user\Desktop\pcileech-fpga-4.13\PCIeSquirrel`. (Desktop is where my project folder is)
 
-4. Once you have PCIeSquirrel dir open in tcl shell type in `source vivado_generate_project.tcl -notrace` and wait for it to finish
+4. Once you have PCIeSquirrel dir open, in the tcl shell type in `source vivado_generate_project.tcl -notrace` and wait for it to finish
 
 ### Customising within Vivado
 1. Navigate to the newly created "pcileech_squirrel" folder made by Vivado and open the .xpr file. (the first open may take a bit longer than expected)
