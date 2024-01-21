@@ -111,7 +111,9 @@ Before
 
 After
 
-![image](https://github.com/Silverr12/DMA-FW-Guide/assets/48173453/667828d1-fc53-47f0-9a48-7cf3ac23b039)
+![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/a5aca523-5d14-48d1-9e79-f43adadbb18b)
+
+this being my DSN
 
 4. Go ahead and save all the changes you've made
 
