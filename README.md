@@ -23,6 +23,8 @@ TLP
 DSN
 : Device Serial Number
 
+DW
+: Double Word
 
 
 ### ⚠️ Disclaimer
@@ -68,7 +70,7 @@ Go Into PCI Config and locate your network controller, scroll around in the deco
 1. Device ID
 2. Vendor ID
 3. Revision ID
-4. BAR0 (Also click on this value and take note of the sizing value e.g `Size: 256 bytes (bit 8 is first writable bit; sizing value: FFFF_FF01h) `)
+4. BAR0 (Also click on this value and take note of the sizing value) e.g <br>`Size: 256 bytes (bit 8 is first writable bit; sizing value: FFFF_FF01h)`
 5. Subsystem ID
 6. DSN(listed as Serial Number Register), just combine the lower and upper DW <sub>**(need to verify)**</sub>
 
@@ -132,14 +134,26 @@ The console should now open at the bottom of the application.
 3. cd back a few times and then cd to the PCIeSquirrel folder in the pcileech-fpga-4.13 project folder. It should look something like this `C:\Users\user\Desktop\pcileech-fpga-4.13\PCIeSquirrel`. (Desktop is where my project folder is)
 
 4. Once you have PCIeSquirrel dir open, in the Tcl console type in `source vivado_generate_project.tcl -notrace` and wait for it to finish
+5. Once the project has been generated, Vivado should automatically open the `pcileech_squirrel.xpr` file.
 
 ### Customising within Vivado
-1. Navigate to the newly created "pcileech_squirrel" folder made by Vivado and open the .xpr file. (the first open may take a bit longer than expected)
-2. Once inside Vivado, navigate to the "sources" box and navigate as such `pcileech_squirrel_top` > `i_pcileech_pcie_a7 : pcileech_pcie_a7` then double click on the file with the yellow square labelled `i_pcie_7x_0 : pcie_7x_0`.
-3. You should now be in a window called "Re-customize IP", in there, press on the `IDs` tab and enter all the IDs you gathered from your donor board, also note that the "SubSystem Vendor ID" Is just the same as your Vendor ID. _(If your donor board is different from a network adapter you may have to adjust some settings in the "Class Code" section below as well.)_
-4. Also go into the "BARs" tab and set the size value you gathered in step 2, note that this is not meant to be the same as your BAR Address
-5. Press OK on the bottom right then hit "Generate" on the new window that pops up and wait for it to finish.
-6. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and to allow us to manually edit some things we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, (to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.)
+1. Once inside Vivado, navigate to the "sources" box and navigate as such `pcileech_squirrel_top` > `i_pcileech_pcie_a7 : pcileech_pcie_a7` then double click on the file with the yellow square labelled `i_pcie_7x_0 : pcie_7x_0`.
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/5617a8f8-6d5a-44af-8f88-703bc7d1f101)
+
+
+
+
+2. You should now be in a window called "Re-customize IP", in there, press on the `IDs` tab and enter all the IDs you gathered from your donor board, also note that the "SubSystem Vendor ID" Is just the same as your Vendor ID. _(If your donor board is different from a network adapter you may have to adjust some settings in the "Class Code" section below as well.)_
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/4b0584ec-9dda-4a2a-a5e1-a6e2eb28c6d1)
+
+
+
+
+3. Also go into the "BARs" tab and set the size value you gathered in step 2, note that this is not meant to be the same as your BAR Address
+4. Press OK on the bottom right then hit "Generate" on the new window that pops up and wait for it to finish.
+5. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and to allow us to manually edit some things we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, (to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.)
 
 ## **5. BAR Address & TLP Emulation**
 1. Back in Visual Studio search for `FFFFF000`, this will come up with a lot of results but we will only be changing
