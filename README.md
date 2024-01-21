@@ -67,6 +67,10 @@ Due to my limited testing and knowledge, I'll be using a network adapter for all
 ### Using Arbor
 Go into Scan Options under the Local system tab and Press Scan/Rescan, the values selected by default are good enough for us.
 Go Into PCI Config and locate your network controller, scroll around in the decode section and take note of the following things:
+
+#### All IDs shown below are mine and might not be the same for you
+
+
 1. Device ID
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/8baec3fe-c4bd-478e-9f95-d262804d6f67)
