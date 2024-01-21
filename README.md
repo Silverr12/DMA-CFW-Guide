@@ -26,7 +26,6 @@ DSN
 DW
 : Double Word
 
-
 ### ⚠️ Disclaimer
 - (Don't expect this to work for Vanguard, Faceit, ESEA, or other such ACs that are as 'sophisticated' as they are. <br />
 Also, this guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
@@ -63,6 +62,8 @@ Also, this guide does ___not___ detail how to set up software or change computer
 (Using a donor card will help us later on with TLP emulation to communicate with the device to start a driver for legitimacy) <br />
 Due to my limited testing and knowledge, I'll be using a network adapter for all examples continuing <br />
 <sup>(I welcome any contribution about utilising different hardware for this)</sup>
+
+It is suggested to use a cheap piece of hardware to get the IDs and then throw it out. These are used to emulate the DMA card. **So don't get the IDs of any existing hardware in your computer and plug them into the firmware. ACs will detect 2 of the same IDs and flag it** 
 
 ### Using Arbor
 Go into Scan Options under the Local system tab and Press Scan/Rescan, the values selected by default are good enough for us.
