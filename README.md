@@ -20,7 +20,8 @@ DMA
 TLP
 : Transaction Layer Packet
 
-
+DSN
+: Device Serial Number
 
 
 
@@ -60,7 +61,7 @@ Due to my limited testing and knowledge, I'll be using a network adapter for all
 <sup>(I welcome any contribution about utilising different hardware for this)</sup>
 
 ### Using Arbor
-Go into Scan Options and Press Scan/Rescan, the values selected by default are good enough for us.
+Go into Scan Options under the Local system tab and Press Scan/Rescan, the values selected by default are good enough for us.
 Go Into PCI Config and locate your network controller, scroll around in the decode section and take note of the following things:
 1. Device ID
 2. Vendor ID
@@ -69,15 +70,50 @@ Go Into PCI Config and locate your network controller, scroll around in the deco
 5. Subsystem ID
 6. DSN(listed as Serial Number Register), just combine the lower and upper DW <sub>**(need to verify)**</sub>
 
-We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it in here so keep it open
+We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it here so keep it open
 
 ## **3. Initial Customisation**
 Once again due to limited knowledge, I'll be focusing on the PCIeSquirrel section of ufrisk's pcileech at the moment, sorry to those using other cards.
 
 ### Using Visual Studio
-1. Open the PCIeSquirrel folder from Pcileech with Visual Studio and use Ctrl+Shift+F to search the solution for `rw[20]` to find the master abort flag/auto-clear status register, it should be listed in `pcileech_pcie_cfg_a7.sv` on line 209, now change the accompanying 0 to a 1 along with the accompanying one on `rw[21]`.
-2. Now in the same file go to `rw[127:64]` to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`, insert your Serial Number there as such `rw[127:64]  <= 64'hXXXXXXXXXXXXXXXX;    // cfg_dsn` <sub>(I don't think it has to be exact as long as its not the hard coded value that pcileech comes with, as that is what AC's would scan for, please correct me if I'm wrong though.)</sub>
-3. Use the search function once again to search for `rw[203]` which will be located in `pcileech_fifo.sv`, change the `1'b1;` to `1'b0;` (This will allow us to change the config space bytes later down the line)
+1. Open the PCIeSquirrel folder and head to this file `/PCIeSquirrel/src/pcileech_pcie_cfg_a7.sv`. Within this file use Ctrl+F and search the file for `rw[20]` which should be on line 209 to find the master abort flag/auto-clear status register. Change the accompanying 0 to a 1 along with the accompanying `rw[21]`.
+
+Before
+
+![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/358337b4-a238-433c-bc53-0630bec5a17d)
+
+
+After
+
+![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/8814e113-bdd8-43de-81d3-008ef9cfb653)
+
+
+
+
+2. In the same file `pcileech_pcie_cfg_a7.sv` Ctrl+F `rw[127:64]` which should be on line 215 to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`, insert your Serial Number there as such `rw[127:64]  <= 64'hXXXXXXXXXXXXXXXX;    // cfg_dsn` <sub>(I don't think it has to be exact as long as its not the hard coded value that pcileech comes with, as that is what AC's would scan for, please correct me if I'm wrong though.)</sub>
+
+Before
+
+![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/788170b0-6e4a-4b87-b1a9-31360abc8575)
+
+After
+
+#### upload image of DSN 
+
+
+
+3. Now head to `PCIeSquirrel/src/pcileech_fifo.sv` and Ctrl+F `rw[203]` which should be on line 290 and change the `1'b1;` to `1;b0;` (This will allow us to change the config space bytes later down the line)
+
+Before
+
+![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/1443ca9e-91c0-49d4-9979-a403d0f711d0)
+
+After
+
+![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/a5aca523-5d14-48d1-9e79-f43adadbb18b)
+
+
+  
 4. Go ahead and save all the changes you've made
 
 ## **4. Vivado Project Generation and Customisation**
