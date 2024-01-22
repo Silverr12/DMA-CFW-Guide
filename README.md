@@ -180,12 +180,9 @@ The console should now open at the bottom of the application.
 5. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and to allow us to manually edit some things we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, (to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.)
 
 ## **5. Blocks 0x40 and 0x60**
-1. Back in Arbor, under the PCI Config tab, near the middle left press on "raw" to see the config space of your donor card, now select DWords for the cell size and press update
+1. Still in Vivado, navigate to `pcie_7x_0_core_top` as shown in the image, and navigate to line 280
 
-![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/f9ea4f53-85c7-4248-bd2f-90b1927aa5d8)
-
-
-2. Navigate to `ip` > `pcileech_cfgspace.coe`
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/c018b760-cb8f-4c08-9efc-e5a3cdd8ed8d)
 
 ## **6. BAR Address & TLP Emulation**
 ** TODO: Still need to find out which exact values to change + new pcileech PIO BAR support needs research
