@@ -24,7 +24,7 @@ DSN
 : Device Serial Number
 
 DW
-: Double Word
+: Double Word | DWORD
 
 ### ⚠️ Disclaimer
 - (Don't expect this to work for Vanguard, Faceit, ESEA, or other such ACs that are as 'sophisticated' as they are. <br />
@@ -180,7 +180,11 @@ The console should now open at the bottom of the application.
 5. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and to allow us to manually edit some things we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, (to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.)
 
 ## **5. Blocks 0x40 and 0x60**
-1. Back in Arbor, near the middle left press on "raw" to see the config space of your donor card, now select DWords for the cell size and press update
+1. Back in Arbor, under the PCI Config tab, near the middle left press on "raw" to see the config space of your donor card, now select DWords for the cell size and press update
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/f9ea4f53-85c7-4248-bd2f-90b1927aa5d8)
+
+
 2. Navigate to `ip` > `pcileech_cfgspace.coe`
 
 ## **6. BAR Address & TLP Emulation**
