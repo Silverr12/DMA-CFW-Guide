@@ -216,7 +216,10 @@ The console should now open at the bottom of the application.
 ## **6. BAR Address & TLP Emulation**
 ** TODO: Still need to find out which exact values to change + new pcileech PIO BAR support needs research
 
-
+## **7. Building and FLashing**
+-explain vivado generate bitstream
+-what file to go to for .bin file
+-either link users to https://docs.lambdaconcept.com/screamer/programming.html or explain it all here
 
 
 
