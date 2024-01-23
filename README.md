@@ -87,11 +87,13 @@ Go Into PCI Config and locate your network controller, scroll around in the deco
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/c2374ea7-ca9c-47b7-8a8d-4ceff5dffe3b)
 
 
-4. BAR0 (Also click on this value and take note of the sizing value) e.g <br>`Size: 256 bytes (bit 8 is first writable bit; sizing value: FFFF_FF01h)`
+4. BAR0 (Also click on this value and take note of the sizing value)
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/19239179-057a-4ed5-a79f-45cf242787a5)
 
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/59a08249-1ce3-49ae-ac98-00e9909ca8e3)
 
+My size is 16kb so record that
 
 5. Subsystem ID // 16 bits
 
@@ -205,6 +207,15 @@ The console should now open at the bottom of the application.
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/4b0584ec-9dda-4a2a-a5e1-a6e2eb28c6d1)
 
 3. Also go into the "BARs" tab and set the size value you gathered in step 2, note that this is not meant to be the same as your BAR Address
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/1942fa3c-71cf-4466-a9a6-a33b5b38e54d)
+
+the size of my bar was 16kb so 16kb is what you set it as
+
+If the size unit is different change the size unit to accommodate the unit of the bar size
+
+
+
 4. Press OK on the bottom right then hit "Generate" on the new window that pops up and wait for it to finish.
 5. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and to allow us to manually edit some things we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, (to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.)
 
