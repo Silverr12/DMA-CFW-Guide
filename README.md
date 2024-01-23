@@ -207,7 +207,7 @@ To check the class code of your donor card go back to Arbor > scan if needed, el
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/24131586-03d6-4b70-9000-16448a4d8944)
 
-3. Also go into the "BARs" tab and set the size value you gathered in step 2.
+3. Also go into the "BARs" tab and set the size value you gathered in step 2, note that the Hex Value shown is not meant to be the same as your bar address. You cannot edit this value.
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/1942fa3c-71cf-4466-a9a6-a33b5b38e54d)
 
