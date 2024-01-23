@@ -43,8 +43,8 @@ Also, this guide does ___not___ detail how to set up software or change computer
 2. [Gathering the donor information](https://github.com/Silverr12/DMA-FW-Guide#2-gathering-the-donor-information)
 3. [Initial Customisation](https://github.com/Silverr12/DMA-FW-Guide#3-initial-customisation)
 4. [Vivado Project Generation and Customisation](https://github.com/Silverr12/DMA-FW-Guide#4-vivado-project-generation-and-customisation)
-5. [Blocks 0x40 and 0x60](https://github.com/Silverr12/DMA-CFW-Guide?tab=readme-ov-file#5-blocks-0x40-and-0x60)
-6. [BAR Address & TLP Emulation](https://github.com/Silverr12/DMA-CFW-Guide?tab=readme-ov-file#6-bar-address--tlp-emulation)
+5. [Blocks 0x40 and 0x60](https://github.com/Silverr12/DMA-CFW-Guide#5-blocks-0x40-and-0x60)
+6. [TLP Emulation](https://github.com/Silverr12/DMA-CFW-Guide#6-tlp-emulation)
 
 ## **1. Requirements**
 
@@ -224,19 +224,19 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/c018b760-cb8f-4c08-9efc-e5a3cdd8ed8d)
 
-## **6. BAR Address & TLP Emulation**
+## **6. TLP Emulation**
 ** TODO: Still need to find out which exact values to change + new pcileech PIO BAR support needs research
 
-## **7. Building and FLashing**
--explain vivado generate bitstream
--what file to go to for .bin file
+## **7. Building and Flashing <sub>only for squirrel</sub>**
+-explain vivado generate bitstream<br />
+-what file to go to for .bin file<br />
 -either link users to https://docs.lambdaconcept.com/screamer/programming.html or explain it all here
 
-
+In regards to flashing, if you mess up your cfw and your bios wont post/hangs/whatever else doesn't allow your main pc to fully boot while your dma card is slotted in, if its still powered (indicated by the green lights) you can flash new firmware onto it from your second computer, if your second computer doesnt recognise the dma card, im 90% sure its dead, if your first computer wont' stay powered on, you have to buy a riser of sorts that will allow you to power your dma card but without it communicating
 
 ### Additional Credits
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
-ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(I recommend looking into this further if you want to look towards creating firmware to bypass sophisticated ACs)</sub>
+ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(You could use this as a base to start off of as well!)</sub>
 
 
 
