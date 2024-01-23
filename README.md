@@ -105,13 +105,15 @@ Go Into PCI Config and locate your network controller, scroll around in the deco
 
 It's fine if the Device Serial Number Capability Structure is not shown. use these numbers
 
-Serial Number Register (Lower DW): `00 00 00 00`,
+Serial Number Register (Lower DW): `00 00 00 00`, // 32 bits
 
-Serial Number Register (Upper DW): `00 00 00 00`,
+Serial Number Register (Upper DW): `00 00 00 00`, // 32 bits
 
-Combed lower and upper registers: `00 00 00 00 00 00 00 00`
+Combed lower and upper registers: `00 00 00 00 00 00 00 00` // 64 bits
 
 To combine your lower and upper registers you add them to make 1 64 bit register 
+
+The combined DSN register is what's used for DSN configuration in step 3
 
 In my case, these are my values:
 
@@ -119,9 +121,11 @@ Serial Number Register (Lower DW): `68 4C E0 00` // 32 bit
 
 Serial Number Register (Upper DW): `01 00 00 00` // 32 bit
 
-Combed lower and upper registers: `68 4C E0 00 01 00 00 00` // 64 bit
+Lower DW + Upper DW = `68 4C E0 00 01 00 00 00` // 64 bits
 
-The combined DSN register is what's used for DSN configuration in step 3
+Thus the combined lower and upper registers is: `68 4C E0 00 01 00 00 00` // 64 bit
+
+
 
 We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it here so keep it open
 
