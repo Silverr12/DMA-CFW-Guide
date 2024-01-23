@@ -34,9 +34,6 @@ Also, this guide does ___not___ detail how to set up software or change computer
 
 - It is not our fault if you brick your computer / DMA card. 
 
-- This guide does not go over how to flash the custom firmware onto your DMA card
-
-
 
 ### 📑 CONTENTS
 1. [Requirements](https://github.com/Silverr12/DMA-FW-Guide#1-requirements)
