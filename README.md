@@ -72,17 +72,17 @@ Go Into PCI Config and locate your network controller, scroll around in the deco
 #### All IDs shown below are mine and might not be the same for you
 
 
-1. Device ID
+1. Device ID // 16 bits
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/8baec3fe-c4bd-478e-9f95-d262804d6f67)
 
 
-2. Vendor ID
+2. Vendor ID // 16 bits
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/39c7de6d-d8db-4744-b0a0-ddeca0dfd7d7)
 
 
-3. Revision ID (will show as RevID)
+3. Revision ID (will show as RevID) // 8 bits
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/c2374ea7-ca9c-47b7-8a8d-4ceff5dffe3b)
 
@@ -93,16 +93,35 @@ Go Into PCI Config and locate your network controller, scroll around in the deco
 
 
 
-5. Subsystem ID
+5. Subsystem ID // 16 bits
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/94522a95-70bd-4336-8e38-58c0839e38ad)
 
 
 
-6. DSN(listed as Serial Number Register), just combine the lower and upper DW should look like `68 4C E0 00 01 00 00 00` when combined  <sub>**(need to verify)**</sub>
+6. DSN(listed as Serial Number Register) // 32 bits each | 64 bits combined
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/595ae3e2-4cd8-4b3d-bcfa-cf6a59f289d5)
 
+It's fine if the Device Serial Number Capability Structure is not shown. use these numbers
+
+Serial Number Register (Lower DW): `00 00 00 00`,
+
+Serial Number Register (Upper DW): `00 00 00 00`,
+
+Combed lower and upper registers: `00 00 00 00 00 00 00 00`
+
+To combine your lower and upper registers you add them to make 1 64 bit register 
+
+In my case, these are my values:
+
+Serial Number Register (Lower DW): `68 4C E0 00` // 32 bit
+
+Serial Number Register (Upper DW): `01 00 00 00` // 32 bit
+
+Combed lower and upper registers: `68 4C E0 00 01 00 00 00` // 64 bit
+
+The combined DSN register is what's used for DSN configuration in step 3
 
 We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it here so keep it open
 
@@ -132,7 +151,14 @@ Before
 
 After
 
-![image](https://github.com/Silverr12/DMA-FW-Guide/assets/48173453/3943d767-cd13-408f-b1bb-4726749f37ec)
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/0e230d17-c649-46a1-93fd-469534f0145b)
+
+
+this being my DSN
+
+if your donor card didn't have a DSN, yours should look like
+
+`rw[127:64]  <= 64'684CE00001000000;    // +008: cfg_dsn`
 
 
 3. Now head to `PCIeSquirrel/src/pcileech_fifo.sv` and Ctrl+F `rw[203]` which should be on line 290 and change the `1'b1;` to `1;b0;` (This will allow us to change the config space bytes later down the line)
@@ -145,7 +171,6 @@ After
 
 ![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/a5aca523-5d14-48d1-9e79-f43adadbb18b)
 
-this being my DSN
 
 4. Go ahead and save all the changes you've made
 
