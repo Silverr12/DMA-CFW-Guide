@@ -178,7 +178,7 @@ this being my DSN
 
 if your donor card didn't have a DSN, yours should look like
 
-`rw[127:64]  <= 64'0000000000000000;    // +008: cfg_dsn`
+`rw[127:64]  <= 64'h0000000000000000;    // +008: cfg_dsn`
 
 
 3. Now head to `/src/pcileech_fifo.sv` and Ctrl+F `rw[203]` which should be on line 290 and change the `1'b1;` to `1;b0;` (This will allow us to change the config space bytes later down the line)
