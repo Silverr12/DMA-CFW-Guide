@@ -39,7 +39,7 @@ Also, this guide does ___not___ detail how to set up software or change computer
 1. [Requirements](https://github.com/Silverr12/DMA-FW-Guide#1-requirements)
 2. [Gathering the donor information](https://github.com/Silverr12/DMA-FW-Guide#2-gathering-the-donor-information)
 3. [Initial Customisation](https://github.com/Silverr12/DMA-FW-Guide#3-initial-customisation)
-4. [Vivado Project Generation and Customisation](https://github.com/Silverr12/DMA-FW-Guide#4-vivado-project-generation-and-customisation)
+4. [Vivado Project Customisation](https://github.com/Silverr12/DMA-FW-Guide#4-vivado-project-customisation)
 5. [Blocks 0x40 and 0x60](https://github.com/Silverr12/DMA-CFW-Guide#5-blocks-0x40-and-0x60)
 6. [TLP Emulation](https://github.com/Silverr12/DMA-CFW-Guide#6-tlp-emulation)
 
