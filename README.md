@@ -103,14 +103,8 @@ My size is 16kb so record that
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/595ae3e2-4cd8-4b3d-bcfa-cf6a59f289d5)
 
-
-It's fine if the Device Serial Number Capability Structure is not shown. use these numbers
-
-Serial Number Register (Lower DW): `00 00 00 00`,
-
-Serial Number Register (Upper DW): `00 00 00 00`, 
-
-Combined lower and upper registers: `00 00 00 00 00 00 00 00`
+If the Device Serial Number Capability Structure is not shown for your device, make a randomized string of byte valid characters or 0 it out completely, but that may look a bit suspicious 
+<sub>(I think as long as its not the hard code value PCIleech comes with you should be fine since that's what ACs would scan for, please correct me if I'm wrong though.)</sub>
 
 Combine your lower and upper DSN registers for our DSN configuration in step 3
 
@@ -161,7 +155,7 @@ After
 
 
 
-2. In the same file `pcileech_pcie_cfg_a7.sv` Ctrl+F `rw[127:64]` which should be on line 215 to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`, insert your Serial Number there as such `rw[127:64]  <= 64'hXXXXXXXXXXXXXXXX;    // cfg_dsn` preserving the 16-character length of the input field, if your DSN is shorter, insert zeroes as seen in the example image<sub>(I think as long as its not the hard code value PCIleech comes with you should be fine as that's what ACs would scan for, please correct me if I'm wrong though.)</sub>
+2. In the same file `pcileech_pcie_cfg_a7.sv` Ctrl+F `rw[127:64]` which should be on line 215 to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`, insert your Serial Number there as such `rw[127:64]  <= 64'hXXXXXXXXXXXXXXXX;    // cfg_dsn` preserving the 16-character length of the input field, if your DSN is shorter, insert zeroes as seen in the example image
 
 Before
 
