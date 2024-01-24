@@ -26,6 +26,9 @@ DSN
 DW
 : Double Word | DWORD
 
+Donor card
+: A card that will be used to get IDs and will not be used on your main PC again
+
 ### ⚠️ Disclaimer
 - (Don't expect this to work for Vanguard, Faceit, ESEA, or other such ACs that are as 'sophisticated' as they are. <br />
 Also, this guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
