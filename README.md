@@ -224,10 +224,12 @@ If the size unit is different change the size unit to accommodate the unit of th
 1. Still in Vivado, navigate to `pcie_7x_0_core_top` as shown in the image, and use the magnifying glass in the top left of the text editor to search for these different lines to match them to your donor card
   (Disclaimer, you are matching the bytes by capability & structure, not by block, for example, Vendor ID is a structure, whereas PCIe is a capability)
 
-- Something about changing values in: 
-  - MSI (0x50)
-  - PCIe (0x60)
-  - & maybe PM capability blocks (0x40)
+- In comparison with a paid custom firmware versus pcileech default, we have recorded changes in the following blocks (grouped by dword, 1 indicates a change, 0 indicates no change)
+  - 0x00 `SKIP-IDS 00000100 01100010 00000000` Header
+  - 0x40 `11110000 00000001 00000000 00000000` PM Capability
+  - 0x50 `00100000 11111001 00000000 00000000` MSI Capability
+  - 0x60 `00100000 00000111 00000101 00001101` PCIe Capability
+  - 0x90 `00010001 00000000 00000000 00000000`PCIe Capability
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/c018b760-cb8f-4c08-9efc-e5a3cdd8ed8d)
 
