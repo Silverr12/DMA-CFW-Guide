@@ -249,11 +249,11 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 
 ## **7. Building and Flashing <sub>only for squirrel</sub>**
--explain vivado generate bitstream<br />
--what file to go to for .bin file<br />
--either link users to https://docs.lambdaconcept.com/screamer/programming.html or explain it all here
+-Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
+-You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
+-Follow the steps on the [official lambdaconcept guide for flashing](https://docs.lambdaconcept.com/screamer/programming.html)
 
-In regards to flashing, if you mess up your cfw and your bios wont post/hangs/whatever else doesn't allow your main pc to fully boot while your dma card is slotted in, if its still powered (indicated by the green lights) you can flash new firmware onto it from your second computer, if your second computer doesnt recognise the dma card, im 90% sure its dead, if your first computer wont' stay powered on, you have to buy a riser of sorts that will allow you to power your dma card but without it communicating
+In regards to flashing, if you mess up your cfw and your bios wont post/hangs/whatever else and doesn't allow your main pc to fully boot while your dma card is slotted in, you may be able to flash new firmware onto it from your second computer if its still powered (indicated by the green lights), if your second computer doesnt recognise the dma card, im 90% sure its dead, if your first computer wont' stay powered on, you have to buy a pcie riser that will allow you to power your dma card without it communicating (EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computer booted then flash it, be warned however as this can corrupt your motherboard's bios, and theres a chance you may not be able to repair it)
 
 ### Additional Credits
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
