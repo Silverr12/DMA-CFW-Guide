@@ -24,7 +24,7 @@ __DW__
 : Double Word | DWORD
 
 __Donor card__
-: A card that will be used to get IDs and will not be used on your main PC again
+: A card that will be used to get IDs and will not be used on your main PC (Eg. PCIE Wifi card)
 
 ### ⚠️ Disclaimer
 - (___Don't___ expect this to work for Vanguard, Faceit or ESEA in the guide's current state. <br />
