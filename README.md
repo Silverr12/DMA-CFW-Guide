@@ -103,6 +103,14 @@ My size is 16kb so record that
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/595ae3e2-4cd8-4b3d-bcfa-cf6a59f289d5)
 
+
+It's fine if the Device Serial Number Capability Structure is not shown. use these numbers
+
+Serial Number Register (Lower DW): `00 00 00 00`, // 32 bits
+
+Serial Number Register (Upper DW): `00 00 00 00`, // 32 bits
+
+
 Combine your lower and upper DSN registers for our DSN configuration in step 3
 
 For example, these are my values:
