@@ -222,7 +222,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 ## **5. Blocks 0x40 and 0x60**
 1. Still in Vivado, navigate to `pcie_7x_0_core_top` as shown in the image, and use the magnifying glass in the top left of the text editor to search for these different lines to match them to your donor card
-  (Disclaimer, you are matching the bytes by capability & structure, not by block, for example, Vendor ID is a structure, whereas PCIe is a capability)
+  (Disclaimer, you are matching the bytes by capability & structure, not by block, for example, Vendor ID is a structure, whereas PCIe is a capability that is made up of many structures)
 
 - In comparison with a paid custom firmware versus pcileech default, we have recorded changes in the following blocks (grouped by dword, 1 indicates a change, 0 indicates no change)
   - 0x00 `SKIP-IDS 00000100 01100010 00000000` Header
