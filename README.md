@@ -221,7 +221,8 @@ If the size unit is different change the size unit to accommodate the unit of th
 5. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and to allow us to manually edit some things we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, (to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.)
 
 ## **5. Blocks 0x40 and 0x60**
-1. Still in Vivado, navigate to `pcie_7x_0_core_top` as shown in the image, and navigate to line 280
+1. Still in Vivado, navigate to `pcie_7x_0_core_top` as shown in the image, and use the magnifying glass in the top left of the text editor to search for these different lines to match them to your donor card
+  (Disclaimer, you are matching the bytes by capability & structure, not by block, for example, Vendor ID is a structure, whereas PCIe is a capability)
 
 - Something about changing values in: 
   - MSI (0x50)
