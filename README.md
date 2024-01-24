@@ -222,7 +222,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 
 ---
-# **steps 5 and 6** are still in development
+# **steps 5 and 6** are still in development <sub>(as we are still researching this)</sub>
 
 
 
