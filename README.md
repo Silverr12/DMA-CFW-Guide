@@ -225,7 +225,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 
 ## **7. Building and Flashing <sub>ONLY FOR SQUIRREL</sub>**
-**It is not our fault if you brick your computer / DMA card (Which shouldn't happen anyway if you follow the steps).**<br />
+**It is not our fault if you brick your computer / DMA card with bad firmware(It shouldn't happen anyway if you follow the steps).**<br />
 
  - Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
  - You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
