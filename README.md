@@ -124,8 +124,6 @@ Lower DW + Upper DW = `68 4C E0 00 01 00 00 00` // 64 bits
 
 Thus the combined lower and upper registers is: `68 4C E0 00 01 00 00 00` // 64 bit
 
-7. 
-
 We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it here so keep it open
 
 ## **3. Initial Customisation**
