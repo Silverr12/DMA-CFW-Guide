@@ -8,31 +8,32 @@ them away from being able to make their own firmware so that they end up buying 
 other providers with no way to guarantee quality (I've seen "custom" paid firmware where they've only changed basic ids lol)
 
 #### 🔎 Definitions
-ACs
+__ACs__
 : Anti Cheats
 
-DMA
+__DMA__
 : Direct Memory Access
 
-TLP
+__TLP__
 : Transaction Layer Packet
 
-DSN
+__DSN__
 : Device Serial Number
 
-DW
+__DW__
 : Double Word | DWORD
 
-Donor card
+__Donor card__
 : A card that will be used to get IDs and will not be used on your main PC again
 
 ### ⚠️ Disclaimer
-- (Don't expect this to work for Vanguard, Faceit, ESEA, or other such ACs that are as 'sophisticated' as they are. <br />
-Also, this guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
+- (___Don't___ expect this to work for Vanguard, Faceit or ESEA in the guide's current state. <br />
+
+- This guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
 
 - It is assumed that the user following the guide has a basic understanding of custom firmware and so on...
 
-- It is not our fault if you brick your computer / DMA card. 
+- It is not our fault if you brick your computer / DMA card (Which shouldn't happen anyway if you follow the steps). 
 
 
 ### 📑 CONTENTS
@@ -69,65 +70,57 @@ Go Into PCI Config and locate your network controller, scroll around in the deco
 #### All IDs shown below are mine and might not be the same for you
 
 
-1. Device ID // 16 bits
+1. Device ID
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/8baec3fe-c4bd-478e-9f95-d262804d6f67)
 
 
-2. Vendor ID // 16 bits
+2. Vendor ID
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/39c7de6d-d8db-4744-b0a0-ddeca0dfd7d7)
 
 
-3. Revision ID (will show as RevID) // 8 bits
+3. Revision ID (will show as RevID)
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/c2374ea7-ca9c-47b7-8a8d-4ceff5dffe3b)
 
 
-4. BAR0 (Also click on this value and take note of the sizing value)
+4. BAR0 Sizing Value(1/2/3/4/5 too if you have them)
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/19239179-057a-4ed5-a79f-45cf242787a5)
+
+Click on the square its in to see sizing info
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/59a08249-1ce3-49ae-ac98-00e9909ca8e3)
 
 My size is 16kb so record that
 
-5. Subsystem ID // 16 bits
+5. Subsystem ID
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/94522a95-70bd-4336-8e38-58c0839e38ad)
 
 
 
-6. DSN(listed as Serial Number Register) // 32 bits each | 64 bits combined
+6. DSN(listed as Serial Number Register)
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/595ae3e2-4cd8-4b3d-bcfa-cf6a59f289d5)
 
-It's fine if the Device Serial Number Capability Structure is not shown. use these numbers
+Combine your lower and upper DSN registers for our DSN configuration in step 3
 
-Serial Number Register (Lower DW): `00 00 00 00`, // 32 bits
+For example, these are my values:
 
-Serial Number Register (Upper DW): `00 00 00 00`, // 32 bits
+Serial Number Register (Lower DW): `68 4C E0 00` <br />
+Serial Number Register (Upper DW): `01 00 00 00`<br />
 
-Combed lower and upper registers: `00 00 00 00 00 00 00 00` // 64 bits
+Combine yours in the same format:
 
-To combine your lower and upper registers you add them to make 1 64 bit register 
+Lower DW + Upper DW = `68 4C E0 00 01 00 00 00`
 
-The combined DSN register is what's used for DSN configuration in step 3
 
-In my case, these are my values:
-
-Serial Number Register (Lower DW): `68 4C E0 00` // 32 bit
-
-Serial Number Register (Upper DW): `01 00 00 00` // 32 bit
-
-Lower DW + Upper DW = `68 4C E0 00 01 00 00 00` // 64 bits
-
-Thus the combined lower and upper registers is: `68 4C E0 00 01 00 00 00` // 64 bit
-
-We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it here so keep it open
+7. We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it here so keep it open
 
 ## **3. Initial Customisation**
-Once again due to limited knowledge, I'll be focusing on the PCIeSquirrel section of ufrisk's pcileech at the moment, sorry to those using other cards.
+Once again due to limited knowledge, I'll be focusing on the PCIeSquirrel section of pcileech at the moment, sorry to those using other firmware.
 
 ### Using Vivado
 1. Open Vivado and in the top menu, in the search query, search for tcl console and click on it.
@@ -177,18 +170,6 @@ this being my DSN
 if your donor card didn't have a DSN, yours should look like
 
 `rw[127:64]  <= 64'h0000000000000000;    // +008: cfg_dsn`
-
-
-3. Now head to `/src/pcileech_fifo.sv` and Ctrl+F `rw[203]` which should be on line 290 and change the `1'b1;` to `1;b0;` (This will allow us to change the config space bytes later down the line)
-
-Before
-
-![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/1443ca9e-91c0-49d4-9979-a403d0f711d0)
-
-After
-
-![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/a5aca523-5d14-48d1-9e79-f43adadbb18b)
-
 
 4. Go ahead and save all the changes you've made
 
