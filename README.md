@@ -220,6 +220,14 @@ If the size unit is different change the size unit to accommodate the unit of th
 4. Press OK on the bottom right then hit "Generate" on the new window that pops up and wait for it to finish.
 5. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and to allow us to manually edit some things we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, (to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.)
 
+
+---
+# **steps 5 and 6** are still in development
+
+
+
+
+
 ## **5. Blocks 0x40 and 0x60**
 1. Still in Vivado, navigate to `pcie_7x_0_core_top` as shown in the image, and use the magnifying glass in the top left of the text editor to search for these different lines to match them to your donor card
   (Disclaimer, you are matching the bytes by capability & structure, not by block, for example, Vendor ID is a structure, whereas PCIe is a capability that is made up of many structures)
@@ -235,6 +243,9 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 ## **6. TLP Emulation**
 ** TODO: Still need to find out which exact values to change + new pcileech PIO BAR support needs research
+
+---
+
 
 ## **7. Building and Flashing <sub>only for squirrel</sub>**
 -explain vivado generate bitstream<br />
