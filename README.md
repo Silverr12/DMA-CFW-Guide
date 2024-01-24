@@ -30,7 +30,7 @@ DW
 - (Don't expect this to work for Vanguard, Faceit, ESEA, or other such ACs that are as 'sophisticated' as they are. <br />
 Also, this guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
 
-- It is assumed that the user following the guide has a basic understanding of custom firmware ...  **Finish this list** ... 
+- It is assumed that the user following the guide has a basic understanding of custom firmware and so on...
 
 - It is not our fault if you brick your computer / DMA card. 
 
