@@ -212,17 +212,23 @@ If the size unit is different change the size unit to accommodate the unit of th
 1. Still in Vivado, navigate to `pcie_7x_0_core_top` as shown in the image, and use the magnifying glass in the top left of the text editor to search for these different lines to match them to your donor card
   (Disclaimer, you are matching the bytes by capability & structure, not by block, for example, Vendor ID is a structure, whereas PCIe is a capability that is made up of many structures and can be located in different blocks on different pieces of hardware)
 
-- In comparison with a paid custom firmware versus pcileech default, we have recorded changes in the following bytes (grouped by dword, 1 indicates a change, 0 indicates no change)
-  - 0x00 `SKIP-IDS 00000100 01100010 00000000` Header
-  - 0x40 `11110000 00000001 00000000 00000000` PM Capability
-  - 0x50 `00100000 11111001 00000000 00000000` MSI Capability
-  - 0x60 `00100000 00000111 00000101 00001101` PCIe Capability
-  - 0x90 `00010001 00000000 00000000 00000000` PCIe Capability
-
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/c018b760-cb8f-4c08-9efc-e5a3cdd8ed8d)
 
+- In comparison with a paid custom firmware versus pcileech default, we have recorded changes in the following bytes (grouped by dword, 1 indicates a change, 0 indicates no change)
+  - 0x00 `SKIP-IDS 00000100 01100000 00000000` 
+  - 0x40 `11110000 00000001 00000000 00000000` 
+  - 0x50 `00100000 11111001 00000000 00000000` 
+  - 0x60 `00100000 00000111 00000101 00001101` 
+  - 0x90 `00010001 00000000 00000000 00000000` <br />
+In addition to this I will be updating a list of variable names in the vivado config correlating to the values changed that you could change, not in any particular order, I have: <br />
+  - 0x00 `CLASS_CODE`
+  - 0x40 `PM_CAP_VERSION`, `PM_CAP_D1SUPPORT`, `PM_CSR_NOSOFTRST`
+  - 0x50 `MSI_CAP_64_BIT_ADDR_CAPABLE`, 
+  - 0x60 `PCIE_CAP_DEVICE_PORT_TYPE`, `LINK_CAP_ASPM_SUPPORT`, `LINK_CAP_MAX_LINK_SPEED`, `LINK_CAP_MAX_LINK_WIDTH`
+  - 0x90
+
 ## **6. TLP Emulation**
-** TODO: Still need to find out what to change + new pcileech PIO BAR support needs research
+** TODO: New pcileech PIO BAR support needs research
 
 ---
 
