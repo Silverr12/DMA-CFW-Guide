@@ -220,13 +220,15 @@ If the size unit is different change the size unit to accommodate the unit of th
   - 0x50 `00100000 11111001 00000000 00000000` 
   - 0x60 `00100000 00000111 00000101 00001101` 
   - 0x90 `00010001 00000000 00000000 00000000` <br />
-In addition to this I will be updating a list of variable names in the vivado config correlating to the values changed that you could change, not in any particular order, I have: <br />
+- In addition to this I will be updating a list of variable names in the vivado config correlating to the values changed that you could change, not in any particular order, I have: <br />
   - 0x00 `CLASS_CODE`
   - 0x40 `PM_CAP_VERSION`, `PM_CAP_D1SUPPORT`, `PM_CSR_NOSOFTRST`
   - 0x50 `MSI_CAP_64_BIT_ADDR_CAPABLE`, 
-  - 0x60 `PCIE_CAP_DEVICE_PORT_TYPE`, `LINK_CAP_ASPM_SUPPORT`, `LINK_CAP_MAX_LINK_SPEED`, `LINK_CAP_MAX_LINK_WIDTH`
-  - 0x90
-
+  - 0x60 `PCIE_CAP_DEVICE_PORT_TYPE`, `DEV_CAP_MAX_PAYLOAD_SUPPORTED`, `DEV_CAP_EXT_TAG_SUPPORTED`, `DEV_CAP_ENDPOINT_L0S_LATENCY`, `DEV_CAP_ENDPOINT_L1_LATENCY`, `LINK_CAP_ASPM_SUPPORT`, `LINK_CAP_MAX_LINK_SPEED`, `LINK_CAP_MAX_LINK_WIDTH`
+  - 0x90 `LINK_CTRL2_TARGET_LINK_SPEED` <br />
+- Fields that I haven't found the variable name for yet but looks like can be changed if you find them:  <br />
+  - 0x60 (Device Control: Correctable Error Reporting Enable), (Device Control: Non-Fatal Error Reporting Enable), (Device Control: Fatal Error Reporting Enable), (Device Control: Enable No Snoop)
+  - 0x90 (Link Status2: Current De-emphasis)
 ## **6. TLP Emulation**
 ** TODO: New pcileech PIO BAR support needs research
 
