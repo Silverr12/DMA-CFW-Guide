@@ -106,10 +106,11 @@ My size is 16kb so record that
 
 It's fine if the Device Serial Number Capability Structure is not shown. use these numbers
 
-Serial Number Register (Lower DW): `00 00 00 00`, // 32 bits
+Serial Number Register (Lower DW): `00 00 00 00`,
 
-Serial Number Register (Upper DW): `00 00 00 00`, // 32 bits
+Serial Number Register (Upper DW): `00 00 00 00`, 
 
+Combined lower and upper registers: `00 00 00 00 00 00 00 00`
 
 Combine your lower and upper DSN registers for our DSN configuration in step 3
 
