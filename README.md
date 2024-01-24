@@ -39,8 +39,9 @@ __Donor card__
 2. [Gathering the donor information](https://github.com/Silverr12/DMA-FW-Guide#2-gathering-the-donor-information)
 3. [Initial Customisation](https://github.com/Silverr12/DMA-FW-Guide#3-initial-customisation)
 4. [Vivado Project Customisation](https://github.com/Silverr12/DMA-FW-Guide#4-vivado-project-customisation)
-5. [Blocks 0x40 and 0x60](https://github.com/Silverr12/DMA-CFW-Guide#5-blocks-0x40-and-0x60)
+5. [Other Config Space Changes](https://github.com/Silverr12/DMA-CFW-Guide#5-other-config-space-changes)
 6. [TLP Emulation](https://github.com/Silverr12/DMA-CFW-Guide#6-tlp-emulation)
+7. [Building and Flashing](https://github.com/Silverr12/DMA-CFW-Guide#7-building-and-flashing-only-for-squirrel)
 
 ## **1. Requirements**
 
@@ -208,7 +209,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 
 
-## **5. Blocks 0x40 and 0x60**
+## **5. Other Config Space Changes**
 1. Still in Vivado, navigate to `pcie_7x_0_core_top` as shown in the image, and use the magnifying glass in the top left of the text editor to search for these different lines to match them to your donor card
   (Disclaimer, you are matching the bytes by capability & structure, not by block, for example, Vendor ID is a structure, whereas PCIe is a capability that is made up of many structures and can be located in different blocks on different pieces of hardware)
 
