@@ -33,8 +33,6 @@ __Donor card__
 
 - It is assumed that the user following the guide has a basic understanding of custom firmware and so on...
 
-- It is not our fault if you brick your computer / DMA card (Which shouldn't happen anyway if you follow the steps). 
-
 
 ### 📑 CONTENTS
 1. [Requirements](https://github.com/Silverr12/DMA-FW-Guide#1-requirements)
@@ -216,20 +214,22 @@ If the size unit is different change the size unit to accommodate the unit of th
   - 0x40 `11110000 00000001 00000000 00000000` PM Capability
   - 0x50 `00100000 11111001 00000000 00000000` MSI Capability
   - 0x60 `00100000 00000111 00000101 00001101` PCIe Capability
-  - 0x90 `00010001 00000000 00000000 00000000`PCIe Capability
+  - 0x90 `00010001 00000000 00000000 00000000` PCIe Capability
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/c018b760-cb8f-4c08-9efc-e5a3cdd8ed8d)
 
 ## **6. TLP Emulation**
-** TODO: Still need to find out which exact values to change + new pcileech PIO BAR support needs research
+** TODO: Still need to find out what to change + new pcileech PIO BAR support needs research
 
 ---
 
 
-## **7. Building and Flashing <sub>only for squirrel</sub>**
--Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
--You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
--Follow the steps on the [official lambdaconcept guide for flashing](https://docs.lambdaconcept.com/screamer/programming.html)
+## **7. Building and Flashing <sub>ONLY FOR SQUIRREL</sub>**
+**It is not our fault if you brick your computer / DMA card (Which shouldn't happen anyway if you follow the steps).**<br />
+
+ - Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
+ - You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
+ - Follow the steps on the [official LambdaConcept guide for flashing](https://docs.lambdaconcept.com/screamer/programming.html)
 
 In regards to flashing, if you mess up your cfw and your bios wont post/hangs/whatever else and doesn't allow your main pc to fully boot while your dma card is slotted in, you may be able to flash new firmware onto it from your second computer if its still powered (indicated by the green lights), if your second computer doesnt recognise the dma card, im 90% sure its dead, if your first computer wont' stay powered on, you have to buy a pcie riser that will allow you to power your dma card without it communicating (EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computer booted then flash it, be warned however as this can corrupt your motherboard's bios, and theres a chance you may not be able to repair it)
 
