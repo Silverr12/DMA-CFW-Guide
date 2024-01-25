@@ -2,6 +2,9 @@
 The following guide details instructions on the creation of modified DMA (attack) Firmware based on [pcileech-fpga](https://github.com/ufrisk/pcileech) **version 4.13**. <br />
 **Additionally this is intended to be a build off of garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) guide in a more detailed way**<br />
 
+Basic video: https://www.youtube.com/watch?v=qOPTxYYw63E&ab_channel=RakeshMonkee
+
+
 #### 📖Why make this guide?
 I don't like that there are people intentionally being vague, or keeping information secret, or even misleading people to drive
 them away from being able to make their own firmware so that they end up buying 100s of dollars worth of custom firmware from
