@@ -36,7 +36,7 @@ __Donor card__
 
 - It is assumed that the user following the guide has a basic understanding of custom firmware and so on...
 
-- If you don't understand a single part of this guide, this guide is not for you as you will most likely brick your card. Buy a paid cfw and hope for the best it is a 1:1
+- If you don't understand a single part of this guide, this guide is not for you as you will most likely brick your card. Buy a paid cfw and hope for the best it is a 1:1 and at the very least make sure they have TLP emulation.
 
 
 ### 📑 CONTENTS
@@ -228,26 +228,26 @@ If the size unit is different change the size unit to accommodate the unit of th
   - 0x90 `00010001 00000000 00000000 00000000` <br />
 - Here is a list of variable names in the Vivado IP core config correlating to the values changed that you could change to match your donor cards. Not in any particular order, I have: <br />
   - 0x00 `CLASS_CODE` (easier to do this one in the UI)
-  - 0x40 `PM_CAP_VERSION`, `PM_CAP_D1SUPPORT`,`PM_CAP_AUXCURRENT`, `PM_CSR_NOSOFTRST`, `cfg_pmcsr_powerstate`(not in the same file)
+  - 0x40 `PM_CAP_VERSION`, `PM_CAP_D1SUPPORT`,`PM_CAP_AUXCURRENT`, `PM_CSR_NOSOFTRST`
   - 0x50 `MSI_CAP_64_BIT_ADDR_CAPABLE`, 
-  - 0x60 `PCIE_CAP_DEVICE_PORT_TYPE`, `DEV_CAP_MAX_PAYLOAD_SUPPORTED`, `DEV_CAP_EXT_TAG_SUPPORTED`, `DEV_CAP_ENDPOINT_L0S_LATENCY`, `DEV_CAP_ENDPOINT_L1_LATENCY`, `LINK_CAP_ASPM_SUPPORT`, `LINK_CAP_MAX_LINK_SPEED`, `LINK_CAP_MAX_LINK_WIDTH`, `corr_err_reporting_en`(not in same file), 
+  - 0x60 `PCIE_CAP_DEVICE_PORT_TYPE`, `DEV_CAP_MAX_PAYLOAD_SUPPORTED`, `DEV_CAP_EXT_TAG_SUPPORTED`, `DEV_CAP_ENDPOINT_L0S_LATENCY`, `DEV_CAP_ENDPOINT_L1_LATENCY`, `LINK_CAP_ASPM_SUPPORT`, `LINK_CAP_MAX_LINK_SPEED`, `LINK_CAP_MAX_LINK_WIDTH`
   - 0x90 `LINK_CTRL2_TARGET_LINK_SPEED` <br />
-- Fields that I haven't found the variable name for yet but looks like can be changed if you find them:  <br />
-  - 0x40 (Power Management Control/Status: Powerstate)
-  - 0x60 (Device Control: Correctable Error Reporting Enable), (Device Control: Non-Fatal Error Reporting Enable), (Device Control: Fatal Error Reporting Enable), (Device Control: Enable No Snoop)
-  - 0x90 (Link Status2: Current De-emphasis)
+- Fields that can be changed in different files (don't know specifics yet)  <br />
+  - 0x40 `cfg_pmcsr_powerstate`
+  - 0x60 `corr_err_reporting_en`, `non_fatal_err_reporting_en`, `fatal_err_reporting_en`, `no_snoop_en`
+  - 0x90 `Link Status2: Current De-emphasis` (I have not been able to find a single reference to deemph in link status2, nor any other config for this structure, your best bet is modifying this manually in the .coe file)
 ## **6. TLP Emulation**
-** TODO: Making a guide for this might even need a repo on its own, for now, see [this](https://github.com/ekknod/pcileech-wifi/blob/main/PCIeSquirrel/src/pcileech_tlps128_bar_controller.sv) from line 803 for an example
+**Making a guide for this might even need a repo of it's own, for now, see [this](https://github.com/ekknod/pcileech-wifi/blob/main/PCIeSquirrel/src/pcileech_tlps128_bar_controller.sv) from line 803 for an example
 
 ---
 
 
-## **7. Building and Flashing <sub>ONLY FOR SQUIRREL</sub>**
+## **7. Building and Flashing**
 **It is not our fault if you brick your computer / DMA card with bad firmware(It shouldn't happen anyway if you follow the steps).**<br />
 
  - Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
  - You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
- - Follow the steps on the [official LambdaConcept guide for flashing](https://docs.lambdaconcept.com/screamer/programming.html)
+ - Follow the steps on the [official LambdaConcept guide for flashing](https://docs.lambdaconcept.com/screamer/programming.html) **<sub>REMINDER: ONLY FOR SQUIRREL</sub>**
 
 ### Flashing troubleshooting
 If you mess up your CFW and your bios wont post/hangs/whatever else which doesn't allow your main pc to fully boot while your dma card is slotted in, you may be able to flash new firmware onto it from your second computer if the card is still powered (indicated by the green lights). If your run a dma card speed test on your second computer and the dma card isnt recognised (doesn't matter if the rest of the speed test goes through or not), I'm 90% sure its dead, if your first computer won't stay powered on, you have to buy a pcie riser that will allow you to power your dma card without it communicating **(EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted booted then flash the card, be warned however as this can corrupt your motherboard's bios, and theres a chance you may not be able to repair it)**
@@ -263,4 +263,4 @@ ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)
 
 End note:<br />
 Don't be like this guy<br />
-![formerstafflmao](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/cf881e80-1139-4641-99c2-325b24bc162a)
+![:(](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/cf881e80-1139-4641-99c2-325b24bc162a)
