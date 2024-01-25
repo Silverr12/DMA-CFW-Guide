@@ -36,6 +36,8 @@ __Donor card__
 
 - It is assumed that the user following the guide has a basic understanding of custom firmware and so on...
 
+- If you don't understand a single part of this guide, this guide is not for you as you will most likely brick your card. Buy a paid cfw and hope for the best it is a 1:1
+
 
 ### 📑 CONTENTS
 1. [Requirements](https://github.com/Silverr12/DMA-FW-Guide#1-requirements)
