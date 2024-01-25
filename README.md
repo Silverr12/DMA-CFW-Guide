@@ -228,6 +228,7 @@ If the size unit is different change the size unit to accommodate the unit of th
   - 0x60 `PCIE_CAP_DEVICE_PORT_TYPE`, `DEV_CAP_MAX_PAYLOAD_SUPPORTED`, `DEV_CAP_EXT_TAG_SUPPORTED`, `DEV_CAP_ENDPOINT_L0S_LATENCY`, `DEV_CAP_ENDPOINT_L1_LATENCY`, `LINK_CAP_ASPM_SUPPORT`, `LINK_CAP_MAX_LINK_SPEED`, `LINK_CAP_MAX_LINK_WIDTH`
   - 0x90 `LINK_CTRL2_TARGET_LINK_SPEED` <br />
 - Fields that I haven't found the variable name for yet but looks like can be changed if you find them:  <br />
+  - 0x40 (Power Management Control/Status: Powerstate), (Power Management Capabilities: Aux_Current)
   - 0x60 (Device Control: Correctable Error Reporting Enable), (Device Control: Non-Fatal Error Reporting Enable), (Device Control: Fatal Error Reporting Enable), (Device Control: Enable No Snoop)
   - 0x90 (Link Status2: Current De-emphasis)
 ## **6. TLP Emulation**
