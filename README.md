@@ -1,14 +1,14 @@
 # DMA-CFW-Guide
 The following guide details instructions on the creation of modified DMA (attack) Firmware based on [pcileech-fpga](https://github.com/ufrisk/pcileech) **version 4.13**. <br />
-**Additionally this is intended to be a build off of garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) guide in a more detailed way**<br />
+**Additionally this is intended to be a build-off of garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) guide in a more detailed way**<br />
 > [!TIP]
 > Video going over steps 1-4: https://www.youtube.com/watch?v=qOPTxYYw63E&ab_channel=RakeshMonkee
 
 
 #### 📖Why make this guide?
-I don't like that there are people intentionally being vague, or keeping information secret, or even misleading people to drive
+I don't like that there are people intentionally being vague, keeping information secret, or even misleading people to drive
 them away from being able to make their own firmware so that they end up buying 100s of dollars worth of custom firmware from
-other providers with no way to guarantee quality (I've seen "custom" paid firmware where they've only changed basic ids lol)
+other providers with no way to guarantee quality (I've seen "custom" paid firmware where they've only changed basic IDs lol)
 
 #### 🔎 Definitions
 __ACs__
@@ -36,7 +36,7 @@ __Donor card__
 
 - It is assumed that the user following the guide has a basic understanding of custom firmware and so on...
 
-- If you don't understand a single part of this guide, this guide is not for you as you will most likely brick your card. Buy a paid cfw making sure at the very least they have TLP emulation and hope for the best it is a 1:1.
+- If you don't understand a single part of this guide, this guide is not for you as you will likely brick your card. Your best and safest bet is to buy a paid CFW making sure at the very least they have TLP emulation and hope for the best it is a 1:1.
 
 
 ### 📑 CONTENTS
@@ -93,7 +93,7 @@ Go Into PCI Config and locate your network controller, scroll around in the deco
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/19239179-057a-4ed5-a79f-45cf242787a5)
 
-Click on the square its in to see sizing info
+Click on the square it's in to see the sizing info
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/59a08249-1ce3-49ae-ac98-00e9909ca8e3)
 
@@ -109,7 +109,7 @@ My size is 16kb so record that
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/595ae3e2-4cd8-4b3d-bcfa-cf6a59f289d5)
 > [!NOTE]
-> If the Device Serial Number Capability Structure is not shown for your device, make a randomized string of byte valid characters or 0 it out completely, but that may look a bit suspicious 
+> If the Device Serial Number Capability Structure is not shown for your device, make a randomized string of byte-valid characters or 0 it out completely, but that may look a bit suspicious 
 > <sub>(I think as long as its not the hard code value PCIleech comes with you should be fine since that's what ACs would scan for, please correct me if I'm wrong though.)</sub>
 
 Combine your lower and upper DSN registers for our DSN configuration in step 3
@@ -189,7 +189,7 @@ if your donor card didn't have a DSN, yours should look like
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/4b0584ec-9dda-4a2a-a5e1-a6e2eb28c6d1)
 
-To check the class code of your donor card go back to Arbor > scan if needed, else > PCI config > set PCI view to Linear. Your card should be highlighted in green. There will also be a column header called **Class**. match that with your card.
+To check the class code of your donor card go back to Arbor > scan if needed, else > PCI config > set PCI view to Linear. Your card should be highlighted in green. There will also be a column header called **Class**. Match that with your card.
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/24131586-03d6-4b70-9000-16448a4d8944)
 
@@ -204,7 +204,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 
 4. Press OK on the bottom right then hit "Generate" on the new window that pops up and wait for it to finish.
-5. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and to allow us to manually edit some things we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, (to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.)
+5. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and allow us to edit some things manually we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, (to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.)
 
 
 ---
@@ -217,19 +217,19 @@ If the size unit is different change the size unit to accommodate the unit of th
 ## **5. Other Config Space Changes**
 1. Decide whether you want to modify your config space in the `configspace.coe` file, which:
    - Has a higher probability of (user) error
-   - Is less time consuming  <br />
+   - Is less time-consuming  <br />
 - **or** in the Vivado IP core, which:
    - Requires more effort
    - Is easier to grasp
 
-**I will first explain how to make the changes in the Vivado IP core editor, if you would instead like to make your changes in the configspace.coe file please scroll down to the appropriate section.**
+**I will first explain how to make the changes in the Vivado IP core editor. If you would instead like to make your changes in the configspace.coe file please scroll down to the appropriate section.**
 
 ### For Vivado configspace edit
   1. In Vivado, navigate to `pcie_7x_0_core_top` as shown in the image, and use the magnifying glass in the top left of the text editor to search for these different lines to match them to your donor card
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/c018b760-cb8f-4c08-9efc-e5a3cdd8ed8d)
 
-- Here is a list of variable names in the Vivado IP core config correlating to values we have seen changed when dumping paid cfw that you could change to match your donor cards. Not in any particular order, there is: <br />
+- Here is a list of variable names in the Vivado IP core config correlating to values we have seen changed when dumping paid CFW that you could change to match your donor cards. Not in any particular order, there is: <br />
   - 0x00 `CLASS_CODE` (easier to do this one in the UI)
   - 0x40 `PM_CAP_VERSION`, `PM_CAP_D1SUPPORT`,`PM_CAP_AUXCURRENT`, `PM_CSR_NOSOFTRST`
   - 0x50 `MSI_CAP_64_BIT_ADDR_CAPABLE`, 
@@ -242,7 +242,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 ### For configspace.coe file manual edit
 > [!IMPORTANT]
-> You are matching the bytes by **capability** & **structure**, *not* by **block**, for example, Vendor ID is a structure, whereas MSI is a capability which is made up of many structures and can be located in different blocks on different pieces of hardware
+> You are matching the bytes by **capability** & **structure**, *not* by **block**, for example, Vendor ID is a structure, whereas MSI is a capability that is made up of many structures and can be located in different blocks on different pieces of hardware
 
 1. In Visual Studio, head to `/src/pcileech_fifo.sv` and Ctrl+F `rw[203]` which should be on line 290 and change the `1'b1;` to `1;b0;` (This will allow us to change the config space bytes)
 
@@ -263,7 +263,7 @@ After
 
   
 ## **6. TLP Emulation**
-**Making a guide for this might even need a repo of it's own, for now, see [ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/PCIeSquirrel/src/pcileech_tlps128_bar_controller.sv) from line 803 for an example**
+**Making a guide for this might even need a repo of its own, for now, see [ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/PCIeSquirrel/src/pcileech_tlps128_bar_controller.sv) from line 803 for an example**
 
 ---
 
@@ -277,7 +277,7 @@ After
  - Follow the steps on the [official LambdaConcept guide for flashing](https://docs.lambdaconcept.com/screamer/programming.html) **<sub>REMINDER: ONLY FOR SQUIRREL</sub>**
 
 ### Flashing troubleshooting
-If you mess up your CFW and your game pc won't fully "boot", be because of bios hang or other reasons, you *may* be able to flash new firmware onto it from your second computer if the card is still powered (indicated by the green lights). If your run a dma card speed test on your second computer and the dma card isnt recognised (doesn't matter if the rest of the speed test goes through or not), I'm 90% sure its dead, if your first computer won't stay powered on, you have to buy a pcie riser that will allow you to power your dma card without it communicating **(EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted booted then flash the card, be warned however as this can corrupt your motherboard's bios, and theres a chance you may not be able to repair it)**
+If you mess up your CFW and your game PC won't fully "boot", be because of bios hang or other reasons, you *may* be able to flash new firmware onto it from your second computer if the card is still powered (indicated by the green lights). If your run a DMA card speed test on your second computer and the DMA card isn't recognised (doesn't matter if the rest of the speed test goes through or not), I'm 90% sure it's dead, if your first computer won't stay powered on, you have to buy a PCIe riser that will allow you to power your DMA card without it communicating **(EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted then flash the card, be warned however as this can corrupt your motherboard's bios, and there's a chance you may not be able to repair it)**
 
 ### Additional Credits
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
