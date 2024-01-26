@@ -110,7 +110,7 @@ My size is 16kb so record that
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/595ae3e2-4cd8-4b3d-bcfa-cf6a59f289d5)
 > [!NOTE]
 > If the Device Serial Number Capability Structure is not shown for your device, make a randomized string of byte-valid characters or 0 it out completely, but that may look a bit suspicious 
-> <sub>(I think as long as its not the hard code value PCIleech comes with you should be fine since that's what ACs would scan for, please correct me if I'm wrong though.)</sub>
+> <sub>(I believe as long as its not the hard code value PCIleech comes with you should be fine since that's what ACs would scan for, please correct me if I'm wrong though.)</sub>
 
 Combine your lower and upper DSN registers for our DSN configuration in step 3
 
@@ -159,7 +159,7 @@ After
 ![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/8814e113-bdd8-43de-81d3-008ef9cfb653)
 
 
-
+Setting `rw[21]` to a 1, allows the DMA card to access the CPU’s memory directly (DMA) or exchange TLPs with peer peripherals (to the extent that the switching entities support that)
 
 2. In the same file `pcileech_pcie_cfg_a7.sv` Ctrl+F `rw[127:64]` which should be on line 215 to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`, insert your Serial Number there as such `rw[127:64]  <= 64'hXXXXXXXXXXXXXXXX;    // cfg_dsn` preserving the 16-character length of the input field, if your DSN is shorter, insert zeroes as seen in the example image
 
@@ -264,6 +264,75 @@ After
   
 ## **6. TLP Emulation**
 **Making a guide for this might even need a repo of its own, for now, see [ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/PCIeSquirrel/src/pcileech_tlps128_bar_controller.sv) from line 803 for an example**
+
+
+Notes to consider:
+
+## Memory Read Request at the Transaction Layer of the PCI Express (PCIe) protocol
+
+| |0x31|0x30|0x29|0x28|0x27|0x26|0x25|0x24|0x23|0x22|02x1|02x0|01x9|01x8|01x7|01x6|0x15|0x14|0x13|0x12|0x11|0x10|0x9|0x8|0x7|0x6|0x5|0x4|0x3|0x2|0x1|0x0|
+|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
+|DW 0|R|Fmt|-|Type|-|-|-|-|R|TC|-|-|R|-|-|-|TD|EP|Attr|-|R|-|Length|-|-|-|-|-|-|-|-|-|
+|DW 1|Requester ID|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|Tag|-|-|-|-|-|-|-|Last BE|-|-|-|1st BE|-|-|-|
+|DW 2|Addresses[31:2]|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|R|-|
+ 
+DW 0:
+   - R: Reserved bit.<br>
+   - Fmt: Format field.<br>
+   - Type: Type field specifying it's a memory read request.<br>
+   - TC: Traffic Class field.<br>
+   - TD: TLP Digest bit.<br>
+   - EP: Extended Payload bit.<br>
+   - Attr: Attribute field.<br>
+   - Length: Length field indicating the number of double words (DWs) to be read.<br>
+   
+DW 1:
+   - Requester ID: Identifies the sender of the request.<br>
+   - Tag: Tag field (may not be used in all cases).<br>
+   - Last BE: Last Byte Enable field.<br>
+   - 1st BE: First Byte Enable field.<br>
+   
+DW 2:
+   - Addresses[31:2]: Address to read from.<br>
+   - R: Reserved bit.<br>
+
+
+
+## Memory Write Request at the Transaction Layer of the PCI Express (PCIe) protocol
+
+
+| |0x31|0x30|0x29|0x28|0x27|0x26|0x25|0x24|0x23|0x22|02x1|02x0|01x9|01x8|01x7|01x6|0x15|0x14|0x13|0x12|0x11|0x10|0x9|0x8|0x7|0x6|0x5|0x4|0x3|0x2|0x1|0x0|
+|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
+|DW 0|R|Fmt|-|Type|-|-|-|-|R|TC|-|-|R|-|-|-|TD|EP|Attr|-|R|-|Length|-|-|-|-|-|-|-|-|-|
+|DW 1|Requester ID|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|Tag|-|-|-|-|-|-|-|Last BE|-|-|-|1st BE|-|-|-|
+|DW 2|Addresses[31:2]|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|R|-|
+|DW 3|DATA DW 0|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+
+
+DW 0:
+   - R: Reserved bit.<br>
+   - Fmt: Format field.<br>
+   - Type: Type field indicating it's a memory write request.<br>
+   - TC: Traffic Class field.<br>
+   - TD: TLP Digest bit.<br>
+   - EP: Extended Payload bit.<br>
+   - Attr: Attribute field.<br>
+   - Length: Length field indicating the number of double words (DWs) of data being written.<br>
+   
+DW 1:
+   - Requester ID: Identifies the sender of the request.<br>
+   - Tag: Tag field (may not be used in all cases).<br>
+   - Last BE: Last Byte Enable field.<br>
+   - 1st BE: First Byte Enable field.<br>
+   
+DW 2:
+   - Addresses[31:2]: Address where the data will be written.<br>
+   
+DW 3:
+   - DATA DW 0: Contains the actual data to be written.<br>
+
+
+
 
 ---
 
