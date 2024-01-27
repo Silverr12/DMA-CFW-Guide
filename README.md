@@ -265,6 +265,19 @@ After
 ## **6. TLP Emulation**
 **Making a guide for this might even need a repo of its own, for now, see [ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/PCIeSquirrel/src/pcileech_tlps128_bar_controller.sv) from line 803 for an example**
 
+These instructions are not complete and final.
+
+1. Edit the Xilinx PCIe core in Vivado. By default, there is one BAR, BAR0 which have 4kB of all-zero read/write memory assigned
+
+2. In Visual Studio head to `pcileech_tlps128_bar_controller.sv` and follow the instructions in the file to implement custom BAR PIO memory regions
+
+
+
+
+
+
+
+
 
 Notes to consider:
 
