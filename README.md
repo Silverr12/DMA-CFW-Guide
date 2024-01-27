@@ -55,8 +55,8 @@ __Donor card__
 - [Visual Studio](https://visualstudio.microsoft.com/vs/community/)
 - [Xilinx Vivado](https://www.xilinx.com/support/download.html) Will need to make an AMD account to download
 - [Pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) Source code for custom firmware
-- [Arbor](https://www.mindshare.com/software/Arbor) Will need to make an account to download the trial (14 days)
-
+- [Arbor](https://www.mindshare.com/software/Arbor) Will need to make an account to download the trial (14 days) <br />
+<sub>The trial can be extended by deleting the appropriate folder in your registry editor, I don't think I can tell you more than that though.</sub>
 
 
 
