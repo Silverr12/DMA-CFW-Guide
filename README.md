@@ -245,7 +245,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 ### For configspace.coe file manual edit
 > [!IMPORTANT]
-> You are matching the bytes by **capability** & **structure**, *not* by **block**, for example, Vendor ID is a structure, whereas MSI is a capability that is made up of many structures and can be located in different blocks on different pieces of hardware
+> You are matching the bytes by **capability structure** & **function**, *not* by **block**, for example, Vendor ID is a function, whereas MSI is a capability that is made up of many functions to form a structure and can be located in different blocks on different pieces of hardware
 
 1. In Visual Studio, head to `/src/pcileech_fifo.sv` and Ctrl+F `rw[203]` which should be on line 290 and change the `1'b1;` to `1;b0;` (This will allow us to change the config space bytes)
 
