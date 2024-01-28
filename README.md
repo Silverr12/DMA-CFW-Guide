@@ -229,25 +229,23 @@ If the size unit is different change the size unit to accommodate the unit of th
   - 0x50 `MSI_CAP_64_BIT_ADDR_CAPABLE`, 
   - 0x60 `PCIE_CAP_DEVICE_PORT_TYPE`, `DEV_CAP_MAX_PAYLOAD_SUPPORTED`, `DEV_CAP_EXT_TAG_SUPPORTED`, `DEV_CAP_ENDPOINT_L0S_LATENCY`, `DEV_CAP_ENDPOINT_L1_LATENCY`, `LINK_CAP_ASPM_SUPPORT`, `LINK_CAP_MAX_LINK_SPEED`, `LINK_CAP_MAX_LINK_WIDTH`
   - 0x90 `LINK_CTRL2_TARGET_LINK_SPEED` <br />
-- Fields that can be changed in different files (don't know specifics yet)  <br />
+- Fields that can be changed in different files or GUI(don't know specifics yet)  <br />
   - 0x40 `cfg_pmcsr_powerstate`
   - 0x60 `corr_err_reporting_en`, `non_fatal_err_reporting_en`, `fatal_err_reporting_en`, `no_snoop_en`
   - 0x90 `Link Status2: Current De-emphasis` (I have not been able to find a single reference to deemph in link status2, nor any other config for this structure, your best bet is modifying this one in the .coe file)
 
-### ~~For configspace.coe file manual edit~~
+
 > [!IMPORTANT]
-> I have removed this section as I could not verify that it fully worked, was more complicated to implement and thus was also way harder. If you still insist on doing it this way, search for the commit "`configspace.coe removal`". This has been left here for posterity
+> Once you have completed steps 1-5, you **should, with 98% confidence**, be good to go for BE, EAC, (probably ricochet) and any other anti-cheat that you can think of **that isn't VGK, Faceit or ESEA**, they come in the next step :)
 
 
   
 ## **6. TLP Emulation**
-**Making a guide for this might even need a repo of its own, for now, see [ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/PCIeSquirrel/src/pcileech_tlps128_bar_controller.sv) from line 803 for an example**
+**For now, see [ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/PCIeSquirrel/src/pcileech_tlps128_bar_controller.sv) from line 803 for an example**
 
-These instructions are not complete and final.
+### These instructions are not complete and final.
 
-1. Edit the Xilinx PCIe core in Vivado. By default, there is one BAR, BAR0 which have 4kB of all-zero read/write memory assigned
-
-2. In Visual Studio head to `pcileech_tlps128_bar_controller.sv` and follow the instructions in the file to implement custom BAR PIO memory regions
+1. In Visual Studio head to `pcileech_tlps128_bar_controller.sv` and follow the instructions in the file to implement custom BAR PIO memory regions
 
 
 
@@ -328,16 +326,19 @@ DW 3:
 ---
 
 
-## **7. Building and Flashing**
+## **7. Building, Flashing & Testing**
 > [!CAUTION]
 > **It is not our fault if you brick your computer / DMA card with bad firmware (It shouldn't happen anyway if you follow the steps correctly).**<br />
 
- - Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
- - You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
- - Follow the steps on the [official LambdaConcept guide for flashing](https://docs.lambdaconcept.com/screamer/programming.html) **<sub>REMINDER: ONLY FOR SQUIRREL</sub>**
+1. Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
+   - You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
+2. Follow the steps on the [official LambdaConcept guide for flashing](https://docs.lambdaconcept.com/screamer/programming.html) **<sub>REMINDER: ONLY FOR SQUIRREL</sub>**
 
 ### Flashing troubleshooting
 If you mess up your CFW and your game PC won't fully "boot", be because of bios hang or other reasons, you *may* be able to flash new firmware onto it from your second computer if the card is still powered (indicated by the green lights). If your run a DMA card speed test on your second computer and the DMA card isn't recognised (doesn't matter if the rest of the speed test goes through or not), I'm 90% sure it's dead, if your first computer won't stay powered on, you have to buy a PCIe riser that will allow you to power your DMA card without it communicating **(EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted then flash the card, be warned however as this can corrupt your motherboard's bios, and there's a chance you may not be able to repair it)**
+
+3. Run a DMA speed test tool from your second computer <sub>(I cannot tell you where to source this)</sub> to verify your firmware is working and reading as it should be.
+4. Dump and compare the config space of your new firmware to the pcileech default to see if its overly similar. You should most definitely be alright with some values being the same, you have to think about the fact that apart from the serial number and maybe bar address, the configuration space of one type of (for example) network card is going to be the exact same accross all of them. So as long as your new firmware's configuration space does not closely resemble the default, you have a legitimate device for all the ACs care. GLHF
 
 ### Additional Credits
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
