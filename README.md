@@ -257,12 +257,22 @@ After
 
 ![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/a5aca523-5d14-48d1-9e79-f43adadbb18b)
 
-- In comparison with a paid custom firmware versus pcileech default, we have recorded changes in the following bytes (grouped by dword, 1 indicates a change, 0 indicates no change)
+2. Head to `/ip/pcileech_cfgspace.coe` and familiarise yourself with the grouped (dword) config space layout, you can also view your donor cards config space in this same layout by selecting it in Arbor on the middle left as shown in the image.
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/63d62a10-97a7-4eae-9047-2bc0731a5f0e)
+
+
+- We have recorded the following bytes that are able to be changed and still allow the device to function as normal <sub>we are by no means saying there aren't more, we just haven't found them</sub>
+- (grouped by dword, 1 indicates a change, 0 indicates no change)
   - 0x00 `SKIP-IDS 00000100 01100000 00000000` 
   - 0x40 `11110000 00000001 00000000 00000000` 
   - 0x50 `00100000 11111001 00000000 00000000` 
   - 0x60 `00100000 00000111 00000101 00001101` 
   - 0x90 `00010001 00000000 00000000 00000000` <br />
+
+3. Copy the appropriate bytes over, example below.
+   - On my donor card my PCIe capability began at 0x40 and for our DMA card it begins at 0x60, so with that in mind I'm going to take the 3rd byte from my 0x40 donor card and put it at the 3rd byte on the 0x60 block in my .coe file
+
 
   
 ## **6. TLP Emulation**
