@@ -8,6 +8,11 @@ Don't create an issue asking for help with this. As stated above, "Not for begin
 
 It's not our fault if you don't listen and brick your card.
 
+If you believe something is wrong, make an issue
+
+
+
+
 IDs:
 - Vendor ID 
 - Device ID 
