@@ -218,16 +218,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 
 ## **5. Other Config Space Changes**
-1. Decide whether you want to modify your config space in the `configspace.coe` file, which:
-   - Has a higher probability of (user) error
-   - Is less time-consuming  <br />
-- **or** in the Vivado IP core, which:
-   - Requires more effort
-   - Is easier to grasp
 
-**I will first explain how to make the changes in the Vivado IP core editor. If you would instead like to make your changes in the configspace.coe file please scroll down to the appropriate section.**
-
-### For Vivado configspace edit
   1. In Vivado, navigate to `pcie_7x_0_core_top` as shown in the image, and use the magnifying glass in the top left of the text editor to search for these different lines to match them to your donor card
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/c018b760-cb8f-4c08-9efc-e5a3cdd8ed8d)
@@ -243,35 +234,9 @@ If the size unit is different change the size unit to accommodate the unit of th
   - 0x60 `corr_err_reporting_en`, `non_fatal_err_reporting_en`, `fatal_err_reporting_en`, `no_snoop_en`
   - 0x90 `Link Status2: Current De-emphasis` (I have not been able to find a single reference to deemph in link status2, nor any other config for this structure, your best bet is modifying this one in the .coe file)
 
-### For configspace.coe file manual edit
+### ~~For configspace.coe file manual edit~~
 > [!IMPORTANT]
-> You are matching the bytes by **capability structure** & **function**, *not* by **block**, for example, Vendor ID is a function, whereas MSI is a capability that is made up of many functions to form a structure and can be located in different blocks on different pieces of hardware
-
-1. In Visual Studio, head to `/src/pcileech_fifo.sv` and Ctrl+F `rw[203]` which should be on line 290 and change the `1'b1;` to `1;b0;` (This will allow us to change the config space bytes)
-
-Before
-
-![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/1443ca9e-91c0-49d4-9979-a403d0f711d0)
-
-After
-
-![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/a5aca523-5d14-48d1-9e79-f43adadbb18b)
-
-2. Head to `/ip/pcileech_cfgspace.coe` and familiarise yourself with the grouped (dword) config space layout, you can also view your donor cards config space in this same layout by selecting it in Arbor on the middle left as shown in the image.
-
-![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/63d62a10-97a7-4eae-9047-2bc0731a5f0e)
-
-
-- We have recorded the following bytes that are able to be changed and still allow the device to function as normal <sub>we are by no means saying there aren't more, we just haven't found them</sub>
-- (grouped by dword, 1 indicates a change, 0 indicates no change)
-  - 0x00 `SKIP-IDS 00000100 01100000 00000000` 
-  - 0x40 `11110000 00000001 00000000 00000000` 
-  - 0x50 `00100000 11111001 00000000 00000000` 
-  - 0x60 `00100000 00000111 00000101 00001101` 
-  - 0x90 `00010001 00000000 00000000 00000000` <br />
-
-3. Copy the appropriate bytes over, example below.
-   - On my donor card my PCIe capability began at 0x40 and for our DMA card it begins at 0x60, so with that in mind I'm going to take the 3rd byte from my 0x40 donor card and put it at the 3rd byte on the 0x60 block in my .coe file
+> I have removed this section as I could not verify that it fully worked, was more complicated to implement and thus was also way harder. If you still insist on doing it this way, search for the commit "`configspace.coe removal`". This has been left here for posterity
 
 
   
