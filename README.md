@@ -49,7 +49,7 @@ __Donor card__
 4. [Vivado Project Customisation](https://github.com/Silverr12/DMA-FW-Guide#4-vivado-project-customisation)
 5. [Other Config Space Changes](https://github.com/Silverr12/DMA-CFW-Guide#5-other-config-space-changes)
 6. [TLP Emulation](https://github.com/Silverr12/DMA-CFW-Guide#6-tlp-emulation)
-7. [Building and Flashing](https://github.com/Silverr12/DMA-CFW-Guide#7-building-flashing--testing)
+7. [Building, Flashing & Testing](https://github.com/Silverr12/DMA-CFW-Guide#7-building-flashing--testing)
 
 ## **1. Requirements**
 
