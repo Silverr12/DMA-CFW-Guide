@@ -4,7 +4,7 @@ Only Do if you know what you are doing and changing. Not for beginners.
 
 Don't create an issue asking for help with this. As stated above, "Not for beginners".
 
-It's not our fault if you don't listen and brick your card.
+It's not our fault if you don't listen and brick your card putting the wrong values in.
 
 If you believe something is wrong, make an issue
 
