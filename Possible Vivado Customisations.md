@@ -1,3 +1,6 @@
+> [!CAUTION]
+> Anything mentioned here that isn't in the main readme has not been tested, you are on your own here on out.
+
 Some Possible Customisations in Vivado. You get the values from Arbor from your Donor Card. Not all Tabs have been added as these are the values/blocks/whatever-it's-called, that I have changed. I cannot find anything about Ext-Capabilities, Ext-Capabilities2, TL Settings, DL & PL Settings, Shared Logic, Core Interface Parameters, and Add Debug Options in Arbor and am not sure about these. Do you
 
 Only Do if you know what you are doing and changing. Not for beginners.
