@@ -52,9 +52,11 @@ __Donor card__
 7. [Building, Flashing & Testing](https://github.com/Silverr12/DMA-CFW-Guide#7-building-flashing--testing)
 
 ## **1. Requirements**
+#### Hardware
+ - A donor card (explained below)
+ - A DMA card of course (My recommendation is [LightningZ](https://lightingz.store/products/lightingzdma-ndma-usb3-0-190mb-s-with-custom-firmware))<sub>**not** sponsored, it is just truly the best bang for your buck in this realm that I've seen.</sub>
 
-
-#### Download all of the following
+#### Software
 - [Visual Studio](https://visualstudio.microsoft.com/vs/community/)
 - [Xilinx Vivado](https://www.xilinx.com/support/download.html) Will need to make an AMD account to download
 - [Pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) Source code for custom firmware
