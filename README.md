@@ -238,7 +238,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 
 > [!IMPORTANT]
-> Once you have completed steps 1-5, you **should, with 98% confidence**, be good to go for BE, EAC, (probably ricochet) and any other anti-cheat that you can think of **that isn't VGK, Faceit or ESEA**, they come in the next step :)
+> Once you have completed steps 1-5, you **should, with 98% confidence**, be good to go for BE, EAC, and any other anti-cheat that you can think of **that isn't VGK, ACE, Faceit or ESEA**, they come in the next step :)
 
 
   
