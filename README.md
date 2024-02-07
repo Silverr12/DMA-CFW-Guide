@@ -273,8 +273,8 @@ If you mess up your CFW and your game PC won't fully "boot", be because of bios 
 
 3. Run a DMA speed test tool from your second computer <sub>(I cannot tell you where to source this)</sub> to verify your firmware is working and reading as it should be.
 4. Dump and compare the config space of your new firmware to the sigged pcileech default seen below to see if its overly similar. You should most definitely be alright with some values being the same, you have to think about the fact that apart from the serial number and maybe bar address, the configuration space of one type of (for example) network card is going to be the exact same accross all of them. So as long as your new firmware's configuration space does not closely resemble the default, you have a legitimate device for all the ACs care. GLHF
-   - `40: 01 48 03 78 08 00 00 00 05 60 80 00 00 00 00 00`
-     `60: 10 00 02 00 e2 8f XX XX XX XX XX XX 12 f4 03 00`
+   - `40: 01 48 03 78 08 00 00 00 05 60 80 00 00 00 00 00`<br />
+     `60: 10 00 02 00 e2 8f XX XX XX XX XX XX 12 f4 03 00`<br />
      ("XX" are bytes that they do not care about)
 
 ### Additional Credits
