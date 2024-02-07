@@ -54,7 +54,7 @@ __Donor card__
 ## **1. Requirements**
 #### Hardware
  - A donor card (explained below)
- - A DMA card of course (My recommendation is [LightningZ](https://lightingz.store/products/lightingzdma-ndma-usb3-0-190mb-s-with-custom-firmware))<sub>**not** sponsored, it is just truly the best bang for your buck in this realm that I've seen.</sub>
+ - A DMA card of course 
 
 #### Software
 - [Visual Studio](https://visualstudio.microsoft.com/vs/community/)
