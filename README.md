@@ -68,9 +68,9 @@ __Donor card__
 ## **2. Gathering the donor information** 
 (Using a donor card will help us later on with TLP emulation to communicate with the device to start a driver for legitimacy) <br />
 Due to my limited testing and knowledge, I'll be using a network adapter for all examples continuing <br />
-<sup>(I welcome any contribution about utilising different hardware for this)</sup>
+<sup>(If you know what you are doing and understand the nuances, you can skip buying a donor card entirely, but for first timers I highly recommend this, way better to know you have a guaranteed-to-work product by spending $20 then sit on an alt for 2 weeks waiting for a delay ban to test your fw)</sup>
 
-It is suggested to use a cheap piece of hardware to get the IDs and then throw it out. These are used to emulate the DMA card. **So don't get the IDs of any existing hardware in your computer and plug them into the firmware. ACs will detect 2 of the same IDs and flag it** 
+It is suggested to use a cheap piece of hardware to get the IDs and then throw it out. These are used to emulate the DMA card. **So don't get the IDs of any existing hardware in your computer and plug them into the firmware. ACs will most likely in the future if not already, detect 2 devices with 1:1 IDs and flag it** 
 
 ### Using Arbor
 Go into Scan Options under the Local system tab and Press Scan/Rescan, the values selected by default are good enough for us.
@@ -225,16 +225,13 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/c018b760-cb8f-4c08-9efc-e5a3cdd8ed8d)
 
-- Here is a list of variable names in the Vivado IP core config correlating to values we have seen changed when dumping paid CFW that you could change to match your donor cards. Not in any particular order, there is: <br />
-  - 0x00 `CLASS_CODE` (easier to do this one in the UI)
-  - 0x40 `PM_CAP_VERSION`, `PM_CAP_D1SUPPORT`,`PM_CAP_AUXCURRENT`, `PM_CSR_NOSOFTRST`
-  - 0x50 `MSI_CAP_64_BIT_ADDR_CAPABLE`, 
-  - 0x60 `PCIE_CAP_DEVICE_PORT_TYPE`, `DEV_CAP_MAX_PAYLOAD_SUPPORTED`, `DEV_CAP_EXT_TAG_SUPPORTED`, `DEV_CAP_ENDPOINT_L0S_LATENCY`, `DEV_CAP_ENDPOINT_L1_LATENCY`, `LINK_CAP_ASPM_SUPPORT`, `LINK_CAP_MAX_LINK_SPEED`, `LINK_CAP_MAX_LINK_WIDTH`
-  - 0x90 `LINK_CTRL2_TARGET_LINK_SPEED` <br />
-- Fields that can be changed in different files or GUI(don't know specifics yet)  <br />
-  - 0x40 `cfg_pmcsr_powerstate`
-  - 0x60 `corr_err_reporting_en`, `non_fatal_err_reporting_en`, `fatal_err_reporting_en`, `no_snoop_en`
-  - 0x90 `Link Status2: Current De-emphasis` (I have not been able to find a single reference to deemph in link status2, nor any other config for this structure, your best bet is modifying this one in the .coe file)
+- Here is a list of variable names exclusively in the manual Vivado IP core config correlating to values we have confirmed to **not** break your firmware that you could change to match your donor cards. matched by capability, there is: <br />
+  - (PM) `PM_CAP_VERSION`, `PM_CAP_D1SUPPORT`,`PM_CAP_AUXCURRENT`, `PM_CSR_NOSOFTRST`
+  - (MSI) `MSI_CAP_64_BIT_ADDR_CAPABLE`, 
+  - (PCIe) `PCIE_CAP_DEVICE_PORT_TYPE`, `DEV_CAP_MAX_PAYLOAD_SUPPORTED`, `DEV_CAP_EXT_TAG_SUPPORTED`, `DEV_CAP_ENDPOINT_L0S_LATENCY`, `DEV_CAP_ENDPOINT_L1_LATENCY`, `LINK_CAP_ASPM_SUPPORT`, `LINK_CAP_MAX_LINK_SPEED`, `LINK_CAP_MAX_LINK_WIDTH`, `LINK_CTRL2_TARGET_LINK_SPEED` <br />
+- Fields that can be changed in different files or a GUI that I do not yet know about. <br />
+  - (PM) `cfg_pmcsr_powerstate`
+  - (PCIe) `corr_err_reporting_en`, `non_fatal_err_reporting_en`, `fatal_err_reporting_en`, `no_snoop_en`, `Link Status2: Current De-emphasis`
 
 
 > [!IMPORTANT]
