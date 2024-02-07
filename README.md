@@ -246,86 +246,21 @@ If the size unit is different change the size unit to accommodate the unit of th
 **For now, see [ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/PCIeSquirrel/src/pcileech_tlps128_bar_controller.sv) from line 803 for an example**
 
 ### These instructions are not complete and final.
-
-1. In Visual Studio head to `pcileech_tlps128_bar_controller.sv` and follow the instructions in the file to implement custom BAR PIO memory regions
-
-
-
-
-
-
-
-
-
 Notes to consider:
 
-## Memory Read Request at the Transaction Layer of the PCI Express (PCIe) protocol
+- Either some classes of devices do not require drivers or have generic drivers automatically load (or theres something else in the config space entirely which tricks detection) which in either case bypass some sophisticated or all acs (specific not known to me at this time), types of device configurations that I have seen with this behaviour are: 
+  - An intel wifi card but classed as a host bridge with the first capability pointer pointing to 0s so none of the other capabilities were read by arbor and so supposedly by your device also, yet they still exist in the configuration space.
+  - A Network controller class with invalid device & vendor id, also subsys vendor id not matching (Maybe from some strange randomisation tool?)
 
-| |0x31|0x30|0x29|0x28|0x27|0x26|0x25|0x24|0x23|0x22|02x1|02x0|01x9|01x8|01x7|01x6|0x15|0x14|0x13|0x12|0x11|0x10|0x9|0x8|0x7|0x6|0x5|0x4|0x3|0x2|0x1|0x0|
-|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
-|DW 0|R|Fmt|-|Type|-|-|-|-|R|TC|-|-|R|-|-|-|TD|EP|Attr|-|R|-|Length|-|-|-|-|-|-|-|-|-|
-|DW 1|Requester ID|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|Tag|-|-|-|-|-|-|-|Last BE|-|-|-|1st BE|-|-|-|
-|DW 2|Addresses[31:2]|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|R|-|
- 
-DW 0:
-   - R: Reserved bit.<br>
-   - Fmt: Format field.<br>
-   - Type: Type field specifying it's a memory read request.<br>
-   - TC: Traffic Class field.<br>
-   - TD: TLP Digest bit.<br>
-   - EP: Extended Payload bit.<br>
-   - Attr: Attribute field.<br>
-   - Length: Length field indicating the number of double words (DWs) to be read.<br>
-   
-DW 1:
-   - Requester ID: Identifies the sender of the request.<br>
-   - Tag: Tag field (may not be used in all cases).<br>
-   - Last BE: Last Byte Enable field.<br>
-   - 1st BE: First Byte Enable field.<br>
-   
-DW 2:
-   - Addresses[31:2]: Address to read from.<br>
-   - R: Reserved bit.<br>
+- You don't need to thoroughly understand verilog, though it would definitely come in handy if you do, but if you did you probably wouldn't be reading through this part.
 
+1. Obtain the register addresses for the device you're emulating tlp for, you could do this by reading the brand's datasheet, technical documentation, or programming guide published for the specific hardware, or reading open source versions of the driver (openbsd and linux come to mind). Another method I've read is using RWEverything to "see the data contained in memory where the BAR's are mapped"
 
-
-## Memory Write Request at the Transaction Layer of the PCI Express (PCIe) protocol
-
-
-| |0x31|0x30|0x29|0x28|0x27|0x26|0x25|0x24|0x23|0x22|02x1|02x0|01x9|01x8|01x7|01x6|0x15|0x14|0x13|0x12|0x11|0x10|0x9|0x8|0x7|0x6|0x5|0x4|0x3|0x2|0x1|0x0|
-|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
-|DW 0|R|Fmt|-|Type|-|-|-|-|R|TC|-|-|R|-|-|-|TD|EP|Attr|-|R|-|Length|-|-|-|-|-|-|-|-|-|
-|DW 1|Requester ID|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|Tag|-|-|-|-|-|-|-|Last BE|-|-|-|1st BE|-|-|-|
-|DW 2|Addresses[31:2]|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|R|-|
-|DW 3|DATA DW 0|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-
-
-DW 0:
-   - R: Reserved bit.<br>
-   - Fmt: Format field.<br>
-   - Type: Type field indicating it's a memory write request.<br>
-   - TC: Traffic Class field.<br>
-   - TD: TLP Digest bit.<br>
-   - EP: Extended Payload bit.<br>
-   - Attr: Attribute field.<br>
-   - Length: Length field indicating the number of double words (DWs) of data being written.<br>
-   
-DW 1:
-   - Requester ID: Identifies the sender of the request.<br>
-   - Tag: Tag field (may not be used in all cases).<br>
-   - Last BE: Last Byte Enable field.<br>
-   - 1st BE: First Byte Enable field.<br>
-   
-DW 2:
-   - Addresses[31:2]: Address where the data will be written.<br>
-   
-DW 3:
-   - DATA DW 0: Contains the actual data to be written.<br>
+3. In Visual Studio head to `/src/pcileech_tlps128_bar_controller.sv` and use the template file in the repo to implement. (soon to come)
 
 
 
 
----
 
 
 ## **7. Building, Flashing & Testing**
@@ -340,7 +275,10 @@ DW 3:
 If you mess up your CFW and your game PC won't fully "boot", be because of bios hang or other reasons, you *may* be able to flash new firmware onto it from your second computer if the card is still powered (indicated by the green lights). If your run a DMA card speed test on your second computer and the DMA card isn't recognised (doesn't matter if the rest of the speed test goes through or not), I'm 90% sure it's dead, if your first computer won't stay powered on, you have to buy a PCIe riser that will allow you to power your DMA card without it communicating **(EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted then flash the card, be warned however as this can corrupt your motherboard's bios, and there's a chance you may not be able to repair it)**
 
 3. Run a DMA speed test tool from your second computer <sub>(I cannot tell you where to source this)</sub> to verify your firmware is working and reading as it should be.
-4. Dump and compare the config space of your new firmware to the pcileech default to see if its overly similar. You should most definitely be alright with some values being the same, you have to think about the fact that apart from the serial number and maybe bar address, the configuration space of one type of (for example) network card is going to be the exact same accross all of them. So as long as your new firmware's configuration space does not closely resemble the default, you have a legitimate device for all the ACs care. GLHF
+4. Dump and compare the config space of your new firmware to the sigged pcileech default seen below to see if its overly similar. You should most definitely be alright with some values being the same, you have to think about the fact that apart from the serial number and maybe bar address, the configuration space of one type of (for example) network card is going to be the exact same accross all of them. So as long as your new firmware's configuration space does not closely resemble the default, you have a legitimate device for all the ACs care. GLHF
+   - `40: 01 48 03 78 08 00 00 00 05 60 80 00 00 00 00 00`
+     `60: 10 00 02 00 e2 8f XX XX XX XX XX XX 12 f4 03 00`
+     ("XX" are bytes that they do not care about)
 
 ### Additional Credits
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
