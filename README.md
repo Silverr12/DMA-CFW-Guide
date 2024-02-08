@@ -233,6 +233,7 @@ If the size unit is different change the size unit to accommodate the unit of th
   - (PM) `cfg_pmcsr_powerstate`
   - (PCIe) `corr_err_reporting_en`, `non_fatal_err_reporting_en`, `fatal_err_reporting_en`, `no_snoop_en`, `Link Status2: Current De-emphasis`
 
+- Known issue: Changing some functions below acceptable bounds most likely named something including payload/size/speed **can** slow down the reading speed of your DMA card. If your card is reading slow, these values are the first place you should look to diagnose.
 
 > [!IMPORTANT]
 > Once you have completed steps 1-5, you **should, with 98% confidence**, be good to go for BE, EAC, and any other anti-cheat that you can think of **that isn't VGK, ACE, Faceit or ESEA**, they come in the next step :)
