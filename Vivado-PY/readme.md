@@ -1,7 +1,10 @@
-Steps
+### Automatically change Basic IDs without touching Vivado
 
-1. Run generate-project.py | Let this finish
-2. Run Vivado.py
+#### Before you run the files, edit them with your IDs and file locations
+Steps
+1. Put the 3 files in the same directory
+2. Run generate-project.py | Let this finish
+3. Run Vivado.py
 
 once Vivado.py has run. The Ids will have changed. 
 
