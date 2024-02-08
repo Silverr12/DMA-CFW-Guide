@@ -278,14 +278,12 @@ If you mess up your CFW and your game PC won't fully "boot", be because of bios 
      `60: 10 00 02 00 e2 8f XX XX XX XX XX XX 12 f4 03 00`<br />
      ("XX" are bytes that they do not care about)
 
+### Once you've read through all this,
+and you have any questions, problems with your firmware or suggestions, feel free to join [my Discord](https://discord.gg/reEgerZX3u) for support
+
 ### Additional Credits
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
 ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(You could use this as a base to start off of as well!)</sub>
-
-
-
-
-
 
 End note:<br />
 Don't be like this guy<br />
