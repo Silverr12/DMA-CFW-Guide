@@ -1,3 +1,6 @@
+
+#Made with <3 by RakeshMonkee
+
 # Change File Path to the path of your pcie_7x_0_core_top.v File
 # Make sure pcileech_squirrel.srcs/sources_1/ip/pcie_7x_0/source/pcie_7x_0_core_top.v is on the end
 file_path = "C:/Users/user/Desktop/Vivado-Test/pcileech-fpga-4.13/PCIeSquirrel/pcileech_squirrel/pcileech_squirrel.srcs/sources_1/ip/pcie_7x_0/source/pcie_7x_0_core_top.v"

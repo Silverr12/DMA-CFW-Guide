@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+#Made with <3 by RakeshMonkee
+
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Change to DIr of your xilinx vivado installation
