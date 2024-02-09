@@ -8,5 +8,7 @@ Steps
 
 once Vivado.py has run. The Ids will have changed. 
 
+I will continue to update this to include more customisations
+
 > [!NOTE]
 > This doesn't create the .bin file. you will need to open the xpr file in /PCIeSquirrel/pcileech_squirrel and generate the file within Vivado.
