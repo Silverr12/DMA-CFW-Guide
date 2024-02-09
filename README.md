@@ -246,13 +246,13 @@ If the size unit is different change the size unit to accommodate the unit of th
 ### These instructions are not complete and final.
 Notes to consider:
 
-- Either some classes of devices do not require drivers or have generic drivers automatically load (or theres something else in the config space entirely which tricks detection) which in either case bypass some sophisticated or all acs (specific not known to me at this time), types of device configurations that I have seen with this behaviour are: 
-  - An intel wifi card but classed as a host bridge with the first capability pointer pointing to 0s so none of the other capabilities were read by arbor and so supposedly by your device also, yet they still exist in the configuration space.
+- Either some classes of devices do not require drivers or have generic drivers automatically load (or there is something else in the config space entirely that tricks detection) which in either case bypasses some sophisticated or all acs (specifically not known to me at this time), types of device configurations that I have seen with this behaviour are: 
+  - An intel wifi card but classed as a host bridge with the first capability pointer pointing to 0s so none of the other capabilities were read by Arbor and so supposedly by your device also, yet they still exist in the configuration space.
   - A Network controller class with invalid device & vendor id, also subsys vendor id not matching (Maybe from some strange randomisation tool?)
 
 - You don't need to thoroughly understand verilog, though it would definitely come in handy if you do, but if you did you probably wouldn't be reading through this part.
 
-1. Obtain the register addresses for the device you're emulating tlp for, you could do this by reading the brand's datasheet, technical documentation, or programming guide published for the specific hardware, or reading open source versions of the driver (openbsd and linux come to mind). Another method I've read is using RWEverything to "see the data contained in memory where the BAR's are mapped"
+1. Obtain the register addresses for the device you're emulating tlp for, you could do this by reading the brand's datasheet, technical documentation, or programming guide published for the specific hardware, or reading open-source versions of the driver (openbsd and linux come to mind). Another method I've read is using RWEverything to "see the data contained in memory where the BAR's are mapped"
 
 3. In Visual Studio head to `/src/pcileech_tlps128_bar_controller.sv` and use the template file in the repo to implement. (soon to come)
 
@@ -273,8 +273,11 @@ Notes to consider:
 If you mess up your CFW and your game PC won't fully "boot", be because of bios hang or other reasons, you *may* be able to flash new firmware onto it from your second computer if the card is still powered (indicated by the green lights). If your run a DMA card speed test on your second computer and the DMA card isn't recognised (doesn't matter if the rest of the speed test goes through or not), I'm 90% sure it's dead, if your first computer won't stay powered on, you have to buy a PCIe riser that will allow you to power your DMA card without it communicating **(EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted then flash the card, be warned however as this can corrupt your motherboard's bios, and there's a chance you may not be able to repair it)**
 
 3. Run a DMA speed test tool from your second computer <sub>(I cannot tell you where to source this)</sub> to verify your firmware is working and reading as it should be.
-4. Dump and compare the config space of your new firmware to the sigged pcileech default seen below to see if its overly similar. You should most definitely be alright with some values being the same, you have to think about the fact that apart from the serial number and maybe bar address, the configuration space of one type of (for example) network card is going to be the exact same accross all of them. So as long as your new firmware's configuration space does not closely resemble the default, you have a legitimate device for all the ACs care. GLHF
-   - `40: 01 48 03 78 08 00 00 00 05 60 80 00 00 00 00 00`<br />
+4. Dump and compare the config space of your new firmware to the sigged pcileech default seen below to see if it's overly similar. You should most definitely be right with some values being the same, you have to think about the fact that apart from the serial number and maybe bar address, the configuration space of one type of (for example) network card is going to be the exact same across all of them. So as long as your new firmware's configuration space does not closely resemble the default, you have a legitimate device for all the ACs care. GLHF
+
+This is the signature BE supposedly scan for in the config space of the PCIe device:
+[More info here](https://dma.lystic.dev/anticheat-evasion/detection-vectors)<br>
+     `40: 01 48 03 78 08 00 00 00 05 60 80 00 00 00 00 00`<br />
      `60: 10 00 02 00 e2 8f XX XX XX XX XX XX 12 f4 03 00`<br />
      ("XX" are bytes that they do not care about)
 
