@@ -30,7 +30,7 @@ __DW__
 : Double Word | DWORD
 
 __Donor card__
-: A card that will be used to get IDs and will not be used on your main PC (Eg. PCIE Wifi card)
+: A card that will be used to get IDs/config space and will not be used on your main PC (Eg. PCIE Wifi card)
 
 ### ⚠️ Disclaimer
 - (___Don't___ expect this to work for Vanguard, Faceit or ESEA in the guide's current state. <br />
@@ -257,7 +257,12 @@ Notes to consider:
 3. In Visual Studio head to `/src/pcileech_tlps128_bar_controller.sv` and use the template file in the repo to implement. (soon to come)
 
 
-
+### Resources for TLP Emulation
+1. https://fpgaemu.readthedocs.io/en/latest/infrastructure.html
+2. https://www.incibe.es/sites/default/files/2023-11/INCIBE-CERT_FIRMWARE_ANALYSIS_SCI_GUIDE_2023_v1.1.pdf
+3. https://docs.xilinx.com/v/u/en-US/pcie_blk_plus_ug341
+4. https://www.fpga4fun.com/PCI-Express4.html
+5. https://www.xillybus.com/tutorials/pci-express-tlp-pcie-primer-tutorial-guide-1
 
 
 
@@ -280,6 +285,11 @@ This is the signature BE supposedly scan for in the config space of the PCIe dev
      `40: 01 48 03 78 08 00 00 00 05 60 80 00 00 00 00 00`<br />
      `60: 10 00 02 00 e2 8f XX XX XX XX XX XX 12 f4 03 00`<br />
      ("XX" are bytes that they do not care about)
+
+
+
+
+
 
 ### Once you've read through all this,
 and you have any questions, problems with your firmware or suggestions, feel free to join [my Discord](https://discord.gg/reEgerZX3u) for support
