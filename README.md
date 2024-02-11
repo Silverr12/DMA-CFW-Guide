@@ -62,6 +62,7 @@ __Donor card__
 - [Pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) Source code for custom firmware
 - [Arbor](https://www.mindshare.com/software/Arbor) Will need to make an account to download the trial (14 days) <br />
 <sub>The trial can be extended by deleting the appropriate folder in your registry editor, I don't think I can tell you more than that though.</sub>
+- Alternative to Arbor, [Telescan PE](https://www.teledynelecroy.com/protocolanalyzer/pci-express/telescan-pe-software/resources/analysis-software), this one's very similar and completely free, but requires a manual review of your registration which can take a bit.
 
 
 
@@ -213,7 +214,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 
 ---
-# **steps 5 and 6** are still in development <sub>(as we are still researching this)</sub>
+# **steps 5 and 6** are being actively researched and updated and therefore are not complete or final, proceed with caution
 
 
 
@@ -225,7 +226,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/c018b760-cb8f-4c08-9efc-e5a3cdd8ed8d)
 
-- Here is a list of variable names exclusively in the manual Vivado IP core config correlating to values we have confirmed to **not** break your firmware that you could change to match your donor cards. matched by capability, there is: <br />
+- Here is a list of variable names in the manual Vivado IP core config correlating to values we have confirmed to **not** break your firmware that you could change to match your donor cards. matched by capability, there is: <br />
   - (PM) `PM_CAP_VERSION`, `PM_CAP_D1SUPPORT`,`PM_CAP_AUXCURRENT`, `PM_CSR_NOSOFTRST`
   - (MSI) `MSI_CAP_64_BIT_ADDR_CAPABLE`, 
   - (PCIe) `PCIE_CAP_DEVICE_PORT_TYPE`, `DEV_CAP_MAX_PAYLOAD_SUPPORTED`, `DEV_CAP_EXT_TAG_SUPPORTED`, `DEV_CAP_ENDPOINT_L0S_LATENCY`, `DEV_CAP_ENDPOINT_L1_LATENCY`, `LINK_CAP_ASPM_SUPPORT`, `LINK_CAP_MAX_LINK_SPEED`, `LINK_CAP_MAX_LINK_WIDTH`, `LINK_CTRL2_TARGET_LINK_SPEED` <br />
@@ -243,16 +244,17 @@ If the size unit is different change the size unit to accommodate the unit of th
 ## **6. TLP Emulation**
 **For now, see [ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/PCIeSquirrel/src/pcileech_tlps128_bar_controller.sv) from line 803 for an example**
 
-### These instructions are not complete and final.
 Notes to consider:
 
 - Either some classes of devices do not require drivers or have generic drivers automatically load (or there is something else in the config space entirely that tricks detection) which in either case bypasses some sophisticated or all acs (specifically not known to me at this time), types of device configurations that I have seen with this behaviour are: 
   - An intel wifi card but classed as a host bridge with the first capability pointer pointing to 0s so none of the other capabilities were read by Arbor and so supposedly by your device also, yet they still exist in the configuration space.
   - A Network controller class with invalid device & vendor id, also subsys vendor id not matching (Maybe from some strange randomisation tool?)
 
-- You don't need to thoroughly understand verilog, though it would definitely come in handy if you do, but if you did you probably wouldn't be reading through this part.
+- You don't need to thoroughly understand verilog for this, as its basically going to be just changing certain addresses
 
-1. Obtain the register addresses for the device you're emulating tlp for, you could do this by reading the brand's datasheet, technical documentation, or programming guide published for the specific hardware, or reading open-source versions of the driver (openbsd and linux come to mind). Another method I've read is using RWEverything to "see the data contained in memory where the BAR's are mapped"
+1. Obtain the register addresses for the device you're emulating tlp for by using a program of your choice (Recommend IDA Pro) to reverse engineer the driver for your donor card, you can find the location of the installed driver by navigating to your device in device manager, going to Properties>Driver>Driver Details, and it should normally be the only .dll file in there.
+
+2. (to be done)
 
 3. In Visual Studio head to `/src/pcileech_tlps128_bar_controller.sv` and use the template file in the repo to implement. (soon to come)
 
