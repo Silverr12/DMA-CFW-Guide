@@ -1,6 +1,6 @@
 # DMA-CFW-Guide
 The following guide details instructions on the creation of modified DMA (attack) Firmware based on [pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) **version 4.13**. <br />
-**Additionally this is intended to be a build-off of garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) guide in a more detailed way**<br />
+
 
 If you know what you are doing and are not a beginner check out extra [Vivado Customisations](https://github.com/Silverr12/DMA-CFW-Guide/blob/main/Possible%20Vivado%20Customisations.md)
 
@@ -298,7 +298,8 @@ and you have any questions, problems with your firmware or suggestions, feel fre
 
 ### Additional Credits
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
-ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(You could use this as a base to start off of as well!)</sub>
+Ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(You could use this as a base to start off of as well!)</sub>
+Garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) that inspired me to make this in the first place and whom I credit my interest in this to.
 
 End note:<br />
 Don't be like this guy<br />
