@@ -2,7 +2,7 @@
 The following guide details instructions on the creation of modified DMA (attack) Firmware based on [pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) **version 4.13**. <br />
 
 
-If you know what you are doing and are not a beginner check out extra [Vivado Customisations](https://github.com/Silverr12/DMA-CFW-Guide/blob/main/Possible%20Vivado%20Customisations.md)
+If you know what you're doing check out extra [Vivado Customisations](https://github.com/Silverr12/DMA-CFW-Guide/blob/main/Possible%20Vivado%20Customisations.md)
 
 > [!TIP]
 > Video going over steps 1-4: https://www.youtube.com/watch?v=qOPTxYYw63E&ab_channel=RakeshMonkee
@@ -11,7 +11,7 @@ If you know what you are doing and are not a beginner check out extra [Vivado Cu
 #### 📖Why make this guide?
 I don't like that there are people intentionally being vague, keeping information secret, or even misleading people to drive
 them away from being able to make their own firmware so that they end up buying 100s of dollars worth of custom firmware from
-other providers with no way to guarantee quality (I've seen "custom" paid firmware where they've only changed basic IDs lol)
+other providers with no way to guarantee quality.
 
 #### 🔎 Definitions
 __ACs__
@@ -37,9 +37,9 @@ __Donor card__
 
 - This guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
 
-- It is assumed that the user following the guide has a basic understanding of custom firmware and so on...
+- I recognise that there are a lot of methods that skirt around the current detection vectors but this guide covers trying to emulate a legitimate device 1:1 because this is the most future-proof/least likely to be detected in the future from my current understanding.
 
-- If you don't understand a single part of this guide, this guide is not for you as you will likely brick your card. Your best and safest bet is to buy a paid CFW making sure at the very least they have TLP emulation and hope for the best it is a 1:1.
+- If you don't understand a single part of this guide, this guide is not for you as you will likely brick your card. Your best and safest bet is to buy a paid CFW making sure at the very least they have TLP emulation and hope for the best that it's a 1 of 1.
 
 
 ### 📑 CONTENTS
@@ -175,7 +175,7 @@ Before
 
 After
 
-![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/0e230d17-c649-46a1-93fd-469534f0145b)
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/0a6238f3-5691-483d-a9a0-97d972d1c893)
 
 
 this being my DSN
@@ -246,9 +246,9 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 Notes to consider:
 
-- Either some classes of devices do not require drivers or have generic drivers automatically load (or there is something else in the config space entirely that tricks detection) which in either case bypasses some sophisticated or all acs (specifically not known to me at this time), types of device configurations that I have seen with this behaviour are: 
+- Either some classes of devices do not require drivers or have generic drivers automatically load (or there is something else in the config space entirely that tricks detection) which in either case bypasses some or all sophisticated ACs (specifics not known to me at this time), types of device configurations that I have seen with this behaviour are: 
   - An intel wifi card but classed as a host bridge with the first capability pointer pointing to 0s so none of the other capabilities were read by Arbor and so supposedly by your device also, yet they still exist in the configuration space.
-  - A Network controller class with invalid device & vendor id, also subsys vendor id not matching (Maybe from some strange randomisation tool?)
+  - A Network controller class with invalid device & vendor id, also subsys vendor id not matching and some standard 40-60 changes (Maybe from some strange randomisation tool?)
 
 - You don't need to thoroughly understand verilog for this, as its basically going to be just changing certain addresses
 
@@ -270,7 +270,7 @@ Notes to consider:
 
 ## **7. Building, Flashing & Testing**
 > [!CAUTION]
-> **It is not our fault if you brick your computer / DMA card with bad firmware (It shouldn't happen anyway if you follow the steps correctly).**<br />
+> **There is a good chance that on your first flash if you went about some of the more 'harder' to navigate steps that it will mess something up, don't worry, and look at the troubleshooting below.**<br />
 
 1. Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
    - You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
@@ -294,7 +294,7 @@ This is the signature BE supposedly scan for in the config space of the PCIe dev
 
 
 ### Once you've read through all this,
-and you have any questions, problems with your firmware or suggestions, feel free to join [my Discord](https://discord.gg/reEgerZX3u) for support
+and you have any questions, problems with your firmware or suggestions, feel free to join my [Discord](https://discord.gg/reEgerZX3u) for support.
 
 ### Additional Credits
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
