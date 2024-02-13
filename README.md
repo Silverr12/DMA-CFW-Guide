@@ -237,8 +237,10 @@ If the size unit is different change the size unit to accommodate the unit of th
   - Capability NEXT Pointers:`CAPABILITIES_PTR`, `MSI_CAP_NEXTPTR`, `PCIE_CAP_NEXTPTR`, `PM_CAP_NEXTPTR` and
   - Capability Pointers: `MSI_BASE_PTR`, `PCIE_BASE_PTR`, `PM_BASE_PTR`
 
-On default pcileech firmware you can locate: **PM at 0x40, MSI at 0x50 and PCIe at 0x60**, The example will be changing them to **PCIe at 0x40, PM at 0xC8 and MSI at 0xD0**, but you can have them at any location really (e.g PCIe at 0x80, PM at 0xD0 and MSI at 0x90) since our computers can and will just jump over the empty blocks, all you have to do is just make sure the `NEXTPTR`'s line up as explained below
-
+On default pcileech firmware you can locate: **PM at 0x40, MSI at 0x50 and PCIe at 0x60**, The example will be changing them to **PCIe at 0x40, PM at 0xC8 and MSI at 0xD0**, but you can have them at any location really (e.g PCIe at 0x80, PM at 0xD0 and MSI at 0x90) since our computers can and will just jump over the empty blocks, all you have to do is just make sure the `NEXTPTR`'s line up to the next capability as explained below and that you take note of the capabilities sizes so they don't try to overlap.
+- You need your NEXTPTR's lined up starting from your header at 0x00 and going up in the config blocks, example:
+  - If I were to change my capabilities blocks around to `PCIe: 0x40 | PM: 0xC8 | MSI: 0xD0` I would assign their associated `BASE_PTR` variables as such.
+  - Secondly, I would also have to have my header capability pointer `CAPABILITIES_PTR` point to 40 (which it is by default) since it's our lowest/first to be read in this case, then the `PCIE_CAP_NEXTPTR` will point to C8, `PM_CAP_NEXTPTR` to D0 and `MSI_CAP_NEXTPTR` to 00 to finalise it out (Other capabilities such as AER, DSN, LTR, etc do not require this configuration if you decide to put them in.)
 
 
 > [!IMPORTANT]
@@ -308,6 +310,11 @@ and you have any questions, problems with your firmware or suggestions, feel fre
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
 Ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(You could use this as a base to start off of as well!)</sub> <br />
 Garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) that inspired me to make this in the first place and whom I credit my interest in this topic to.
+
+### Donations
+If you feel this guide has helped you enough to warrant a monetary donation, here are my addresses for: <br />
+BTC: `1BNVf49u5GMuHg8teDcnexChqzyHB4MB2T` <br />
+LTC: `MMxWW2n5pTbWoY9EakDaTiQ7HKBJy7sxDh`
 
 End note:<br />
 Don't be like this guy<br />
