@@ -299,7 +299,7 @@ This is the signature BE supposedly scan for in the config space of the PCIe dev
 
 ### 'Dysfunctional' firmware troubleshooting
 - If your speed test prompts something along the lines of `tiny PCIe algorithm`, you have made a mistake somewhere in your capabilities. Your card *will* still function but reads will be slower than they should be which can severely impact performance.
-- Changing some functions below acceptable bounds most likely named something including payload/size/speed **can** also slow down the reading speed of your card.
+- Changing some functions below acceptable bounds most likely named something including payload/size/speed **can** also slow down the reading speed of your card. Best course of action is to set Max read request/payload sizes to 4KB
 - Another form of detection that may or may not be implemented that could be blocking your firmware is reading your device history, this can be cleaned by following [this](https://dma.lystic.dev/anticheat-evasion/clearing-device-history) post.
 
 
@@ -311,7 +311,7 @@ Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
 Ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(You could use this as a base to start off of as well!)</sub> <br />
 Garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) that inspired me to make this in the first place and whom I credit my interest in this topic to.
 
-### Donations
+### Sponsor
 If you feel this guide has helped you enough to warrant a monetary donation, here are my addresses for: <br />
 BTC: `1BNVf49u5GMuHg8teDcnexChqzyHB4MB2T` <br />
 ![btcaddr](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/7df65e0e-5bd9-497c-bef3-06abbf035022)<br />
