@@ -304,6 +304,7 @@ This is the signature BE supposedly scan for in the config space of the PCIe dev
 - If your speed test prompts something along the lines of `tiny PCIe algorithm`, you have made a mistake somewhere in your capabilities. Your card *will* still function but reads will be slower than they should be which can severely impact performance.
 - Changing some functions below acceptable bounds most likely named something including payload/size/speed **can** also slow down the reading speed of your card. The best course of action is to set max read request/payload sizes to 4KB
 - Another form of detection that may or may not be implemented that could be blocking your firmware is reading your device history, this can be cleaned by following [this](https://dma.lystic.dev/anticheat-evasion/clearing-device-history) post.
+- Sometimes your firmware will allow your device to work but cause a massive slowdown then BSOD your computer if it tries to read it with Arbor or Device manager. Unfortunately I don't know exactly where you need to go wrong for this to happen so I recommend re-doing your whole firmware.
 
 
 ### Once you've read through all this,
