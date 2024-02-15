@@ -13,6 +13,14 @@ I don't like that there are people intentionally being vague, keeping informatio
 them away from being able to make their own firmware so that they end up buying 100s of dollars worth of custom firmware from
 other providers with no way to guarantee quality.
 
+#### Device Compatibility
+This guide uses a squirrel DMA card. Instead of using the Squirrel folder for the project, use the corresponding folder for your DMA card which will be found in the pcileech-fpga-master folder
+
+- 35T: Squirrel
+
+- 75T: EnigmaX1
+
+
 #### 🔎 Definitions
 __ACs__
 : Anti Cheats
