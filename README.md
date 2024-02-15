@@ -315,8 +315,8 @@ Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
 Ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(You could use this as a base to start off of as well!)</sub> <br />
 Garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) that inspired me to make this in the first place and whom I credit my interest in this topic to.
 
-### Sponsor
-If you feel this guide has helped you enough to warrant a monetary donation, here are my addresses for: <br />
+### Sponsor this project
+If you feel this guide has helped you enough to warrant a monetary donation, feel free to donate here: <br />
 BTC: `1BNVf49u5GMuHg8teDcnexChqzyHB4MB2T` <br />
 ![btcaddr](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/7df65e0e-5bd9-497c-bef3-06abbf035022)<br />
 LTC: `MMxWW2n5pTbWoY9EakDaTiQ7HKBJy7sxDh`<br />
