@@ -260,7 +260,7 @@ On default pcileech firmware you can locate: **PM at 0x40, MSI at 0x50 and PCIe 
 
   
 ## **6. TLP Emulation**
-**For now, see [ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/PCIeSquirrel/src/pcileech_tlps128_bar_controller.sv) from line 803 for an example**
+**For now, see [ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/src/pcileech_tlps128_bar_controller.sv) mainly from line 850-896 for an example**
 
 Notes to consider:
 
