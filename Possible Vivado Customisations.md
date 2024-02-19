@@ -69,3 +69,17 @@ PME SUPPORT:
 - D3hot
 - D3cold
 - No Soft Reset
+
+DSN Capability:
+- DSN Capability
+- Change DSN value within `pcileech_pcie_cfg_a7.sv`
+
+
+Vendor Specific Capability:
+- VSEC Capability
+
+
+Virtual Channel Capability:
+- VC Capability
+- Reject Snoop Transactions
+
