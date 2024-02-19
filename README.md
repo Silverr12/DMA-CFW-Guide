@@ -270,13 +270,15 @@ Notes to consider:
 
 - You don't need to thoroughly understand any coding language for this as complicated as this may seem, it's basically going to be just changing certain addresses
 
-1. Obtain the register addresses for the device you're emulating TLP for by using a program of your choice (Recommend IDA Pro) to reverse engineer the driver for your donor card, you can find the location of the installed driver by navigating to your device in device manager, going to Properties>Driver>Driver Details, and it should normally be the only .dll file in there.
+1. You have two options for obtaining the register addresses for the device you're emulating, your options are:
+- Navigate to this (Wikipedia)[https://en.wikipedia.org/wiki/Comparison_of_open-source_wireless_drivers] page that lists which drivers have been either already reverse engineered or were open source to begin with that you could use.
+- Using a program of your choice (Recommend IDA Pro) to reverse engineer the driver for your donor card, you can find the location of the installed driver by navigating to your device in device manager, going to Properties>Driver>Driver Details, and it should normally be the only .dll file in there. (Mind you intel does **not** release their sources without contractual obligation so good luck if you're adamant on them)
 
 2. (to be done)
 
 3. In Visual Studio head to `/src/pcileech_tlps128_bar_controller.sv` and use the template file in the repo to implement. (soon to come)
 
-4. (to be done, latency/timing checks)
+4. (to be done, maybe latency/timing checks)
 
 
 ### Resources for TLP Emulation
