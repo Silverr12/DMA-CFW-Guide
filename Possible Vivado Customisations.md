@@ -1,5 +1,5 @@
 > [!CAUTION]
-> Anything mentioned here that **isn't in** the main readme has not been tested, you are on your own here. Don't create an issue asking for help with this. it's not our fault if you don't listen and brick your card changing the wrong values.
+> Anything mentioned here can and will brick your card changing the wrong values. You have been warned. As long as you copy your Donor Board you are fine
 
 If you believe something is wrong, open an issue
 
