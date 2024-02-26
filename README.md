@@ -255,8 +255,8 @@ On default pcileech firmware you can locate: **PM at 0x40, MSI at 0x50 and PCIe 
 
 
 > [!IMPORTANT]
-> Once you have completed steps 1-5, you **should, with 98% confidence**, be good to go for BE, EAC, and any other anti-cheat that you can think of **that isn't VGK, ACE, Faceit or ESEA**, they come in the next step :)
-
+> Once you have completed steps 1-5, you **should, with 98% confidence**, be good to go for BE, EAC, and any other anti-cheat that you can think of **that isn't VGK, Faceit or ESEA**
+> For them your best bet would be lots of trial and error with emulating different devices, doing odd config space changes and changing things around in pcileech, many will not reveal their methods unless they want it detected, so you are mostly on your own there unfortunately.
 
   
 ## **6. TLP Emulation**
@@ -264,14 +264,13 @@ On default pcileech firmware you can locate: **PM at 0x40, MSI at 0x50 and PCIe 
 
 Notes to consider:
 
-- Either some classes of devices do not require drivers or have generic drivers automatically load (or there is something else in the config space entirely that tricks detection) which in either case bypasses some or all sophisticated ACs (specifics not known to me at this time), types of device configurations that I have seen with this behaviour are: 
-  - An intel wifi card but classed as a host bridge with the first capability pointer pointing to 0s so none of the other capabilities were read by Arbor and so supposedly by your device also, yet they still exist in the configuration space.
-  - A Network controller class with invalid device & vendor ID, also subsystem vendor ID not matching and some standard 40-60 changes (Maybe from some strange randomisation tool?)
+- Either some classes of devices do not require drivers or have generic drivers automatically load which in either case bypasses some or all sophisticated ACs (e.g devices that use the same artix-7 chip as your card would.)
+ 
 
 - You don't need to thoroughly understand any coding language for this as complicated as this may seem, it's basically going to be just changing certain addresses
 
 1. You have two options for obtaining the register addresses for the device you're emulating, your options are:
-- Navigate to this (Wikipedia)[https://en.wikipedia.org/wiki/Comparison_of_open-source_wireless_drivers] page that lists which drivers have been either already reverse engineered or were open source to begin with that you could use.
+- Navigate to this [Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_open-source_wireless_drivers) page that lists open source/reverse engineered drivers that you could take values from for your firmware
 - Using a program of your choice (Recommend IDA Pro) to reverse engineer the driver for your donor card, you can find the location of the installed driver by navigating to your device in device manager, going to Properties>Driver>Driver Details, and it should normally be the only .dll file in there. (Mind you intel does **not** release their sources without contractual obligation so good luck if you're adamant on them)
 
 2. (to be done)
@@ -297,7 +296,7 @@ Notes to consider:
 1. Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
    - You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
 2. Follow the steps on the [official LambdaConcept guide for flashing](https://docs.lambdaconcept.com/screamer/programming.html) **<sub>REMINDER: ONLY FOR SQUIRREL</sub>**
-3. Run a DMA speed test tool from your second computer <sub>(I cannot tell you where to source this)</sub> to verify your firmware is working and reading as it should be.
+3. Run a DMA speed test tool from your second computer <sub>(There is a link and download in the dc server)</sub> to verify your firmware is working and reading as it should be.
 4. Dump and compare the config space of your new firmware to the **known** signed pcileech default seen below to see if it's overly similar. You should most definitely be right about some values being the same, you have to think about the fact that apart from the serial number and maybe bar address, the configuration space of one type of (for example) network card is going to be the same across all of them. So as long as your new firmware's configuration space does not closely resemble the default, you have a legitimate device for all the ACs care. GLHF
 
 This is the signature BE supposedly scan for in the config space of the PCIe device:
@@ -306,6 +305,8 @@ This is the signature BE supposedly scan for in the config space of the PCIe dev
      `60: 10 00 02 00 e2 8f XX XX XX XX XX XX 12 f4 03 00`<br />
      ("XX" are bytes that they do not care about)
 
+Another form of detection that may or may not be implemented that could be blocking your firmware is reading your device history, this can be cleaned by following [this](https://dma.lystic.dev/anticheat-evasion/clearing-device-history) post.
+
 ### Flashing troubleshooting
 - If you mess up your CFW and your game PC won't fully "boot", be because of bios hang or other reasons, you *may* be able to flash new firmware onto it from your second computer if the card is still powered (indicated by the green lights). If your run a DMA card speed test on your second computer and the DMA card isn't recognised (doesn't matter if the rest of the speed test goes through or not), I'm 90% sure it's dead, if your first computer won't stay powered on, you have to buy a PCIe riser that will allow you to power your DMA card without it communicating **(EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted then flash the card, be warned however as this can corrupt your motherboard's bios, and there's a chance you may not be able to repair it)**
 - There are flat-out some motherboards that will be incompatible with some firmware, what about them I know 0 about, the safest bet is to clone a device that you know already works on your machine.
@@ -313,7 +314,7 @@ This is the signature BE supposedly scan for in the config space of the PCIe dev
 ### 'Dysfunctional' firmware troubleshooting
 - If your speed test prompts something along the lines of `tiny PCIe algorithm`, you have made a mistake somewhere in your capabilities. Your card *will* still function but reads will be slower than they should be which can severely impact performance.
 - Changing some functions below acceptable bounds most likely named something including payload/size/speed **can** also slow down the reading speed of your card. The best course of action is to set max read request/payload sizes to 4KB
-- Another form of detection that may or may not be implemented that could be blocking your firmware is reading your device history, this can be cleaned by following [this](https://dma.lystic.dev/anticheat-evasion/clearing-device-history) post.
+- Some motherboards will simply be incompatible with some firmware, most reports have been on gigabyte mobos.
 - Sometimes your firmware will allow your device to work but cause a massive slowdown then BSOD your computer if it tries to read it with Arbor or Device Manager. Unfortunately, I don't know exactly where you need to go wrong for this to happen so I recommend re-doing your whole firmware. I suggest keeping a stable firmware that works, on your second computer in case this happens.
 
 
