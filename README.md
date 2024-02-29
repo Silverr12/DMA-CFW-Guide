@@ -316,10 +316,13 @@ Another form of detection that may or may not be implemented that could be block
 - Changing some functions below acceptable bounds most likely named something including payload/size/speed **can** also slow down the reading speed of your card. The best course of action is to set max read request/payload sizes to 4KB
 - Some motherboards will simply be incompatible with some firmware, most reports have been on gigabyte mobos.
 - Sometimes your firmware will allow your device to work but cause a massive slowdown then BSOD your computer if it tries to read it with Arbor or Device Manager. Unfortunately, I don't know exactly where you need to go wrong for this to happen so I recommend re-doing your whole firmware. I suggest keeping a stable firmware that works, on your second computer in case this happens.
+- Are your changes not saving when making a new .bin file? Try deleting your `pcileech_squirrel.runs` folder and/or also making and working in a new copy of the stock pcileech-fpga folder every new firmware as good practice
 
 
 ### Once you've read through all this,
-If you have any questions, problems with your firmware or suggestions, feel free to join my [Discord](https://discord.gg/reEgerZX3u) for support.
+If you have any questions, problems with your firmware or suggestions, feel free to join my Discord for support.
+[![Discord Banner](https://discord.com/api/guilds/1205153997166608394/widget.png?style=banner2)](https://discord.com/invite/reEgerZX3u)
+
 
 ### Additional Credits
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
@@ -333,7 +336,8 @@ BTC: `1BNVf49u5GMuHg8teDcnexChqzyHB4MB2T` <br />
 LTC: `MMxWW2n5pTbWoY9EakDaTiQ7HKBJy7sxDh`<br />
 ![ltcaddr](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/e243973f-7b84-42a9-b78a-19a7a12aac98)<br />
 or just starring the repo helps **immensely** too <3 <br />
-<sub>also sponsor the [man who's making this all possible](https://github.com/ufrisk)
+<sub>also sponsor the [man who's making this all possible](https://github.com/ufrisk)<br />
+
 End note:<br />
 Don't be like this guy<br />
 ![:(](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/cf881e80-1139-4641-99c2-325b24bc162a)
