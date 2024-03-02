@@ -331,13 +331,11 @@ Garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-
 
 ### Sponsor this project
 If you feel this guide has helped you enough to warrant a monetary donation, feel free to donate here: <br />
-BTC: `1BNVf49u5GMuHg8teDcnexChqzyHB4MB2T` <br />
-![btcaddr](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/7df65e0e-5bd9-497c-bef3-06abbf035022)<br />
+USDT/trc20: `1BNVf49u5GMuHg8teDcnexChqzyHB4MB2T` <br />
+![usdtaddr](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/36a8a6d6-1edd-4289-96b9-a9003a7c4a26)<br />
+
 LTC: `MMxWW2n5pTbWoY9EakDaTiQ7HKBJy7sxDh`<br />
 ![ltcaddr](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/e243973f-7b84-42a9-b78a-19a7a12aac98)<br />
 or just starring the repo helps **immensely** too <3 <br />
 <sub>also sponsor the [man who's making this all possible](https://github.com/ufrisk)<br />
 
-End note:<br />
-Don't be like this guy<br />
-![:(](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/cf881e80-1139-4641-99c2-325b24bc162a)
