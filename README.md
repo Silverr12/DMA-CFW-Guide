@@ -68,7 +68,7 @@ __FPGA__
  - A DMA card of course 
 
 #### Software
-- [Visual Studio](https://visualstudio.microsoft.com/vs/community/)
+- A text editor, [Visual Studio](https://visualstudio.microsoft.com/vs/community/) is used in this guide.
 - [Xilinx Vivado](https://www.xilinx.com/support/download.html) Will need to make an AMD account to download
 - [Pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) Source code for custom firmware
 - [Arbor](https://www.mindshare.com/software/Arbor) Will need to make an account to download the trial (14 days) <br />
@@ -124,8 +124,7 @@ My size is 16kb so record that
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/595ae3e2-4cd8-4b3d-bcfa-cf6a59f289d5)
 > [!NOTE]
-> If the Device Serial Number Capability Structure is not shown for your device, make a randomized string of byte-valid characters or 0 it out completely, but that may look a bit suspicious 
-> <sub>(I believe as long as its not the hard code value PCIleech comes with you should be fine since that's what ACs would scan for, please correct me if I'm wrong though.)</sub>
+> If the Device Serial Number Capability Structure is not shown for your device, make a randomized string of byte-valid characters, 0 it out completely, or disable the capability altogether.
 
 Combine your lower and upper DSN registers for our DSN configuration in step 3
 
@@ -144,22 +143,6 @@ Lower DW + Upper DW = `68 4C E0 00 01 00 00 00`
 ## **3. Initial Customisation**
 Once again due to limited knowledge, I'll be focusing on the PCIeSquirrel section of pcileech at the moment, sorry to those using other firmware.
 
-### Using Vivado
-1. Open Vivado and in the top menu, in the search query, search for tcl console and click on it.
-
-![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/5a3770ad-b821-49c1-bea8-a79684993abc)
-
-The console should now open at the bottom of the application.
-
-![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/ae96df35-3e46-4f55-8ffd-39b42c8d0972)
-
-
-2. In the Tcl console, type in `pwd` to see the working directory. It should look something like this `C:/Users/user/AppData/Roaming/Xilinx/Vivado`
-
-3. cd back a few times and then cd to the PCIeSquirrel folder in the pcileech-fpga-master project folder. It should look something like this `C:\Users\user\Desktop\pcileech-fpga-master\PCIeSquirrel`. (Desktop is where my project folder is)
-
-4. Once you have PCIeSquirrel dir open, in the Tcl console type in `source vivado_generate_project.tcl -notrace` and wait for it to finish
-5. Once the project has been generated, Vivado should automatically open the `pcileech_squirrel.xpr` file. Keep it open on the side for a bit.
 
 ### Using Visual Studio
 1. Open the PCIeSquirrel folder and head to this file `/PCIeSquirrel/src/pcileech_pcie_cfg_a7.sv`. Within this file use Ctrl+F and search the file for `rw[20]` which should be on line 209 to find the master abort flag/auto-clear status register. Change the accompanying 0 to a 1 along with the accompanying `rw[21]`.
@@ -195,6 +178,24 @@ if your donor card didn't have a DSN, yours should look like
 
 4. Go ahead and save all the changes you've made
 
+
+### Generating the Vivado files
+1. Open Vivado and in the top menu, in the search query, search for tcl console and click on it.
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/5a3770ad-b821-49c1-bea8-a79684993abc)
+
+The console should now open at the bottom of the application.
+
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/ae96df35-3e46-4f55-8ffd-39b42c8d0972)
+
+
+2. In the Tcl console, type in `pwd` to see the working directory. It should look something like this `C:/Users/user/AppData/Roaming/Xilinx/Vivado`
+
+3. cd to the PCIeSquirrel folder in the pcileech-fpga-master project folder. It should look something like this `C:\Users\user\Desktop\pcileech-fpga-master\PCIeSquirrel`. (Desktop is where my project folder is) <sub> If you get an error when trying to cd to your project directory, replace all the '\'s with '/'</sub>
+
+4. Once you have PCIeSquirrel dir open, in the Tcl console type in `source vivado_generate_project.tcl -notrace` and wait for it to finish
+5. Once the project has been generated, Vivado should automatically open the `pcileech_squirrel.xpr` file. Keep it open on the side for a bit.
+
 ## **4. Vivado Project Customisation**
 1. Once inside Vivado, navigate to the "sources" box and navigate as such `pcileech_squirrel_top` > `i_pcileech_pcie_a7 : pcileech_pcie_a7` then double click on the file with the yellow square labelled `i_pcie_7x_0 : pcie_7x_0`.
 
@@ -218,7 +219,9 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 
 
-4. Press OK on the bottom right then hit "Generate" on the new window that pops up and wait for it to finish.
+4. Press OK on the bottom right then hit "Generate" on the new window that pops up and wait for it to finish.<br />
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/df292771-63c0-4013-9eaf-bb2c39e52539)
+
 5. We will lock the core so that when Vivado synthesises and/or builds our project it will not overwrite some things and allow us to edit some things manually we could only do through the interface before, to do this, navigate to the "Tcl Console" located in the top right of the bottom box and enter into there `set_property is_managed false [get_files pcie_7x_0.xci]`, (to unlock it in the future for any purposes use `set_property is_managed true [get_files pcie_7x_0.xci]`.)
 
 
