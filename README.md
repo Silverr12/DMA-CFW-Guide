@@ -44,7 +44,7 @@ __FPGA__
 : Field Programmable Gate Array
 
 ### ⚠️ Disclaimer
-- (___Don't___ expect this to work for Vanguard, Faceit or ESEA in the guide's current state. <br />
+- (___Don't___ expect this to work for Vanguard, Faceit, or ESEA in the guide's current state. <br />
 
 - This guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
 
@@ -84,7 +84,7 @@ It is suggested to use a cheap piece of hardware to get the IDs and then throw i
 
 ### Using Arbor
 Go into Scan Options under the Local system tab and Press Scan/Rescan, the values selected by default are good enough for us.
-Go Into PCI Config and locate your network controller, scroll around in the decode section and take note of the following things:
+Go Into PCI Config and locate your network controller, scroll around in the decode section, and take note of the following things:
 
 #### All IDs shown below are mine and might not be the same for you
 
@@ -251,15 +251,15 @@ If the size unit is different change the size unit to accommodate the unit of th
   - Capability NEXT Pointers:`CAPABILITIES_PTR`, `MSI_CAP_NEXTPTR`, `PCIE_CAP_NEXTPTR`, `PM_CAP_NEXTPTR` and
   - Capability Pointers: `MSI_BASE_PTR`, `PCIE_BASE_PTR`, `PM_BASE_PTR`
 
-On default pcileech firmware you can locate: **PM at 0x40, MSI at 0x50 and PCIe at 0x60**, The example will be changing them to **PCIe at 0x40, PM at 0xC8 and MSI at 0xD0**, but you can have them at any location really (e.g PCIe at 0x80, PM at 0xD0 and MSI at 0x90) since our computers can and will jump over the empty blocks, all you have to do is make sure the `NEXTPTR`'s line up to the next capability as explained below and that you take note of the capabilities sizes so they don't try to overlap.
+On default pcileech firmware you can locate: **PM at 0x40, MSI at 0x50, and PCIe at 0x60**, The example will be changing them to **PCIe at 0x40, PM at 0xC8 and MSI at 0xD0**, but you can have them at any location really (e.g PCIe at 0x80, PM at 0xD0 and MSI at 0x90) since our computers can and will jump over the empty blocks, all you have to do is make sure the `NEXTPTR`'s line up to the next capability as explained below and that you take note of the capabilities sizes so they don't try to overlap.
 - You need your NEXTPTRs lined up starting from your header at 0x00 and going up in the config blocks, for example:
   - If I were to change my capabilities blocks around to `PCIe: 0x40 | PM: 0xC8 | MSI: 0xD0` I would simply assign their associated `BASE_PTR` variables as such to the same value. Always make to start at or above 0x40 as our header ends just before it and also make sure your base ptrs always end on 0, 4, or 8 such as 40, 44 68.
-  - Secondly, I would also have to have my header capability pointer `CAPABILITIES_PTR` point to 40 (which it is by default) since it's our lowest/first to be read in this case, then the `PCIE_CAP_NEXTPTR` will point to C8, `PM_CAP_NEXTPTR` to D0 and `MSI_CAP_NEXTPTR` to 00 to finalise it out, and always make sure its in order from top to bottom, as if you try to point backwards in the config space your firmware will not work. (Extended capabilities such as AER, DSN, LTR, etc do also require this configuration if you decide to put them in. But you do not point the regular capablities into them as they are a seperate 'set', besides that they follow the same pointer format as your regular capabilities.)
+  - Secondly, I would also have to have my header capability pointer `CAPABILITIES_PTR` point to 40 (which it is by default) since it's our lowest/first to be read in this case, then the `PCIE_CAP_NEXTPTR` will point to C8, `PM_CAP_NEXTPTR` to D0 and `MSI_CAP_NEXTPTR` to 00 to finalise it out, and always make sure it's in order from top to bottom as if you try to point backward in the config space your firmware will not work. (Extended capabilities such as AER, DSN, LTR, etc also require this configuration if you decide to put them in. But you do not point the regular capabilities into them as they are a separate 'set', besides that they follow the same pointer format as your regular capabilities.)
 
 
 > [!IMPORTANT]
 > Once you have completed steps 1-5, you **should, with 98% confidence**, be good to go for BE, EAC, and any other anti-cheat that you can think of **that isn't VGK, Faceit or ESEA**
-> For them your best bet would be lots of trial and error with emulating different devices, doing odd config space changes and changing things around in pcileech, many will not reveal their methods unless they want it detected, so you are mostly on your own there unfortunately.
+> For them your best bet would be lots of trial and error with emulating different devices, doing odd config space changes, and changing things around in pcileech, many will not reveal their methods unless they want it detected, so you are mostly on your own there unfortunately.
 
   
 ## **6. TLP Emulation**
@@ -270,11 +270,11 @@ Notes to consider:
 - Either some classes of devices do not require drivers or have generic drivers automatically load which in either case bypasses some or all sophisticated ACs (e.g devices that use the same artix-7 chip as your card would.)
  
 
-- You don't need to thoroughly understand any coding language for this as complicated as this may seem, it's basically going to be just changing certain addresses
+- You don't need to thoroughly understand any coding language for this as complicated as this may seem, it's going to be just changing certain addresses
 
 1. You have two options for obtaining the register addresses for the device you're emulating, your options are:
-- Navigate to this [Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_open-source_wireless_drivers) page that lists open source/reverse engineered drivers that you could take values from for your firmware
-- Using a program of your choice (Recommend IDA Pro) to reverse engineer the driver for your donor card, you can find the location of the installed driver by navigating to your device in device manager, going to Properties>Driver>Driver Details, and it should normally be the only .dll file in there. (Mind you intel does **not** release their sources without contractual obligation so good luck if you're adamant on them)
+- Navigate to this [Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_open-source_wireless_drivers) page that lists open-source/reverse-engineered drivers that you could take values from for your firmware
+- Using a program of your choice (Recommend IDA Pro) to reverse engineer the driver for your donor card, you can find the location of the installed driver by navigating to your device in the device manager, going to Properties>Driver>Driver Details, and it should normally be the only .dll file in there. (Mind you intel does **not** release their sources without contractual obligation so good luck if you're adamant about them)
 
 2. (to be done)
 
@@ -299,7 +299,7 @@ Notes to consider:
 1. Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
    - You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
 2. Follow the steps on the [official LambdaConcept guide for flashing](https://docs.lambdaconcept.com/screamer/programming.html) **<sub>REMINDER: ONLY FOR SQUIRREL</sub>**
-3. Run a DMA speed test tool from your second computer <sub>(There is a link and download in the dc server)</sub> to verify your firmware is working and reading as it should be.
+3. Run a DMA speed test tool from your second computer <sub>(There is a link and download in the discord server)</sub> to verify your firmware is working and reading as it should be.
 4. Dump and compare the config space of your new firmware to the **known** signed pcileech default seen below to see if it's overly similar. You should most definitely be right about some values being the same, you have to think about the fact that apart from the serial number and maybe bar address, the configuration space of one type of (for example) network card is going to be the same across all of them. So as long as your new firmware's configuration space does not closely resemble the default, you have a legitimate device for all the ACs care. GLHF
 
 This is the signature BE supposedly scan for in the config space of the PCIe device:
@@ -311,7 +311,7 @@ This is the signature BE supposedly scan for in the config space of the PCIe dev
 Another form of detection that may or may not be implemented that could be blocking your firmware is reading your device history, this can be cleaned by following [this](https://dma.lystic.dev/anticheat-evasion/clearing-device-history) post.
 
 ### Flashing troubleshooting
-- If you mess up your CFW and your game PC won't fully "boot", be because of bios hang or other reasons, you *may* be able to flash new firmware onto it from your second computer if the card is still powered (indicated by the green lights). If your run a DMA card speed test on your second computer and the DMA card isn't recognised (doesn't matter if the rest of the speed test goes through or not), I'm 90% sure it's dead, if your first computer won't stay powered on, you have to buy a PCIe riser that will allow you to power your DMA card without it communicating **(EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted then flash the card, be warned however as this can corrupt your motherboard's bios, and there's a chance you may not be able to repair it)**
+- If you mess up your CFW and your game PC won't fully "boot", be because of bios hang or other reasons, you *may* be able to flash new firmware onto it from your second computer if the card is still powered (indicated by the green lights). If you run a DMA card speed test on your second computer and the DMA card isn't recognised (doesn't matter if the rest of the speed test goes through or not), I'm 90% sure it's dead, if your first computer won't stay powered on, you have to buy a PCIe riser that will allow you to power your DMA card without it communicating **(EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted then flash the card, be warned however as this can corrupt your motherboard's bios, and there's a chance you may not be able to repair it)**
 - There are flat-out some motherboards that will be incompatible with some firmware, what about them I know 0 about, the safest bet is to clone a device that you know already works on your machine.
 
 ### 'Dysfunctional' firmware troubleshooting
