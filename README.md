@@ -20,6 +20,8 @@ This guide uses a squirrel DMA card. Instead of using the Squirrel folder for th
 
 - 75T: EnigmaX1
 
+- 100T: ZDMA
+
 
 #### 🔎 Definitions
 __ACs__
