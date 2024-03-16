@@ -4,7 +4,7 @@
 
 如果你知道自己在做什么，请查阅 [Vivado 定制](https://github.com/Silverr12/DMA-CFW-Guide/blob/main/Possible%20Vivado%20Customisations.md)
 
-> [!TIP]提醒
+> [!TIP]
 > 1-4步的视频教学: https://www.youtube.com/watch?v=qOPTxYYw63E&ab_channel=RakeshMonkee
 
 
