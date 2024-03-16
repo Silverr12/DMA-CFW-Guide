@@ -6,6 +6,7 @@ If you know what you're doing check out extra [Vivado Customisations](https://gi
 
 > [!TIP]
 > Video going over steps 1-4: https://www.youtube.com/watch?v=qOPTxYYw63E&ab_channel=RakeshMonkee
+> Cloning via ['shadow' config space](https://github.com/Silverr12/DMA-CFW-Guide/blob/main/Shadow_cfg_space.md)
 
 
 #### 📖Why make this guide?
