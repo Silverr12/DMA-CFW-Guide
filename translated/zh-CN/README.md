@@ -46,11 +46,11 @@ __FPGA__
 ### ⚠️ 免责声明
 - (___不要___ 期盼本指南目前的操作能够绕过 Vanguard，Faceit，或是 ESEA. <br />
 
-- This guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
+- 本指南并未详细说明如何设置软件或更改计算机设置以适应 DMA 卡.
 
-- I recognise that there are a lot of methods that skirt around the current detection vectors but this guide covers trying to emulate a legitimate device 1:1 because this is the most future-proof/least likely to be detected in the future from my current understanding.
+- 我认识到有很多方法可以绕过当前的检测向量，但本指南涵盖了尝试 1:1 模拟合法设备，因为根据我目前的理解，这是最面向未来的/将来最不可能被检测到的方法.
 
-- If you don't understand a single part of this guide，this guide is not for you as you will likely brick your card. Your best and safest bet is to buy a paid CFW making sure at the very least they have TLP emulation and hope for the best that it's a 1 of 1.
+- 如果您不理解本指南的任何部分，则本指南不适合您，因为您的卡可能会变砖。您最好和最安全的选择是购买付费 CFW，确保至少他们有 TLP 仿真，并希望它是 1 中的 1.
 
 
 ### 📑 目录
