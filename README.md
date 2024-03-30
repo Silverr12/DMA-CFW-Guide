@@ -148,8 +148,7 @@ Once again due to limited knowledge, I'll be focusing on the PCIeSquirrel sectio
 
 
 ### Using Visual Studio
-1. Open the PCIeSquirrel folder and head to this file `/PCIeSquirrel/src/pcileech_pcie_cfg_a7.sv`. Within this file use Ctrl+F and search the file for `rw[20]` which should be on line 209 to find the master abort flag/auto-clear status register. Change the accompanying 0 to a 1 along with the accompanying `rw[21]`.
-
+1. Open the PCIeSquirrel folder and head to this file `/PCIeSquirrel/src/pcileech_pcie_cfg_a7.sv`. Within this file use Ctrl+F and search the file for `rw[20]` which should be on line 209 to find the master abort flag/auto-clear status register. Change the accompanying 0 to a 1.
 Before
 
 ![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/358337b4-a238-433c-bc53-0630bec5a17d)
@@ -211,6 +210,10 @@ The console should now open at the bottom of the application.
 To check the class code of your donor card go back to Arbor > scan if needed, else > PCI config > set PCI view to Linear. Your card should be highlighted in green. There will also be a column header called **Class**. Match that with your card.
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/24131586-03d6-4b70-9000-16448a4d8944)
+
+> [!TIP]
+> Want an easy "hidden in device manager" firmware? Simply set the class code to a variant of 060000/Bridge device<br />
+> <sub>(doesn't work for every motherboard)</sub>
 
 3. Also go into the "BARs" tab and set the size value you gathered in step 2, note that the Hex Value shown is not meant to be the same as your bar address. You cannot edit this value.
 
@@ -314,15 +317,15 @@ This is the signature BE supposedly scan for in the config space of the PCIe dev
 Another form of detection that may or may not be implemented that could be blocking your firmware is reading your device history, this can be cleaned by following [this](https://dma.lystic.dev/anticheat-evasion/clearing-device-history) post.
 
 ### Flashing troubleshooting
-- If you mess up your CFW and your game PC won't fully "boot", be because of bios hang or other reasons, you *may* be able to flash new firmware onto it from your second computer if the card is still powered (indicated by the green lights). If you run a DMA card speed test on your second computer and the DMA card isn't recognised (doesn't matter if the rest of the speed test goes through or not), I'm 90% sure it's dead, if your first computer won't stay powered on, you have to buy a PCIe riser that will allow you to power your DMA card without it communicating **(EXTREMELY NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted then flash the card, be warned however as this can corrupt your motherboard's bios, and there's a chance you may not be able to repair it)**
+- If you mess up your CFW and your game PC won't fully "boot", be because of bios hang or other reasons, you will be able to flash new firmware onto it from your second computer if the card is still powered (normally indicated by LEDs). If your main computer won't stay powered on, you have to buy a PCIe riser that will allow you to power your DMA card without it 'communicating' **(NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted then flash the card, be warned however as there have been rare reports of motherboard corruptions due to this)**
 - There are flat-out some motherboards that will be incompatible with some firmware, what about them I know 0 about, the safest bet is to clone a device that you know already works on your machine.
 
 ### 'Dysfunctional' firmware troubleshooting
-- If your speed test prompts something along the lines of `tiny PCIe algorithm`, you have made a mistake somewhere in your capabilities. Your card *will* still function but reads will be slower than they should be which can severely impact performance.
-- Changing some functions below acceptable bounds most likely named something including payload/size/speed **can** also slow down the reading speed of your card. The best course of action is to set max read request/payload sizes to 4KB
+- If your speed test prompts something along the lines of `tiny PCIe algorithm`, you have made a mistake somewhere in your configuration space. Your card *will* still function but reads will be slower than they should be which can severely impact performance.
+- Changing some functions below acceptable bounds most likely named something including payload/size/speed **can** also slow down the reading speed of your card. The best course of action is to set max read request/payload sizes to 4KB/highest available
 - Some motherboards will simply be incompatible with some firmware, most reports have been on gigabyte mobos.
-- Sometimes your firmware will allow your device to work but cause a massive slowdown then BSOD your computer if it tries to read it with Arbor or Device Manager. Unfortunately, I don't know exactly where you need to go wrong for this to happen so I recommend re-doing your whole firmware. I suggest keeping a stable firmware that works, on your second computer in case this happens.
-- Are your changes not saving when making a new .bin file? Try deleting your `pcileech_squirrel.runs` folder and/or also making and working in a new copy of the stock pcileech-fpga folder every new firmware as good practice
+- Sometimes your firmware will allow your device to work but cause a massive slowdown then BSOD your computer if it tries to read it with Arbor or Device Manager. Unfortunately, I don't know exactly where you need to go wrong for this to happen so I recommend re-doing your whole firmware. I suggest keeping a stable firmware that works on your second computer in case this happens.
+- Are your changes not saving when making a new .bin file? Try deleting your `pcileech_squirrel.runs` & `pcileech_squirrel.cached` folder or even making and working in a new copy of the stock pcileech-fpga folder every new firmware as good practice
 
 
 ### Once you've read through all this,
@@ -332,7 +335,7 @@ If you have any questions, problems with your firmware or suggestions, feel free
 
 ### Additional Credits
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
-Ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(You could use this as a base to start off of as well!)</sub> <br />
+Ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(You may be able to use this as a base to start off of as well!)</sub> <br />
 Garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) that inspired me to make this in the first place and whom I credit my interest in this topic to.
 
 ### Sponsor this project
