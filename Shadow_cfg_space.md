@@ -9,7 +9,7 @@ Firslty we'll need to convert our donor device's configuration space to a format
 
 2. In the file `src/pcileech_fifo.sv`, change `rw[203]     <= 1'b1;                        //       CFGTLP ZERO DATA` to -> `1'b0;`. Additionally change the `rw[20]      <= 1;                       //       CFGSPACE_STATUS_REGISTER_AUTO_CLEAR [master abort flag]` as well as seen in the main part of the guide
    
-3. Copy the converted file into your `pcileech_cfgspace.coe`. There are some values you may need to change for it to function on your card, main one is to convert your BAR(s) from the address to the sizing as can be seen in the main part of the guide, also apply the same rules regarding payload/data sizes.
+3. Copy the converted file into your `pcileech_cfgspace.coe`. There are some values you may need to change for it to function on your card, main one is to convert your BAR(s) from the address to the sizing (still in the cfgspace.coe file not the vivado gui, though I recommend using it to see what your bar with your specific size **should** look like), also apply the same rules regarding payload/data sizes as in the main part of the guide.
    
 4. After the two files are changed and saved, proceed to generate your Vivado project, inside which we'll be changing just the Vendor & Device IDs in the gui and nothing else. Take care to select "Global" in your synthesis options (as seen in the picture)
    ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/d997c1e7-ba9b-47e6-b0fb-5a31ee2cf4f8)
