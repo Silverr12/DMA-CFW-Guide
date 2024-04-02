@@ -127,21 +127,19 @@ My size is 16kb so record that
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/595ae3e2-4cd8-4b3d-bcfa-cf6a59f289d5)
 > [!NOTE]
-> If the Device Serial Number Capability Structure is not shown for your device, make a randomized string of byte-valid characters, 0 it out completely, or disable the capability altogether.
+> There is a good chance your device may not have this extended capability, some other extended capabilities you can implement in the vivado core_top are `VSEC`, `AER`, `VC` & `RBAR`
 
 Combine your lower and upper DSN registers for our DSN configuration in step 3
 
 For example, these are my values:
 
-Serial Number Register (Lower DW): `68 4C E0 00` <br />
-Serial Number Register (Upper DW): `01 00 00 00`<br />
+Serial Number Register (Upper DW): `01 00 00 00` <br />
+Serial Number Register (Lower DW): `68 4C E0 00`<br />
 
 Combine yours in the same format:
 
-Lower DW + Upper DW = `68 4C E0 00 01 00 00 00`
+Upper DW + Lower DW = `01 00 00 00 68 4C E0 00`
 
-
-7. We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it here so keep it open
 
 ## **3. Initial Customisation**
 Once again due to limited knowledge, I'll be focusing on the PCIeSquirrel section of pcileech at the moment, sorry to those using other firmware.
