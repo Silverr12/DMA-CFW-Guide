@@ -138,7 +138,7 @@ Serial Number Register (Lower DW): `68 4C E0 00`<br />
 
 Combine yours in the same format:
 
-Lower DW + Upper DW = `68 4C E0 00 01 00 00 00`
+Upper DW + Lower DW = `01 00 00 00 68 4C E0 00`
 
 
 ## **3. Initial Customisation**
