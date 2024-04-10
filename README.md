@@ -138,7 +138,7 @@ Serial Number Register (Lower DW): `68 4C E0 00`<br />
 
 Combine yours in the same format:
 
-Lower DW + Upper DW = `68 4C E0 00 01 00 00 00`
+Upper DW + Lower DW = `01000000684CE000`
 
 
 ## **3. Initial Customisation**
@@ -167,7 +167,7 @@ Before
 
 After
 
-![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/0a6238f3-5691-483d-a9a0-97d972d1c893)
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/5181524/dfdc02aa-ce5c-48a0-90c0-62b698a22194)
 
 
 this being my DSN
