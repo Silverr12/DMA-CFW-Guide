@@ -2,7 +2,7 @@
 本指南详细地说明了如何制作自定义DMA固件。基于 [pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) **4.13版本**。<br />
 
 
-如果你知道自己在做什么，请查阅 [Vivado 定制](https://github.com/Silverr12/DMA-CFW-Guide/blob/main/Possible%20Vivado%20Customisations.md)
+如果你知道自己在做什么，请查阅 [Vivado自定义固件教程](https://github.com/Silverr12/DMA-CFW-Guide/blob/main/Possible%20Vivado%20Customisations.md)
 
 > [!TIP]
 > 1-4步的视频教学: https://www.youtube.com/watch?v=qOPTxYYw63E&ab_channel=RakeshMonkee
@@ -44,160 +44,160 @@ __FPGA__
 : 现场可编程逻辑门阵列
 
 ### ⚠️ 免责声明
-- (___不要___ 期盼本指南目前的操作能够绕过 Vanguard，Faceit，或是 ESEA. <br />
+- ___不要___ 期盼本指南目前的操作能够绕过 Vanguard(Riot)，Faceit(CS)，或是 ESEA(CS). <br />
 
 - 本指南并未详细说明如何设置软件或更改计算机设置以适应 DMA 卡.
 
-- 我认识到有很多方法可以绕过当前的检测向量，但本指南涵盖了尝试 1:1 模拟合法设备，因为根据我目前的理解，这是最面向未来的/将来最不可能被检测到的方法.
+- 我认识到有很多方法可以绕过当前的反作弊检测因素，但本指南涵盖了尝试 1:1 模拟真实合法设备，因为根据我目前的理解，这是最面向未来的/将来最不可能被检测到的方法.
 
-- 如果您不理解本指南的任何部分，则本指南不适合您，因为您的卡可能会变砖。您最好和最安全的选择是购买付费 CFW，确保至少他们有 TLP 仿真，并希望它是 1 中的 1.
+- 如果您不理解本教程的任何部分，则本指南不适合您，因为您的DMA卡可能会变砖。您最安全的选择是购买付费别人的自制固件，确保他们至少有TLP模拟功能，并且是私人1：1固件.
 
 
 ### 📑 目录
-1. [Requirements](https://github.com/Silverr12/DMA-FW-Guide#1-requirements)
-2. [Gathering the donor information](https://github.com/Silverr12/DMA-FW-Guide#2-gathering-the-donor-information)
-3. [Initial Customisation](https://github.com/Silverr12/DMA-FW-Guide#3-initial-customisation)
-4. [Vivado Project Customisation](https://github.com/Silverr12/DMA-FW-Guide#4-vivado-project-customisation)
-5. [Other Config Space Changes](https://github.com/Silverr12/DMA-CFW-Guide#5-other-config-space-changes)
-6. [TLP Emulation](https://github.com/Silverr12/DMA-CFW-Guide#6-tlp-emulation)
-7. [Building，Flashing & Testing](https://github.com/Silverr12/DMA-CFW-Guide#7-building-flashing--testing)
+1. [前置要求](https://github.com/Silverr12/DMA-FW-Guide#1-requirements)
+2. [收集样板卡的相关信息](https://github.com/Silverr12/DMA-FW-Guide#2-gathering-the-donor-information)
+3. [初步自定义固件](https://github.com/Silverr12/DMA-FW-Guide#3-initial-customisation)
+4. [Vivado中自定义](https://github.com/Silverr12/DMA-FW-Guide#4-vivado-project-customisation)
+5. [固件中其他的配置空间修改](https://github.com/Silverr12/DMA-CFW-Guide#5-other-config-space-changes)
+6. [TLP模拟实现](https://github.com/Silverr12/DMA-CFW-Guide#6-tlp-emulation)
+7. [构建、烧录&测试](https://github.com/Silverr12/DMA-CFW-Guide#7-building-flashing--testing)
 
-## **1. Requirements**
-#### Hardware
- - A donor card (explained below)
- - A DMA card of course 
+## **1. 前置要求**
+#### 硬件
+ - 一张样板卡 (下面有详细介绍)
+ - DMA卡
 
-#### Software
-- A text editor，[Visual Studio](https://visualstudio.microsoft.com/vs/community/) is used in this guide.
-- [Xilinx Vivado](https://www.xilinx.com/support/download.html) Will need to make an AMD account to download
-- [Pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) Source code for custom firmware
-- [Arbor](https://www.mindshare.com/software/Arbor) Will need to make an account to download the trial (14 days) <br />
-<sub>The trial can be extended by deleting the appropriate folder in your registry editor，I don't think I can tell you more than that though.</sub>
-- Alternative to Arbor，[Telescan PE](https://www.teledynelecroy.com/protocolanalyzer/pci-express/telescan-pe-software/resources/analysis-software)，this one's very similar and completely free but requires a manual review of your registration which can take a bit.
+#### 软件
+- 文本编辑器，[Visual Studio](https://visualstudio.microsoft.com/vs/community/) 在本文中使用.
+- [Xilinx Vivado](https://www.xilinx.com/support/download.html) 核心软件，需要注册一个AMD账号进行使用
+- [Pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) 自定义固件的源代码
+- [Arbor](https://www.mindshare.com/software/Arbor) 付费软件，但是可以免费试用14天，用来查看样板卡的相关信息 <br />
+<sub>免费试用可以通过某种方法延长，自己研究吧..</sub>
+- 代替 Arbor的选项，[Telescan PE](https://www.teledynelecroy.com/protocolanalyzer/pci-express/telescan-pe-software/resources/analysis-software)，这软件跟Arbor非常的像而且是免费的，但是可能需要你自己多花点力气人工阅读相关教程
 
-## **2. Gathering the donor information** 
-(Using a donor card will help us later on with TLP emulation to communicate with the device to start a driver for legitimacy) <br />
-Due to my limited testing and knowledge，I'll be using a network adapter for all examples continuing <br />
-<sup>(If you know what you are doing and understand the nuances，you can skip buying a donor card entirely，but for first timers I highly recommend this，way better to know you have a guaranteed-to-work product by spending $20 then sit on an alt for 2 weeks waiting for a delay ban to test your firmware)</sup>
+## **2. 收集样板卡的相关信息** 
+(使用一张样板卡将有助于我们稍后进行TLP通讯模拟，从而让固件的驱动程序看上去更加合法) <br />
+由于本人的知识和水平有限，我将用一张网卡作为样板卡进行讲解<br />
+<sup>(如果你知道自己在做什么并了解其中的各种细节，你可以完全跳过购买样板卡，但对于第一次尝试制作固件的人，我强烈建议您购买一张样板卡，花20美元就可以确保你有一张完美运行的PCIE卡，而不是用小号玩来测试固件，结果却是在两周后等来了延迟封号)</sup>
 
-It is suggested to use a cheap piece of hardware to get the IDs and then throw it out. These are used to emulate the DMA card. **So don't get the IDs of any existing hardware in your computer and plug them into the firmware. ACs will most likely in the future if not already，detect 2 devices with 1:1 IDs and flag them** 
+建议您使用廉价的PCIE卡来获取相关ID，然后就把他扔了。这些信息将用于模拟DMA卡。
+ **因此，不要获取电脑中任何现有硬件的ID信息并将其伪装成固件信息。反作弊系统很可能在未来（如果还没有的话）检测到2个具有1:1 ID的设备并标记它们** 
 
-### Using Arbor
-Go into Scan Options under the Local system tab and Press Scan/Rescan，the values selected by default are good enough for us.
-Go Into PCI Config and locate your network controller，scroll around in the decode section，and take note of the following things:
+### 使用 Arbor 获取信息
+打开 Scan选项， 就在 Local system tab 下面，然后 点击 Scan/Rescan，默认的扫描选项就足够了.
+进入 PCI Config 选项 and 找到你刚买的网卡，在decode区域往下滑，然后开始准备记录下列信息：
 
-#### All IDs shown below are mine and might not be the same for you
+#### 下列所有的样板卡ID都是我的网卡的信息，跟您的可能不太一样
 
 
-1. Device ID
+1. Device ID 设备ID
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/8baec3fe-c4bd-478e-9f95-d262804d6f67)
 
 
-2. Vendor ID
+2. Vendor ID 制造商ID
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/39c7de6d-d8db-4744-b0a0-ddeca0dfd7d7)
 
 
-3. Revision ID (will show as RevID)
+3. Revision ID 校对ID（显示为RevID）
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/c2374ea7-ca9c-47b7-8a8d-4ceff5dffe3b)
 
 
-4. BAR0 Sizing Value(1/2/3/4/5 too if you have them)
+4. BAR0 Sizing Value BAR0大小值（有BAR1，2，3...的话也请记录）
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/19239179-057a-4ed5-a79f-45cf242787a5)
 
-Click on the square it's in to see the sizing info
+点击这个BARO所在的方块，你就可以看到他的相关信息
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/59a08249-1ce3-49ae-ac98-00e9909ca8e3)
 
-My size is 16kb so record that
+这里显示，我的网卡的BARO的大小是16KB
 
-5. Subsystem ID
+5. Subsystem ID 子系统ID
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/94522a95-70bd-4336-8e38-58c0839e38ad)
 
 
 
-6. DSN(listed as Serial Number Register)
+6. DSN(listed as Serial Number Register) 设备序列号（显示为Serial Number Register)
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/595ae3e2-4cd8-4b3d-bcfa-cf6a59f289d5)
 > [!NOTE]
-> If the Device Serial Number Capability Structure is not shown for your device，make a randomized string of byte-valid characters，0 it out completely，or disable the capability altogether.
+> 如果您的PCIE卡没有显示Device Serial Number Capability Structure，请弄一个字节有效的字符串，全部写成0，或者完全禁用该功能。
 
-Combine your lower and upper DSN registers for our DSN configuration in step 3
+结合lowerDW和upperDW来组成完成的DSN，在第三步中将用到
 
-For example，these are my values:
+比如我的Serial Number Register值是这样的：
 
 Serial Number Register (Lower DW): `68 4C E0 00` <br />
 Serial Number Register (Upper DW): `01 00 00 00`<br />
 
-Combine yours in the same format:
+那么我就把他合并：
 
 Lower DW + Upper DW = `68 4C E0 00 01 00 00 00`
 
 
-7. We will still need Arbor later for our 0x40 and 0x60 blocks but it'd be convoluting to explain it here so keep it open
+7. 我们等会还需要用到Arbor来配置0x40和0x60，先别关
 
-## **3. Initial Customisation**
-Once again due to limited knowledge，I'll be focusing on the PCIeSquirrel section of pcileech at the moment，sorry to those using other firmware.
+## **3. 初步自定义固件**
+再次声明和抱歉：本人知识有限，我只会对于pcileech源代码中的PCIeSquirrel部分进行讲解，如果你用的是其他固件样板，那么我的讲解恐怕不适用
 
+### 使用 Visual Studio
+1. 打开以下的文件夹中的文件：`/PCIeSquirrel/src/pcileech_pcie_cfg_a7.sv`，使用Ctrl+F搜索 `[rw20]`，应该在第209行。将`[rw20]`和`[rw21]`的值都改成1.
 
-### Using Visual Studio
-1. Open the PCIeSquirrel folder and head to this file `/PCIeSquirrel/src/pcileech_pcie_cfg_a7.sv`. Within this file use Ctrl+F and search the file for `rw[20]` which should be on line 209 to find the master abort flag/auto-clear status register. Change the accompanying 0 to a 1 along with the accompanying `rw[21]`.
-
-Before
+之前
 
 ![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/358337b4-a238-433c-bc53-0630bec5a17d)
 
 
-After
+之后
 
 ![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/8814e113-bdd8-43de-81d3-008ef9cfb653)
 
 
-Setting `rw[21]` to a 1，allows the DMA card to access the CPU’s memory directly (DMA) or exchange TLPs with peer peripherals (to the extent that the switching entities support that)
+把 `rw[21]` 改成 1，允许 DMA 卡 可以绕过CPU直接访问内存
 
-2. In the same file `pcileech_pcie_cfg_a7.sv` Ctrl+F `rw[127:64]` which should be on line 215 to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`，insert your Serial Number there as such `rw[127:64]  <= 64'hXXXXXXXXXXXXXXXX;    // cfg_dsn` preserving the 16-character length of the input field，if your DSN is shorter，insert zeroes as seen in the example image.
+2. 然后在相同文件中搜素 `rw[127:64]`， 他应该在第215行，这一行代表了你的DSN（设备序列号）： `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`，输入刚刚获得的DSN（设备序列号）进去 `rw[127:64]  <= 64'hXXXXXXXXXXXXXXXX;    // cfg_dsn` 你需要确保这个是长16位的值，如果你的DSN短于16位，则高位补0。
 
-Before
+改之前
 
 ![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/788170b0-6e4a-4b87-b1a9-31360abc8575)
 
-After
+改之后
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/0a6238f3-5691-483d-a9a0-97d972d1c893)
 
 
-this being my DSN
+这里改之后输入的就是我的网卡的DSN
 
-if your donor card didn't have a DSN，yours should look like
+如果你的样板卡没有DSN的话，就全部写0，即16个0
 
 `rw[127:64]  <= 64'h0000000000000000;    // +008: cfg_dsn`
 
-4. Go ahead and save all the changes you've made
+4. 保存修改
 
 
-### Generating the Vivado files
-1. Open Vivado and in the top menu，in the search query，search for tcl console and click on it.
+### 生成 Vivado 文件
+1. 打开 Vivado， 在顶部的搜索框呢输入tcl console 然后点击他.
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/5a3770ad-b821-49c1-bea8-a79684993abc)
 
-The console should now open at the bottom of the application.
+Tcl控制台马上就会出现在Vivado的最下方
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/ae96df35-3e46-4f55-8ffd-39b42c8d0972)
 
 
-2. In the Tcl console，type in `pwd` to see the working directory. It should look something like this `C:/Users/user/AppData/Roaming/Xilinx/Vivado`
+2. 在控制台内，输入`pwd`就能看到当前文件夹，大概是这样： `C:/Users/user/AppData/Roaming/Xilinx/Vivado`
 
-3. cd to the PCIeSquirrel folder in the pcileech-fpga-master project folder. It should look something like this `C:\Users\user\Desktop\pcileech-fpga-master\PCIeSquirrel`. (Desktop is where my project folder is) <sub> If you get an error when trying to cd to your project directory，replace all the '\'s with '/'</sub>
+3. 用cd命令去到PCIeSquirrel文件夹，如：`C:\Users\user\Desktop\pcileech-fpga-master\PCIeSquirrel`. (Desktop是我的项目文件夹) <sub> 如果您在尝试使用cd命令切换项目目录时遇到错误，请将所有“\”替换为“/”</sub>
 
-4. Once you have PCIeSquirrel dir open，in the Tcl console type in `source vivado_generate_project.tcl -notrace` and wait for it to finish
-5. Once the project has been generated，Vivado should automatically open the `pcileech_squirrel.xpr` file. Keep it open on the side for a bit.
+4. 在打开PCIeSquirrel文件夹后，在Tcl控制台输入`source vivado_generate_project.tcl -notrace`，等待他完成项目构建。
+5. 在项目被生成后，Vivado应该会自动打开`pcileech_squirrel.xpr`文件，不要关闭它。
 
-## **4. Vivado Project Customisation**
-1. Once inside Vivado，navigate to the "sources" box and navigate as such `pcileech_squirrel_top` > `i_pcileech_pcie_a7 : pcileech_pcie_a7` then double click on the file with the yellow square labelled `i_pcie_7x_0 : pcie_7x_0`.
+## **4. Vivado中的自定义步骤**
+1. 在Vivado中，navigate to the "sources" box and navigate as such `pcileech_squirrel_top` > `i_pcileech_pcie_a7 : pcileech_pcie_a7` then double click on the file with the yellow square labelled `i_pcie_7x_0 : pcie_7x_0`.
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/89455475/5617a8f8-6d5a-44af-8f88-703bc7d1f101)
 
