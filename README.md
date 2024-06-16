@@ -230,7 +230,7 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 
 ---
-# **Steps 5 and 6** are being actively researched and updated and therefore are not complete or final, proceed with caution
+# **Steps 5 and 6** are currently under research and revision, so they are not yet complete or final. Please proceed with caution.
 
 
 
@@ -277,22 +277,16 @@ Notes to consider:
 - You don't need to thoroughly understand any coding language for this as complicated as this may seem, it's going to be just changing certain addresses
 
 1. You have two options for obtaining the register addresses for the device you're emulating, your options are:
-- Navigate to this [Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_open-source_wireless_drivers) page that lists open-source/reverse-engineered drivers that you could take values from for your firmware
-- Using a program of your choice (Recommend IDA Pro) to reverse engineer the driver for your donor card, you can find the location of the installed driver by navigating to your device in the device manager, going to Properties>Driver>Driver Details, and it should normally be the only .dll file in there. (Mind you intel does **not** release their sources without contractual obligation so good luck if you're adamant about them)
+- Searching to see if your driver is already open source and looking through it, a good starting point is this [Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_open-source_wireless_drivers) page that lists open-source/reverse-engineered wireless drivers that you could take values from for your firmware
+- **[Hard]** Using a reverse-engineering program of your choice to find the details of your driver for your donor card, you can find the location of the installed driver by navigating to your device in the device manager, going to Properties>Driver>Driver Details, and it should normally be the only .dll file in there. (Mind you intel does **not** release their sources without contractual obligation so good luck if you're adamant about one of their products)
 
-2. (to be done)
-
-3. In Visual Studio head to `/src/pcileech_tlps128_bar_controller.sv` and use the template file in the repo to implement. (soon to come)
-
-4. (to be done, maybe latency/timing checks)
-
-
-### Resources for TLP Emulation
+### Resources for general understanding & TLP emulation
 1. https://fpgaemu.readthedocs.io/en/latest/infrastructure.html
 2. https://www.incibe.es/sites/default/files/2023-11/INCIBE-CERT_FIRMWARE_ANALYSIS_SCI_GUIDE_2023_v1.1.pdf
 3. https://docs.xilinx.com/v/u/en-US/pcie_blk_plus_ug341
 4. https://www.fpga4fun.com/PCI-Express4.html
 5. https://www.xillybus.com/tutorials/pci-express-tlp-pcie-primer-tutorial-guide-1
+6. https://ctf.re (<-amazing one)
 
 
 
@@ -338,7 +332,7 @@ Garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-
 
 ### Sponsor this project
 If you feel this guide has helped you enough to warrant a monetary donation, feel free to donate here: <br />
-USDT/trc20: `1BNVf49u5GMuHg8teDcnexChqzyHB4MB2T` <br />
+USDT/trc20: `TDa8PUwAdD9rg84ythjXjN52s8UeaejnFN` <br />
 ![usdtaddr](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/36a8a6d6-1edd-4289-96b9-a9003a7c4a26)<br />
 
 LTC: `MMxWW2n5pTbWoY9EakDaTiQ7HKBJy7sxDh`<br />
