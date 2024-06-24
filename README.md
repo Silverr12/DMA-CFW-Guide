@@ -147,17 +147,14 @@ Once again due to limited knowledge, I'll be focusing on the PCIeSquirrel sectio
 
 ### Using Visual Studio
 1. Open the PCIeSquirrel folder and head to this file `/PCIeSquirrel/src/pcileech_pcie_cfg_a7.sv`. Within this file use Ctrl+F and search the file for `rw[20]` which should be on line 209 to find the master abort flag/auto-clear status register. Change the accompanying 0 to a 1.
+
 Before
 
-![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/358337b4-a238-433c-bc53-0630bec5a17d)
-
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/78248ed9-68fc-4f43-929b-339328eae478)
 
 After
 
-![image](https://github.com/Silverr12/DMA-FW-Guide/assets/89455475/8814e113-bdd8-43de-81d3-008ef9cfb653)
-
-
-Setting `rw[21]` to a 1, allows the DMA card to access the CPU’s memory directly (DMA) or exchange TLPs with peer peripherals (to the extent that the switching entities support that)
+![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/c372cfe9-4736-42db-ab16-18a0de516d9b)
 
 2. In the same file `pcileech_pcie_cfg_a7.sv` Ctrl+F `rw[127:64]` which should be on line 215 to find your DSN field listed as `rw[127:64]  <= 64'h0000000101000A35;    // cfg_dsn`, insert your Serial Number there as such `rw[127:64]  <= 64'hXXXXXXXXXXXXXXXX;    // cfg_dsn` preserving the 16-character length of the input field, if your DSN is shorter, insert zeroes as seen in the example image.
 
@@ -168,7 +165,6 @@ Before
 After
 
 ![image](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/0a6238f3-5691-483d-a9a0-97d972d1c893)
-
 
 this being my DSN
 
@@ -191,7 +187,7 @@ The console should now open at the bottom of the application.
 
 2. In the Tcl console, type in `pwd` to see the working directory. It should look something like this `C:/Users/user/AppData/Roaming/Xilinx/Vivado`
 
-3. cd to the PCIeSquirrel folder in the pcileech-fpga-master project folder. It should look something like this `C:\Users\user\Desktop\pcileech-fpga-master\PCIeSquirrel`. (Desktop is where my project folder is) <sub> If you get an error when trying to cd to your project directory, replace all the '\'s with '/'</sub>
+3. cd to the PCIeSquirrel folder in the pcileech-fpga-master project folder. It should look something like this `C:\Users\user\Desktop\pcileech-fpga-master\PCIeSquirrel`. (Desktop is where my project folder is) <br /> <sub> If you get an error when trying to cd to your project directory, replace all the '\\'s with '/'</sub>
 
 4. Once you have PCIeSquirrel dir open, in the Tcl console type in `source vivado_generate_project.tcl -notrace` and wait for it to finish
 5. Once the project has been generated, Vivado should automatically open the `pcileech_squirrel.xpr` file. Keep it open on the side for a bit.
