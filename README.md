@@ -244,14 +244,14 @@ If the size unit is different change the size unit to accommodate the unit of th
     - (PCIe) `corr_err_reporting_en`, `non_fatal_err_reporting_en`, `fatal_err_reporting_en`, `no_snoop_en`, `Link Status2: Current De-emphasis`
 
 
-#### - It is also advised that you change the block locations of the capabilities, this can be done by changing the following variables:
+#### - It is also advised that you change the block locations of some of the capabilities, this can be done by changing the following variables:
   - Capability NEXT Pointers:`CAPABILITIES_PTR`, `MSI_CAP_NEXTPTR`, `PCIE_CAP_NEXTPTR`, `PM_CAP_NEXTPTR` and
   - Capability Pointers: `MSI_BASE_PTR`, `PCIE_BASE_PTR`, `PM_BASE_PTR`
 
 On default pcileech firmware you can locate: **PM at 0x40, MSI at 0x50, and PCIe at 0x60**, The example will be changing them to **PCIe at 0x40, PM at 0xC8 and MSI at 0xD0**, but you can have them at any location really (e.g PCIe at 0x80, PM at 0xD0 and MSI at 0x90) since our computers can and will jump over the empty blocks, all you have to do is make sure the `NEXTPTR`'s line up to the next capability as explained below and that you take note of the capabilities sizes so they don't try to overlap.
 - You need your NEXTPTRs lined up starting from your header at 0x00 and going up in the config blocks, for example:
   - If I were to change my capabilities blocks around to `PCIe: 0x40 | PM: 0xC8 | MSI: 0xD0` I would simply assign their associated `BASE_PTR` variables as such to the same value. Always make to start at or above 0x40 as our header ends just before it and also make sure your base ptrs always end on 0, 4, or 8 such as 40, 44 68.
-  - Secondly, I would also have to have my header capability pointer `CAPABILITIES_PTR` point to 40 (which it is by default) since it's our lowest/first to be read in this case, then the `PCIE_CAP_NEXTPTR` will point to C8, `PM_CAP_NEXTPTR` to D0 and `MSI_CAP_NEXTPTR` to 00 to finalise it out, and always make sure it's in order from top to bottom as if you try to point backward in the config space your firmware will not work. (Extended capabilities such as AER, DSN, LTR, etc also require this configuration if you decide to put them in. But you do not point the regular capabilities into them as they are a separate 'set', besides that they follow the same pointer format as your regular capabilities.)
+  - Secondly, I would also have to have my header capability pointer `CAPABILITIES_PTR` point to 40 (which it is by default) since it's our lowest/first to be read in this case, then the `PCIE_CAP_NEXTPTR` will point to C8, `PM_CAP_NEXTPTR` to D0 and `MSI_CAP_NEXTPTR` to 00 to finalise it out, and always make sure it's in order from top to bottom as if you try to point backward in the config space your firmware will not work in some cases. (Extended capabilities such as AER, DSN, LTR, etc also require this configuration if you decide to put them in. But you do not point the regular capabilities into them as they are a separate 'set', besides that they follow the same pointer format as your regular capabilities.)
 
 
 > [!IMPORTANT]
@@ -260,26 +260,25 @@ On default pcileech firmware you can locate: **PM at 0x40, MSI at 0x50, and PCIe
 
   
 ## **6. TLP Emulation**
-**For now, see [ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/src/pcileech_tlps128_bar_controller.sv) mainly from line 850-896 for an example**
+**For now, see:**
+1. [Ekknod's bar controller config](https://github.com/ekknod/pcileech-wifi/blob/main/src/pcileech_tlps128_bar_controller.sv#L850) between line 850-896 for an example
+2. [One of Yxlnq's bar controllers](https://github.com/yxlnqs/diviner-full-emu-v2/blob/5a177e34ae5dae94bb2c023e38301af425ca6e4b/src/pcileech_tlps128_bar_controller.sv#L850)
 
 Notes to consider:
 
-- Either some classes of devices do not require drivers or have generic drivers automatically load which in either case bypasses some or all sophisticated ACs (e.g devices that use the same artix-7 chip as your card would.)
+- Either some classes of devices do not require drivers or have generic drivers automatically load which in either case bypasses some or all sophisticated ACs
  
-
-- You don't need to thoroughly understand any coding language for this as complicated as this may seem, it's going to be just changing certain addresses
 
 1. You have two options for obtaining the register addresses for the device you're emulating, your options are:
 - Searching to see if your driver is already open source and looking through it, a good starting point is this [Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_open-source_wireless_drivers) page that lists open-source/reverse-engineered wireless drivers that you could take values from for your firmware
-- **[Hard]** Using a reverse-engineering program of your choice to find the details of your driver for your donor card, you can find the location of the installed driver by navigating to your device in the device manager, going to Properties>Driver>Driver Details, and it should normally be the only .dll file in there. (Mind you intel does **not** release their sources without contractual obligation so good luck if you're adamant about one of their products)
+- **[Hard]** Using a reverse-engineering program of your choice to find the details of your driver for your donor card, you can find the location of the installed driver by navigating to your device in the device manager, going to Properties>Driver>Driver Details, and it should normally be the only .dll file in there. (Mind you unless you are already well versed in the area of reverse engineering, don't commit your time to this)
 
 ### Resources for general understanding & TLP emulation
-1. https://fpgaemu.readthedocs.io/en/latest/infrastructure.html
-2. https://www.incibe.es/sites/default/files/2023-11/INCIBE-CERT_FIRMWARE_ANALYSIS_SCI_GUIDE_2023_v1.1.pdf
-3. https://docs.xilinx.com/v/u/en-US/pcie_blk_plus_ug341
-4. https://www.fpga4fun.com/PCI-Express4.html
-5. https://www.xillybus.com/tutorials/pci-express-tlp-pcie-primer-tutorial-guide-1
-6. https://ctf.re (<-amazing one)
+1. https://fpgaemu.readthedocs.io/en/latest/emulation.html
+2. https://docs.xilinx.com/v/u/en-US/pcie_blk_plus_ug341
+3. https://www.fpga4fun.com/PCI-Express4.html
+4. https://www.xillybus.com/tutorials/pci-express-tlp-pcie-primer-tutorial-guide-1
+5. https://ctf.re (<-amazing one)
 
 
 
