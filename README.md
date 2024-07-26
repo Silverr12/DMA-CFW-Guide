@@ -7,7 +7,6 @@ If you know what you're doing check out extra [Vivado Customisations](https://gi
 > [!TIP]
 > * Information overload? [This site](https://www.simonrak.se) has you covered with even more concise broken down steps. Even includes a long video! (cred. Simonrak)<br />
 > * Easier method of cloning via ['shadow' config space](https://github.com/Silverr12/DMA-CFW-Guide/blob/main/Shadow_cfg_space.md)
-> * 75T USERS BEWARE: pcileech is no longer maintained for 75t chipped devices, it is recommended to use a reputable 35t type card
 
 
 #### 📖Why make this guide?
