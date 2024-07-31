@@ -312,7 +312,7 @@ Another form of detection that may or may not be implemented that could be block
 
 
 ### Once you've read through all this,
-If you have any questions, problems with your firmware or suggestions, feel free to join my Discord for support.
+~~If you have any questions, problems with your firmware or suggestions, feel free to join my Discord for support.~~ termed
 [![Discord Banner](https://discord.com/api/guilds/1205153997166608394/widget.png?style=banner2)](https://discord.com/invite/reEgerZX3u)
 
 
