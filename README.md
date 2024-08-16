@@ -1,8 +1,5 @@
 # DMA-CFW-Guide
-The following guide details instructions on the creation of modified DMA (attack) Firmware based on [pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) **version 4.13**. <br />
-
-
-If you know what you're doing check out extra [Vivado Customisations](https://github.com/Silverr12/DMA-CFW-Guide/blob/main/Possible%20Vivado%20Customisations.md)
+The following guide details instructions on the creation of modified DMA (attack) Firmware based on [pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) **version 4.15**. <br />
 
 > [!TIP]
 > * Information overload? [This site](https://www.simonrak.se) has you covered with even more concise broken down steps. Even includes a long video! (cred. Simonrak)<br />
@@ -47,13 +44,11 @@ __FPGA__
 : Field Programmable Gate Array
 
 ### ⚠️ Disclaimer
-- (___Don't___ expect this to work for Vanguard, Faceit, or ESEA in the guide's current state. <br />
+- This guide is not always updated to the scene's best practices, excercise caution when live-testing. <br />
 
-- This guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards)
+- This guide does ___not___ detail how to set up software or change computer settings to accommodate DMA cards
 
-- I recognise that there are a lot of methods that skirt around the current detection vectors but this guide covers trying to emulate a legitimate device 1:1 because this is the most future-proof/least likely to be detected in the future from my current understanding.
-
-- If you don't understand a single part of this guide, this guide is not for you as you will likely brick your card. Your best and safest bet is to buy a paid CFW making sure at the very least they have TLP emulation and hope for the best that it's a 1 of 1.
+- If you there are concepts you don't understand even after reading through the whole guide, there is a link to a discord server at the bottom
 
 
 ### 📑 CONTENTS
@@ -226,8 +221,6 @@ If the size unit is different change the size unit to accommodate the unit of th
 
 
 
-
-
 ## **5. Other Config Space Changes**
 
   1. In Vivado, navigate to `pcie_7x_0_core_top` as shown in the image, and use the magnifying glass in the top left of the text editor to search for these different lines to match them to your donor card
@@ -254,8 +247,8 @@ On default pcileech firmware you can locate: **PM at 0x40, MSI at 0x50, and PCIe
 
 
 > [!IMPORTANT]
-> Once you have completed steps 1-5, you **should, with 98% confidence**, be good to go for BE, EAC, and any other anti-cheat that you can think of **that isn't VGK, Faceit or ESEA**
-> For them your best bet would be lots of trial and error with emulating different devices, doing odd config space changes, and changing things around in pcileech, many will not reveal their methods unless they want it detected, so you are mostly on your own there unfortunately.
+> Once you have completed steps 1-5, you **should, with 98% confidence**, be good to go for systems with lower-end detections
+> Your best bet to get past higher-end detection systems is lots of trial and error, many will not reveal their methods unless they want it detected so you are mostly on your own there unfortunately.
 
   
 ## **6. TLP Emulation**
@@ -264,8 +257,6 @@ On default pcileech firmware you can locate: **PM at 0x40, MSI at 0x50, and PCIe
 2. [One of Yxlnq's bar controllers](https://github.com/yxlnqs/diviner-full-emu-v2/blob/5a177e34ae5dae94bb2c023e38301af425ca6e4b/src/pcileech_tlps128_bar_controller.sv#L850)
 
 Notes to consider:
-
-- Either some classes of devices do not require drivers or have generic drivers automatically load which in either case bypasses some or all sophisticated ACs
  
 
 1. You have two options for obtaining the register addresses for the device you're emulating, your options are:
@@ -282,8 +273,6 @@ Notes to consider:
 
 
 ## **7. Building, Flashing & Testing**
-> [!CAUTION]
-> **There is a good chance that on your first flash if you went about some of the more 'harder' to navigate steps it will mess something up, don't worry, and look at the troubleshooting below.**<br />
 
 1. Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
    - You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
@@ -291,7 +280,7 @@ Notes to consider:
 3. Run a DMA speed test tool from your second computer <sub>(There is a link and download in the discord server)</sub> to verify your firmware is working and reading as it should be.
 4. Dump and compare the config space of your new firmware to the **known** signed pcileech default seen below to see if it's overly similar. You should most definitely be right about some values being the same, you have to think about the fact that apart from the serial number and maybe bar address, the configuration space of one type of (for example) network card is going to be the same across all of them. So as long as your new firmware's configuration space does not closely resemble the default, you have a legitimate device for all the ACs care. GLHF
 
-This is the signature BE supposedly scan for in the config space of the PCIe device:
+This is the signature one of the lower-end detection systems supposedly scan for in the config space of the PCIe device:
 [More info here](https://dma.lystic.dev/anticheat-evasion/detection-vectors)<br>
      `40: 01 48 03 78 08 00 00 00 05 60 80 00 00 00 00 00`<br />
      `60: 10 00 02 00 e2 8f XX XX XX XX XX XX 12 f4 03 00`<br />
@@ -299,9 +288,12 @@ This is the signature BE supposedly scan for in the config space of the PCIe dev
 
 Another form of detection that may or may not be implemented that could be blocking your firmware is reading your device history, this can be cleaned by following [this](https://dma.lystic.dev/anticheat-evasion/clearing-device-history) post.
 
+> [!CAUTION]
+> **There is a good chance that on your first flash if you went about some of the more 'harder' to navigate steps it will mess something up, don't worry, and look at the troubleshooting below.**<br />
+
 ### Flashing troubleshooting
 - If you mess up your CFW and your game PC won't fully "boot", be because of bios hang or other reasons, you will be able to flash new firmware onto it from your second computer if the card is still powered (normally indicated by LEDs). If your main computer won't stay powered on, you have to buy a PCIe riser that will allow you to power your DMA card without it 'communicating' **(NOT RECOMMENDED: if a riser is unavailable you can hotplug the dma card in after your computers fully booted then flash the card, be warned however as there have been rare reports of motherboard corruptions due to this)**
-- There are flat-out some motherboards that will be incompatible with some firmware, what about them I know 0 about, the safest bet is to clone a device that you know already works on your machine.
+- There are flat-out some motherboards that will be incompatible with some firmware, in some cases this can be resolved my making a manual memory map.
 
 ### 'Dysfunctional' firmware troubleshooting
 - If your speed test prompts something along the lines of `tiny PCIe algorithm`, you have made a mistake somewhere in your configuration space. Your card *will* still function but reads will be slower than they should be which can severely impact performance.
