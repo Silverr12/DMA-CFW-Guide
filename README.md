@@ -58,7 +58,8 @@ __FPGA__
 4. [Vivado Project Customisation](https://github.com/Silverr12/DMA-FW-Guide#4-vivado-project-customisation)
 5. [Other Config Space Changes](https://github.com/Silverr12/DMA-CFW-Guide#5-other-config-space-changes)
 6. [TLP Emulation](https://github.com/Silverr12/DMA-CFW-Guide#6-tlp-emulation)
-7. [Building, Flashing & Testing](https://github.com/Silverr12/DMA-CFW-Guide#7-building-flashing--testing)
+7. [Interrupts](https://github.com/Silverr12/DMA-CFW-Guide#7-interrupts)
+8. [Building, Flashing & Testing](https://github.com/Silverr12/DMA-CFW-Guide#7-building-flashing--testing)
 
 ## **1. Requirements**
 #### Hardware
@@ -270,9 +271,10 @@ Notes to consider:
 4. https://www.xillybus.com/tutorials/pci-express-tlp-pcie-primer-tutorial-guide-1
 5. https://ctf.re (<-amazing one)
 
+## **7. Interrupts**
+Please see [https://github.com/kilmu1337/VGK-DMA-BYPASS](https://github.com/kilmu1337/VGK-DMA-BYPASS) for now
 
-
-## **7. Building, Flashing & Testing**
+## **8. Building, Flashing & Testing**
 
 1. Run `source vivado_build.tcl -notrace` in the tcl console to generate the file you'll need to flash onto your card<br />
    - You'll find the file in `pcileech_squirrel/pcileech_squirrel.runs/impl_1` named "pchileech_squirrel_top.bin"<br />
