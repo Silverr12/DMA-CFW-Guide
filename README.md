@@ -1,3 +1,10 @@
+# Foreword
+Plainly put, for the reason you are likely here, this guide is *outdated* as it was uses information in the scene from 2023-24. <br/>
+There remains here some very beginner-intermediate steps at emulation, but they alone will likely not get you past that threshold you're looking for.<br/>
+In good faith I recommend other, more in-depth guides that have cropped up for the modern day.<br/>
+So until I can perhaps muster up the motivation to add to/rewrite this(soon™), don't take it as a complete OOB guide.
+
+
 # DMA-CFW-Guide
 The following guide details instructions on the creation of modified DMA (attack) Firmware based on [pcileech-fpga](https://github.com/ufrisk/pcileech-fpga) **version 4.15**. <br />
 
@@ -445,23 +452,8 @@ Another form of detection that may or may not be implemented that could be block
 - Are your changes not saving when making a new .bin file? Try deleting your `pcileech_squirrel.runs` & `pcileech_squirrel.cached` folder or even making and working in a new copy of the stock pcileech-fpga folder every new firmware as good practice
 
 
-### Once you've read through all this,
-If you have any questions, problems with your firmware or suggestions, feel free to join my Discord for support.
-[![Discord Banner](https://discord.com/api/guilds/1268006421002453124/widget.png?style=banner2)](https://discord.gg/m9zmBwn8Y5)
-
-
 ### Additional Credits
 Ulf Frisk for [pcileech](https://github.com/ufrisk/pcileech) <br />
 Ekknod for his [custom pcileech config](https://github.com/ekknod/pcileech-wifi)<sub>(You may be able to use this as a base to start off of as well!)</sub> <br />
 Garagedweller's [Unknown Cheats thread](https://www.unknowncheats.me/forum/anti-cheat-bypass/613135-dma-custom-firmware-guide.html) that inspired me to make this in the first place and whom I credit my interest in this topic to.
-
-### Sponsor this project
-If you feel this guide has helped you enough to warrant a monetary donation, feel free to donate here: <br />
-USDT/trc20: `TDa8PUwAdD9rg84ythjXjN52s8UeaejnFN` <br />
-![usdtaddr](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/36a8a6d6-1edd-4289-96b9-a9003a7c4a26)<br />
-
-LTC: `MMxWW2n5pTbWoY9EakDaTiQ7HKBJy7sxDh`<br />
-![ltcaddr](https://github.com/Silverr12/DMA-CFW-Guide/assets/48173453/e243973f-7b84-42a9-b78a-19a7a12aac98)<br />
-or just starring the repo helps **immensely** too <3 <br />
-<sub>also sponsor the [man who's making this all possible](https://github.com/ufrisk)<br />
 
